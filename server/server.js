@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var avatar = require('./modules/avatar.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -42,7 +43,7 @@ io.sockets.on('connection', function(socket)
 		message = ent.encode(message);
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message});
+		io.sockets.emit('new_message', {name:socket.name, message:message, avatar:avatar.getRandomAvatar()});
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
