@@ -13,27 +13,34 @@
 	
 	<body>
 		<h1>Le Chat !</h1>
-		
-		<div id="chat">
-			<div id="messages">
-				
+
+		<div id="chatbox">
+			<div id="users">
+				<h2>Utilisateurs</h2>
+				<div id="usersList"></div>
 			</div>
-                        
-                        <div id="tools">
-                                <input type="text" id="message-input" />
-                                
-                                <input type="button" id="send-message" value="Envoyer" />
-                        </div>
+			
+			<div id="chat">
+				<div id="messages">
+					
+				</div>
+							
+				<div id="tools">
+						<input type="text" id="message-input" />
+						
+						<input type="button" id="send-message" value="Envoyer" />
+				</div>
+			</div>
 		</div>
 		
-                <div id="help">
-                        <div id="help-toggle">?</div>
-                        <ul id="help-content">
-                                <li>
-                                        <strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
-                                </li>
-                        </ul>
-                </div>
+		<div id="help">
+				<div id="help-toggle">?</div>
+				<ul id="help-content">
+						<li>
+								<strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
+						</li>
+				</ul>
+		</div>
                 
 		<script type="text/javascript" src="chat.js"></script>
 	</body>

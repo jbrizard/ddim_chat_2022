@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var users = require('./modules/users.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -15,9 +16,6 @@ var server = http.createServer(app);
 
 // Initialisation du websocket
 var io = ioLib.listen(server);
-
-// Initialisation des users 
-var connectedUsers = [];
 
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)
@@ -36,9 +34,10 @@ io.sockets.on('connection', function(socket)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
-		
-		
-		
+
+		// Ajoute un nouvel utilisateur
+		users.addUser(socket);
+		users.notifyUserEnter(io, socket);
 	});
 	
 	// Réception d'un message
