@@ -9,7 +9,15 @@ module.exports =  {
     getRandomAvatar: getRandomAvatar
 }
 
+var list = new Map();
+
 /* Get aléatoire avatar */
-function getRandomAvatar() {
-    return "<img src='/modules/avatar/01.svg' alt='' width='30px'>";
+function getRandomAvatar(name) {
+    let id = 0;
+    if (!list.has(name)) {
+        id = Math.floor(Math.random() * 6);
+        list.set(name, id);
+    }
+
+    return "<img src='/modules/avatar/" + list.get(name) + ".svg' alt='' width='30px'>";
 }
