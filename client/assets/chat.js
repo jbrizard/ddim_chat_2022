@@ -1,5 +1,5 @@
 ﻿// Connexion au socket
-var socket = io.connect(':8080');
+var socket = io.connect(':8090');
 
 // Demande un pseudo et envoie l'info au serveur
 var name = prompt('Quel est votre pseudo ?');
@@ -55,4 +55,10 @@ function receiveMessage(data)
 	     + '</div>'
 	)
 	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+}
+
+
+function sendSearchGifs(search)
+{
+	socket.emit('search_gifs', search);
 }

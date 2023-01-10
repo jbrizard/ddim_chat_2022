@@ -49,13 +49,13 @@ h1 {
 #message-input {
 	display:inline-block;
 	border:solid 2px #888;
-	width:calc(100% - 144px);
 	padding:0 20px;
 	height:31px;
 	border-top-left-radius:8px;
 	border-bottom-left-radius:8px;
 	border-right:none;
 	transition:all .4s;
+	flex: 1;
 }
 #send-message {
 	display:inline-block;

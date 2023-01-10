@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var gifs = require('./modules/gifs.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -47,7 +48,21 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
 	});
+
+	socket.on('search_gifs', function(search)
+	{
+		// Par sécurité, on encode les caractères spéciaux
+		search = ent.encode(search);
+
+		gifs.handleGif(search).then(function (res) {
+			console.log(res);
+
+			// Transmet le message à tous les utilisateurs (broadcast)
+			io.to(socket.id).emit('results_search_gifs', {gifs:res});
+		});
+
+	});
 });
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)
-server.listen(8080);
+server.listen(8090);
