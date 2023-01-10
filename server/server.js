@@ -43,10 +43,15 @@ io.sockets.on('connection', function(socket)
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);		
 
+		//On traite le message pour savoir si c'est une commande ou non
+		message = commandes.handleCommandes(io, message)
+
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:commandes.handleCommandes(io, message)});
+		io.sockets.emit('new_message', {name:socket.name, message:message});
+
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+
 		// Transmet le message au module EasterEggs (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		eastereggs.handleEasterEggs(io, message);
 	});
@@ -54,5 +59,4 @@ io.sockets.on('connection', function(socket)
 });
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)
-
 server.listen(8080);

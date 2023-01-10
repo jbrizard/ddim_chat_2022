@@ -17,7 +17,6 @@ function handleEasterEggs(io, message)
 	// Passe le message en minuscules (recherche insensible à la casse)
 	message = message.toLowerCase();
 
-	console.log(message);
 	// Est-ce qu'il contient une référence à Clément ?
 	if (message.includes('cl&#233;ment') || message.includes('clement'))
 	{

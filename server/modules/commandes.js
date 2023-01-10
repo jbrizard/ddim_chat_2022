@@ -22,10 +22,10 @@ function handleCommandes(io, message)
 
     switch(message)
     {
-        case ('/tableflip'):
+        case '/tableflip':
         {
             //Transforme le message
-            newMessage=('(╯°□°）╯︵ ┻━┻');
+            newMessage = '(╯°□°）╯︵ ┻━┻';
             break;
         }
         default: 
