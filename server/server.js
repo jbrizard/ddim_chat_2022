@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var eastereggs = require('./modules/eastereggs.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -41,13 +42,24 @@ io.sockets.on('connection', function(socket)
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
 		
-		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message});
-		
+		if(message==('/tableflip'))
+		{
+			// Transmet le message spécial à tous les utilisateurs (broadcast)
+			io.sockets.emit('new_message', {name:socket.name, message:'(╯°□°）╯︵ ┻━┻'});
+		}
+		else
+		{
+			// Transmet le message à tous les utilisateurs (broadcast)
+			io.sockets.emit('new_message', {name:socket.name, message:message});
+		}
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+		// Transmet le message au module EasterEggs (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		eastereggs.handleEasterEggs(io, message);
 	});
+	
 });
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)
+
 server.listen(8080);
