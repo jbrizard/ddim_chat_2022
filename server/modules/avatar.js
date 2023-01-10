@@ -5,7 +5,7 @@
  */
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
-export default {
+module.exports =  {
     getRandomAvatar: getRandomAvatar
 }
 
