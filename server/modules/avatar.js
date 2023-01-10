@@ -11,5 +11,5 @@ module.exports =  {
 
 /* Get aléatoire avatar */
 function getRandomAvatar() {
-    return "<span style='color:red'>OK</span>";
+    return "<img src='/modules/avatar/01.svg' alt='' width='30px'>";
 }

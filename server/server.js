@@ -50,5 +50,5 @@ io.sockets.on('connection', function(socket)
 	});
 });
 
-// Lance le serveur sur le port 8080 (http://localhost:8080)
+// Lance le serveur sur le port 8080 (http://localhost:8090)
 server.listen(8090);
