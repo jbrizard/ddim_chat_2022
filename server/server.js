@@ -14,7 +14,10 @@ var app = express();
 var server = http.createServer(app);
 
 // Initialisation du websocket
-var io = ioLib.listen(server)
+var io = ioLib.listen(server);
+
+// Initialisation des users 
+var users = [];
 
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)
@@ -33,6 +36,8 @@ io.sockets.on('connection', function(socket)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
+		
+		
 	});
 	
 	// Réception d'un message
@@ -49,5 +54,5 @@ io.sockets.on('connection', function(socket)
 	});
 });
 
-// Lance le serveur sur le port 8080 (http://localhost:8080)
-server.listen(8080);
+// Lance le serveur sur le port 8090 (http://localhost:8090)
+server.listen(8090);
