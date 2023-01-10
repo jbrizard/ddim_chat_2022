@@ -46,6 +46,12 @@ h1 {
 #messages .message:nth-child(2n) {
 	background:rgba(0, 0, 0, .02);
 }
+#messages .new-user {
+	padding:4px 20px;
+	text-align: center;
+	background-color: rgba(106, 163, 194, 0.38);
+	border-radius: 4px;
+}
 #message-input {
 	display:inline-block;
 	border:solid 2px #888;

@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var userInteraction = require('./modules/userInteraction.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -33,6 +34,9 @@ io.sockets.on('connection', function(socket)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
+
+		// Transmet le message au module UserInteraction (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		userInteraction.announceUser(socket, name);
 	});
 	
 	// Réception d'un message
