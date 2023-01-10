@@ -5,11 +5,13 @@
  */
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
-module.exports =  {
+module.exports =  
+{
     getRandomAvatar: getRandomAvatar
 }
 
 /* Get aléatoire avatar */
-function getRandomAvatar() {
+function getRandomAvatar() 
+{
     return "<img src='/modules/avatar/01.svg' alt='' width='30px'>";
 }
