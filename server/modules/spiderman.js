@@ -28,7 +28,7 @@ function handleSpider(io, message)
 			// Si oui, envoie la réponse de Spiderman...
 			messagePerso(io,"2+2=4, c'est tout ce que je sais.");
 		}
-		else if (message.includes('vol'))
+		if (message.includes('vol'))
 		{
 			messagePerso(io,'Je suis une araignée pas un pigeon !');
 		} 
