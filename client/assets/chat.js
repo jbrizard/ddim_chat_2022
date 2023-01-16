@@ -54,12 +54,21 @@ function register()
 	//Pas d'envoie si pas de pseudo
 	if (pseudoVal == '')
 		return;
+	//récupère icone
+	var iconeInput = $('#idIcone');
+	var iconeVal = iconeInput.value;
+
+	console.log(iconeInput);
+	console.log(iconeVal);
+	//Pas d'envoie si pas d'icone
+	if (iconeVal == '')
+		return;
 
 	// add class hidden to modal
 	$('#modal').addClass('hidden');
 
 	//envoie pseudo et icone au serveur
-	socket.emit('user_enter', pseudoVal, 2);
+	socket.emit('user_enter', pseudoVal, iconeVal);
 }
 
 /**
