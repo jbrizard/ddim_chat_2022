@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var basket = require('./modules/basket.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -25,9 +26,15 @@ app.get('/', function(req, res)
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 
+// Initialisation du module Basket
+basket.init(io);
+
 // Gestion des connexions au socket
 io.sockets.on('connection', function(socket)
 {
+	// Ajoute le client au jeu de basket
+	basket.addClient(socket);
+	
 	// Arrivée d'un utilisateur
 	socket.on('user_enter', function(name)
 	{
@@ -46,8 +53,11 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+		
+		// Transmet le message au module Basket
+		basket.onMessage(io, message);
 	});
 });
 
-// Lance le serveur sur le port 8080 (http://localhost:8080)
-server.listen(8080);
+// Lance le serveur sur le port 8090 (http://localhost:8090)
+server.listen(8090);
