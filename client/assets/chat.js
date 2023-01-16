@@ -1,9 +1,20 @@
 ﻿// Connexion au socket
 var socket = io.connect(':8090');
 
-// Demande un pseudo et envoie l'info au serveur
-var name = prompt('Quel est votre pseudo ?');
-socket.emit('user_enter', name);
+if (typeof(localStorage.user_name) == 'undefined')
+{
+	// Demande un pseudo et envoie l'info au serveur
+	var name = prompt('Quel est votre pseudo ?');
+
+	if (confirm('Voulez-vous enregistrer votre pseudo ?'))
+		localStorage.user_name = name;
+}
+else
+{
+	name = localStorage.user_name;
+}
+
+socket.emit('user_enter', localStorage.user_name);
 
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
@@ -55,10 +66,4 @@ function receiveMessage(data)
 	     + '</div>'
 	)
 	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
-}
-
-
-function sendSearchGifs(search)
-{
-	socket.emit('search_gifs', search);
 }

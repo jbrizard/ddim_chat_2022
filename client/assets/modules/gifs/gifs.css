@@ -46,10 +46,24 @@
 .tooltip-body::-webkit-scrollbar{
     width:0px;
 }
+.tooltip-content {
+    align-self: start;
+}
 .tooltip-flex {
     width: 350px;
     max-height: 650px;
 
     display: flex;
     flex-direction: column;
+}
+
+
+/* IMPROVE IMAGES & MESSAGES DISPLAY */
+.gif {
+    max-width: 100%;
+}
+#messages .message {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
 }

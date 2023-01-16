@@ -49,15 +49,34 @@ io.sockets.on('connection', function(socket)
 		daffy.handleDaffy(io, message);
 	});
 
-	socket.on('search_gifs', function(search)
+	// Réception d'un gif
+	socket.on('gif', function(url)
+	{
+		// Par sécurité, on encode les caractères spéciaux
+		url = ent.encode(url);
+
+		// Transmet le gif à tous les utilisateurs (broadcast)
+		gifs.handleGifMessage(io,socket.name,url)
+	});
+
+	// Démarrage du recherche de gif et renvoi du résultat au client
+	socket.on('search_gifs', function(search, offset = 0)
 	{
 		// Par sécurité, on encode les caractères spéciaux
 		search = ent.encode(search);
 
-		gifs.handleGif(search).then(function (res) {
-			console.log(res);
+		gifs.handleGif(search, offset).then(function (res) {
+			// Transmet le message à l'utilisateur
+			io.to(socket.id).emit('results_search_gifs', {gifs:res, offset:offset});
+		});
 
-			// Transmet le message à tous les utilisateurs (broadcast)
+	});
+
+	// Démarrage de la récupération des gifs trending et renvoi du résultat au client
+	socket.on('trending_gifs', function()
+	{
+		gifs.handleTrendingGif().then(function (res) {
+			// Transmet le message à l'utilisateur
 			io.to(socket.id).emit('results_search_gifs', {gifs:res});
 		});
 
