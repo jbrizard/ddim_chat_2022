@@ -1,6 +1,7 @@
-var ball = $('.ball').hide();
+var ball = $('.ball');
 var ballWidth = ball.width();
 var ballHeight = ball.height();
+var scores = $('#basket-scores');
 var bounceAudio = $('#basket-bounce')[0];
 var swishAudio = $('#basket-swish')[0];
 var othersMousePos = $('#others-mouse-pos');
@@ -28,6 +29,7 @@ function startBasket()
 	setInterval(onEnterFrame, 10);
 	
 	ball.fadeIn(1500);
+	scores.fadeIn(1500);
 }
 
 /**
@@ -77,7 +79,8 @@ function onBasketBallMove(data)
 	});
 	
 	// si on touche le sol = déclenche le son "bounce" (volume adapté en fonction de la vélocité)
-	if (data.touchFloor && Math.abs(data.vy) > 0.3){
+	if (data.touchFloor && Math.abs(data.vy) > 0.3)
+	{
 		bounceAudio.currentTime = 0;
 		bounceAudio.volume = Math.abs(data.vy) / 1 * .05 + .05;
 		bounceAudio.play();
@@ -111,11 +114,11 @@ function onSetCurrentPlayer(data)
 {
 	if (data != null)
 	{
-		$('#basket-scores #stats').empty().html(
+		scores.find('#stats').empty().html(
 			'Meilleur joueur : ' + data.bestPlayer.name + ' (' + data.bestPlayer.numTouches + ') !'
 		);
 		
-		$('#basket-scores #current-player').empty().html(
+		scores.find('#current-player').empty().html(
 			'' + data.name + ' a la balle (' + data.numTouches + ') !'
 		);
 		

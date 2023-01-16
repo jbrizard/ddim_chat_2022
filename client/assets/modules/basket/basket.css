@@ -10,6 +10,7 @@
 	background-size:contain;
 	transform-origin:center;
 	z-index:2;
+	display:none;
 }
 #basket-net {
 	position:absolute;
@@ -62,6 +63,7 @@
     font-size: 12px;
     line-height: 2;
 	font-weight:bold;
+	display:none;
 }
 .basket-score {
 	position:absolute;
