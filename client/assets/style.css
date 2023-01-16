@@ -130,7 +130,7 @@ h1 {
 	width: 100%;
 	z-index: 500;
 	height: 100vh;
-	background-color: rgba(200, 200, 200, 0.2);
+	background-color: rgba(255, 255, 255, 0.8);
 	left: 0;
 	top: 0;
 	align-items: center;
@@ -139,9 +139,11 @@ h1 {
 .modal-content{
 	background-color: #fff;
 	width: fit-content;
-	margin: auto;
+	margin: 50px auto;
 	padding: 20px;
 	z-index: 600;
+	border: 1px solid #888;
+	border-radius: 15px;
 }
 /* Avatar center */
 .message {
@@ -155,9 +157,20 @@ h1 {
 }
 /*taille icone modal*/
 .iconeRadio{
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 10px;
 }
 .icone{
 	width: 40px;
+}
+/* Button */
+.button-primary {
+	display:inline-block;
+	border:solid 2px #888;
+	width:calc(100% - 144px);
+	padding:0 20px;
+	height:31px;
+	border-radius: 8px;
+	transition:all .4s;
 }

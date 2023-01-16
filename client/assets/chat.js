@@ -17,8 +17,16 @@ $('#register').click(register);
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-input').keyup(function(evt)
 {
-	if (evt.keyCode == 13) // 13 = touche Entrée
+	if (evt.keyCode == 13) {
 		sendMessage();
+	} // 13 = touche Entrée
+});
+
+$('#pseudo').keyup(function(evt)
+{
+	if (evt.keyCode == 13) {
+		register();
+	} // 13 = touche Entrée
 });
 
 // Action quand on clique sur le bouton Aide (?)
@@ -62,7 +70,7 @@ function register()
 			iconeVal = document.getElementsByClassName("idIcone")[i].value;
 		}
 	}
-	
+
 	//Pas d'envoie si pas d'icone
 	if (iconeVal === 0)
 		return;
