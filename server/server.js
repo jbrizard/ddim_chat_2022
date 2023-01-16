@@ -30,10 +30,11 @@ app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 io.sockets.on('connection', function(socket)
 {
 	// Arrivée d'un utilisateur
-	socket.on('user_enter', function(name)
+	socket.on('user_enter', function(name, avatarId)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
+		socket.avatarId = avatarId;
 	});
 	
 	// Réception d'un message
@@ -43,7 +44,7 @@ io.sockets.on('connection', function(socket)
 		message = ent.encode(message);
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message, avatar:avatar.getRandomAvatar(socket.name)});
+		io.sockets.emit('new_message', {name:socket.name, message:message, avatar:avatar.getAvatar(socket.avatarId)});
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);

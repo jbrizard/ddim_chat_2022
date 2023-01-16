@@ -142,3 +142,13 @@ h1 {
 	margin: auto;
 	padding: 20px;
 }
+/* Avatar center */
+.message {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+.hidden{
+	display: none;
+}
