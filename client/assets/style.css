@@ -185,7 +185,7 @@ h1 {
 	overflow: hidden;
 }
 
-.userCard .statusPill {
+.userCard .status {
 	position: absolute;
 	left: 5px;
 	top: 50%;

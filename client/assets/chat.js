@@ -48,7 +48,6 @@ function sendMessage()
  */
 function receiveMessage(data)
 {
-	console.dir(data)
 	if (!data.excludedUsers?.includes(socket.id) ?? true) {
 		$('#chat #messages').append(
 			'<div class="message">'
@@ -68,17 +67,26 @@ const connectionStatus = {
 
 function notifyUser(data) 
 {
+	// on vide le html correspondant à la liste d'utilisateurs
 	$('#users #user-list').empty();
-	for (const userId in data.users) {
+
+	// on parcours tous les utilisateurs
+	for (const userId in data.users) 
+	{
+		// on ajoute la carte HTML de chaque utilisateur dans le DOM
 		const user = data.users[userId];
-		
 		if (user.status === connectionStatus.CONNECTED) {
-			$('#users #user-list').append(
-				`<div class="userCard">
-					<span class='statusPill connected'></span>
-					<span class="name">${user.name}</span> 
-				</div>`
-			);
+			$('#users #user-list').append(generateUserRow(user));
 		}	
 	}
+}
+
+function generateUserRow(user) 
+{
+	return `
+		<div class="userCard">
+			<span class='status ${user.status}'></span>
+			<span class="name">${user.name}</span> 
+		</div>
+	`
 }
