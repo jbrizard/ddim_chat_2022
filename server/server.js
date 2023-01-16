@@ -9,6 +9,7 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var avatar = require('./modules/avatar.js');
+var spiderman = require('./modules/spiderman.js')
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -46,8 +47,9 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message, avatar:avatar.getAvatar(socket.avatarId)});
 		
-		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		// Transmet le message au module Daffy et Spiderman (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+		spiderman.handleSpider(io, message);
 	});
 });
 
