@@ -55,13 +55,16 @@ function register()
 	if (pseudoVal == '')
 		return;
 	//récupère icone
-	var iconeInput = $('#idIcone');
-	var iconeVal = iconeInput.value;
+	var iconeVal = 0;
 
-	console.log(iconeInput);
-	console.log(iconeVal);
+	for (i=0; i<document.getElementsByClassName("idIcone").length; i++) {
+		if (document.getElementsByClassName("idIcone")[i].checked) {
+			iconeVal = document.getElementsByClassName("idIcone")[i].value;
+		}
+	}
+	
 	//Pas d'envoie si pas d'icone
-	if (iconeVal == '')
+	if (iconeVal === 0)
 		return;
 
 	// add class hidden to modal
