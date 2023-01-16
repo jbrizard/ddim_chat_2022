@@ -1,15 +1,21 @@
-﻿html, body {
+﻿@import url('https://fonts.googleapis.com/css2?family=Coustard&family=Roboto&display=swap');
+
+html, body {
 	height:100%;
 	margin:0;
 	padding:0;
 	overflow:hidden;
 }
+
 body {
 	background:#888;
 	color:#555;
 	text-align:center;
 	font-family:Arial;
+	font-family: 'Coustard', serif;
+	font-family: 'Roboto', sans-serif;
 }
+
 h1 {
 	color:#fff;
 	text-transform:uppercase;
@@ -146,9 +152,14 @@ h1 {
 	box-shadow:0px 0px 20px 0 rgba(0, 0, 0, 0.3);
 }
 
+#users h2 {
+	margin: 0;
+}
+
 #user-list {
 	display: flex;
 	flex-direction: column;
+	padding-top: 20px;
 	gap: 10px;
 }
 
