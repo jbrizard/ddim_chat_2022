@@ -153,15 +153,42 @@ h1 {
 }
 
 .userCard {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
-	background-color: #DDD;
-	border-radius: 14px;
-
-	font-size: 9pt;
-
+	gap: 5px;
 	width: 100%;
 	height: 20px;
+	background-color: #DDD;
+	border-radius: 14px;
+	font-size: 9pt;
+}
+
+.userCard .name {
+	width: 75%;
+	padding-left: 5px;
+
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.userCard .statusPill {
+	position: absolute;
+	left: 5px;
+	top: 50%;
+	transform: translateY(-50%);
+    --size: 10px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+}
+
+.connected {
+	background-color: green;
+}
+
+.disconnected {
+	background-color: red;
 }

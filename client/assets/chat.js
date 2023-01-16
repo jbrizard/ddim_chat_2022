@@ -75,6 +75,7 @@ function notifyUser(data)
 		if (user.status === connectionStatus.CONNECTED) {
 			$('#users #user-list').append(
 				`<div class="userCard">
+					<span class='statusPill connected'></span>
 					<span class="name">${user.name}</span> 
 				</div>`
 			);
