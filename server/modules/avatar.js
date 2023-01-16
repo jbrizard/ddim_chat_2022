@@ -15,7 +15,7 @@ var list = new Map();
 function getRandomAvatar(name) {
     let id = 0;
     if (!list.has(name)) {
-        id = Math.floor(Math.random() * 6);
+        id = Math.floor(Math.random() * 5) + 1;
         list.set(name, id);
     }
 
