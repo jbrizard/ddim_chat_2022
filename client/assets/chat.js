@@ -49,10 +49,11 @@ function sendMessage()
 function receiveMessage(data)
 {
 	$('#chat #messages').append(
-		'<div class="message">'
-			+ '<span class="user">'+ data.avatar + data.name  + '</span> '
-			+ data.message 
-	     + '</div>'
+	 	'<div class="message">'
+		+  data.avatar
+		+ '<span class="user">' + data.name +  '</span> '
+		+ data.message
+		+ '</div>'
 	)
 	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 }

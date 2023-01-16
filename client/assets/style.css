@@ -123,3 +123,11 @@ h1 {
         box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
         border-radius: 3px;
 }
+
+/* Avatar center */
+.message {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
