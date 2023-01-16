@@ -36,7 +36,7 @@ io.sockets.on('connection', function(socket)
 		socket.name = name;
 
 		// Ajoute un nouvel utilisateur
-		users.addUser(socket);
+		users.connectUser(socket);
 		users.notifyUser(io, socket, users.connectionStatus.CONNECTED);
 	});
 	
@@ -53,6 +53,11 @@ io.sockets.on('connection', function(socket)
 		daffy.handleDaffy(io, message);
 
 		//
+	});
+	  
+	socket.on("disconnect", function() {
+		users.notifyUser(io, socket, users.connectionStatus.DISCONNECTED);
+		users.disconnectUser(socket);
 	});
 });
 

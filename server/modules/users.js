@@ -13,26 +13,41 @@ const connectionStatus = {
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
 module.exports =  {
     connectionStatus: connectionStatus,
-	addUser: addUser, // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
+	connectUser: connectUser, // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
+    disconnectUser: disconnectUser, // permet de supprimer un user de la liste des users connectés
     notifyUser: notifyUser, //Permet d'ajouter un message de notification d'arrivée d'un nouvel user dans le chat
-    updateUsersList: updateUsersList,
 }
 
 // Initialisation des users 
-var connectedUsers = [];
+var connectedUsers = {};
 
 /**
  * Ajoute un utilisateur
  */
-function addUser(socket) 
+function connectUser(socket) 
 {
     if(!checkIfUserExists(socket)) {
-        connectedUsers.push({
-            id: socket.id,
+        connectedUsers[socket.id] = {
             name: socket.name,
-        });
+            status: connectionStatus.CONNECTED
+        };
+        
         // Log --
         console.log(`✅ Success: Added user ${socket.name}`);
+    } else {
+        connectedUsers[socket.id].status = connectionStatus.CONNECTED;
+
+        // Log --
+        console.log(`✅ Success: Connected user ${socket.name}`);
+    }
+}
+
+function disconnectUser(socket) {
+    if(checkIfUserExists(socket)) {
+        connectedUsers[socket.id].status = connectionStatus.DISCONNECTED;
+
+        // Log --
+        console.log(`✅ Success: Disconnected user ${socket.name}`);
     }
 }
 
@@ -41,9 +56,7 @@ function addUser(socket)
  */
 function checkIfUserExists(socket) 
 {
-    return (typeof(connectedUsers.find((s) => 
-        s.id === socket.id
-    )) !== 'undefined');
+    return socket.id in connectedUsers;
 }
 
 /**
@@ -51,6 +64,17 @@ function checkIfUserExists(socket)
  */
 function notifyUser(io, socket, type) 
 {
+    console.dir(connectedUsers)
+    //edition dynamque du message en fonction du connectionStatus
+	let message = '';
+    switch(type) 
+    {
+        case connectionStatus.CONNECTED: message = `${connectedUsers[socket.id].name} s'est connecté...`; break;
+        case connectionStatus.DISCONNECTED: message = `${connectedUsers[socket.id].name} s'est déconnecté...`; break;
+        default: break;
+    }
+
+    io.sockets.emit('new_message', {name:'bot', message:message});
     io.sockets.emit('notify_user', {
         type: type,
         userId: socket.id,

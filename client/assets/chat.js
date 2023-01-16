@@ -65,16 +65,9 @@ const connectionStatus = {
 
 function notifyUser(data) 
 {
-    //edition dynamque du message en fonction du connectionStatus
-	let message = '';
-    switch(data.type) 
-    {
-        case connectionStatus.CONNECTED: message = `${socket.name} s'est connécté...`; break;
-        case connectionStatus.DISCONNECTED: message = `${socket.name} s'est déconnécté...`; break;
-        default: break;
-    }
-
-	for (const user of data.users) {
+	$('#users #user-list').empty();
+	for (const userId in data.users) {
+		const user = data.users[userId];
 		$('#users #user-list').append(
 			`<div class="user">
 				<span class="name">${user.name}</span> 
