@@ -3,7 +3,7 @@ var socket = io.connect(':8090');
 
 // Demande un pseudo et envoie l'info au serveur
 var name = prompt('Quel est votre pseudo ?');
-socket.emit('user_enter', name);
+socket.emit('user_enter', name, 2);
 
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
