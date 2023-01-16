@@ -48,10 +48,18 @@ function sendMessage()
 
 function register()
 {
-	alert('ok');
-	var modal = document.getElementsByClassName('modal');
-	modal.classList.add('hidden');
-	socket.emit('user_enter', "#pseudo", 2);
+	//récupère le pseudo
+	var pseudoInput = $('#pseudo');
+	var pseudoVal = pseudoInput.val();
+	//Pas d'envoie si pas de pseudo
+	if (pseudoVal == '')
+		return;
+
+	// add class hidden to modal
+	$('#modal').addClass('hidden');
+
+	//envoie pseudo et icone au serveur
+	socket.emit('user_enter', pseudoVal, 2);
 }
 
 /**
