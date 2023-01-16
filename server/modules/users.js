@@ -69,8 +69,8 @@ function notifyUser(io, socket, type)
 	let message = '';
     switch(type) 
     {
-        case connectionStatus.CONNECTED: message = `${connectedUsers[socket.id].name} s'est connecté...`; break;
-        case connectionStatus.DISCONNECTED: message = `${connectedUsers[socket.id].name} s'est déconnecté...`; break;
+        case connectionStatus.CONNECTED: message = `${socket.name} s'est connecté...`; break;
+        case connectionStatus.DISCONNECTED: message = `${socket.name} s'est déconnecté...`; break;
         default: break;
     }
 
