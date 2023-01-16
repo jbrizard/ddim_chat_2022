@@ -51,7 +51,7 @@ function register()
 	alert('ok');
 	var modal = document.getElementsByClassName('modal');
 	modal.classList.add('hidden');
-	socket.emit('user_enter', "OK", 2);
+	socket.emit('user_enter', "#pseudo", 2);
 }
 
 /**
