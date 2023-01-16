@@ -6,6 +6,7 @@
 	
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>	<!-- fichier injecté par NodeJS -->
+		<script type="text/javascript" src="chat.js" defer></script>
 		
 		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="/modules/daffy/daffy.css" />
@@ -17,31 +18,30 @@
 		<div id="chatbox">
 			<div id="users">
 				<h2>Utilisateurs</h2>
-				<div id="usersList"></div>
+				<div id="user-list"></div>
 			</div>
+			
 			
 			<div id="chat">
 				<div id="messages">
-					
 				</div>
 							
 				<div id="tools">
-						<input type="text" id="message-input" />
-						
-						<input type="button" id="send-message" value="Envoyer" />
+					<input type="text" id="message-input" />
+					
+					<input type="button" id="send-message" value="Envoyer" />
 				</div>
 			</div>
 		</div>
 		
 		<div id="help">
-				<div id="help-toggle">?</div>
-				<ul id="help-content">
-						<li>
-								<strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
-						</li>
-				</ul>
+			<div id="help-toggle">?</div>
+			<ul id="help-content">
+				<li>
+					<strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
+				</li>
+			</ul>
 		</div>
                 
-		<script type="text/javascript" src="chat.js"></script>
 	</body>
 </html>

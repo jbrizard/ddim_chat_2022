@@ -4,10 +4,18 @@
  * Auteur(s) : 
  */
 
+// différents status de connextion d'un utilisateur
+const connectionStatus = {
+    CONNECTED: 'connected',
+    DISCONNECTED: 'disconnected',
+}
+
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
 module.exports =  {
+    connectionStatus: connectionStatus,
 	addUser: addUser, // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
-    notifyUserEnter: notifyUserEnter
+    notifyUser: notifyUser, //Permet d'ajouter un message de notification d'arrivée d'un nouvel user dans le chat
+    updateUsersList: updateUsersList,
 }
 
 // Initialisation des users 
@@ -19,17 +27,13 @@ var connectedUsers = [];
 function addUser(socket) 
 {
     if(!checkIfUserExists(socket)) {
-        connectedUsers[socket.id] = socket;
+        connectedUsers.push({
+            id: socket.id,
+            name: socket.name,
+        });
+        // Log --
         console.log(`✅ Success: Added user ${socket.name}`);
     }
-}
-
-/**
- * Supprime un utiisateur
- */
-function removeUser(socket) 
-{
-    delete connectedUsers[socket.id];
 }
 
 /**
@@ -43,9 +47,13 @@ function checkIfUserExists(socket)
 }
 
 /**
- * Emission d'un message de nofication de connection d'un nouvel user
+ * Emission d'un message de nofication de connection/déconnection d'un user
  */
-function notifyUserEnter(io, socket) 
+function notifyUser(io, socket, type) 
 {
-    io.sockets.emit('new_message', {name: 'bot', message: `${socket.name} s'est connécté...`});
+    io.sockets.emit('notify_user', {
+        type: type,
+        userId: socket.id,
+        users: connectedUsers
+    });
 }

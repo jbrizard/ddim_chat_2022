@@ -37,7 +37,7 @@ io.sockets.on('connection', function(socket)
 
 		// Ajoute un nouvel utilisateur
 		users.addUser(socket);
-		users.notifyUserEnter(io, socket);
+		users.notifyUser(io, socket, users.connectionStatus.CONNECTED);
 	});
 	
 	// Réception d'un message
@@ -51,6 +51,8 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+
+		//
 	});
 });
 
