@@ -2,14 +2,17 @@
 var socket = io.connect(':8090');
 
 // Demande un pseudo et envoie l'info au serveur
-var name = prompt('Quel est votre pseudo ?');
-socket.emit('user_enter', name, 2);
+//var name = prompt('Quel est votre pseudo ?');
+//socket.emit('user_enter', name, 2);
 
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
 
 // Action quand on clique sur le bouton "Envoyer"
 $('#send-message').click(sendMessage);
+
+// Action quand on clcique sur le bouton "inscription"
+$('#register').click(register);
 
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-input').keyup(function(evt)
@@ -41,6 +44,11 @@ function sendMessage()
 	
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
+}
+
+function register()
+{
+	socket.emit('user_enter', "OK", 2);
 }
 
 /**
