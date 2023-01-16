@@ -48,9 +48,9 @@ function sendMessage()
 
 function register()
 {
-	alert('ok');
-	var modal = document.getElementsByClassName('modal');
-	modal.classList.add('hidden');
+	// add class hidden to modal
+	$('#modal').addClass('hidden');
+
 	socket.emit('user_enter', "OK", 2);
 }
 
