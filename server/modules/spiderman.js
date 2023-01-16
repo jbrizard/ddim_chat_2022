@@ -5,6 +5,7 @@
  */
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
+const { setMaxListeners } = require("events");
 const avatar = require("./avatar");
 module.exports =  {
 	handleSpider: handleSpider // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
@@ -17,29 +18,23 @@ function handleSpider(io, message)
 {
 	// Passe le message en minuscules (recherche insensible à la casse)
 	message = message.toLowerCase();
-	io.sockets.emit('new_message',
-		{
-			name:'Spiderman',
-			message:'<span class="spiderman"> test4</span>',
-			avatar:"<img src='/modules/avatar/spiderman.svg' alt='Spiderman avatar' width='30px'>"
-		});
-	messagePerso('test1');
+	
 	// Est-ce qu'il contient une référence à Spiderman ?
 	if (message.includes('spiderman'))
 	{
-		messagePerso('test2');
-			//Autre réponse de Spiderman
+		
 		if (message.includes('calcul'))
 		{
 			// Si oui, envoie la réponse de Spiderman...
-			messagePerso('Les maths.');
+			messagePerso(io,"2+2=4, c'est tout ce que je sais.");
 		}
-		else if (message.includes('test'))
+		else if (message.includes('vol'))
 		{
-			messagePerso('test');
-		} else 
+			messagePerso(io,'Je suis une araignée pas un pigeon !');
+		} 
+		else 
 		{
-			messagePerso('Un grand pouvoir implique de grandes responsabilitées.');
+			messagePerso(io,'Un grand pouvoir implique de grandes responsabilitées.');
 		}
 	}
 	
