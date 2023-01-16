@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var users = require('./modules/users.js');
 var gifs = require('./modules/gifs.js');
 var meteo = require('./modules/meteo.js');
 
@@ -16,7 +17,7 @@ var app = express();
 var server = http.createServer(app);
 
 // Initialisation du websocket
-var io = ioLib.listen(server)
+var io = ioLib.listen(server);
 
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)
@@ -35,6 +36,10 @@ io.sockets.on('connection', function(socket)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
+
+		// Ajoute un nouvel utilisateur
+		users.connectUser(socket);
+		users.notifyUser(io, socket, users.connectionStatus.CONNECTED);
 	});
 	
 	// Réception d'un message
@@ -49,10 +54,18 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
 
+	 
+// Lance le serveur sur le port 8090 (http://localhost:8090)
 		// Transmet le message au module Météo
 		meteo.handleMessage(io, socket, message);
 
 	});
+	
+		socket.on("disconnect", function() {
+		users.disconnectUser(socket);
+		users.notifyUser(io, socket, users.connectionStatus.DISCONNECTED);
+	});
+});
 
 	// Réception d'un gif
 	socket.on('gif', function(url)
@@ -86,7 +99,7 @@ io.sockets.on('connection', function(socket)
 		});
 
 	});
-});
+
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)
 server.listen(8090);

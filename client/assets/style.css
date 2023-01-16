@@ -1,22 +1,38 @@
-﻿html, body {
+﻿@import url('https://fonts.googleapis.com/css2?family=Coustard&family=Roboto&display=swap');
+
+html, body {
 	height:100%;
 	margin:0;
 	padding:0;
 	overflow:hidden;
 }
+
 body {
 	background:#888;
 	color:#555;
 	text-align:center;
 	font-family:Arial;
+	font-family: 'Coustard', serif;
+	font-family: 'Roboto', sans-serif;
 }
+
 h1 {
 	color:#fff;
 	text-transform:uppercase;
 	text-shadow:0px 0px 20px rgba(0, 0, 0, 0.4);
 }
+
+#chatbox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 30px;
+
+	height: calc(100vh - 100px);
+}
+
+
 #chat {
-	margin:0 auto;
 	width:70%;
 	max-width:500px;
 	height: calc(100% - 80px - 40px - 60px); /* 80px = marge haute, 40px = marge basse, 60px = padding vertical */
@@ -122,4 +138,68 @@ h1 {
         text-align: left;
         box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
         border-radius: 3px;
+}
+
+
+
+/* Listing utilisateur */
+#users {
+	width: 150px;
+	height: calc(100% - 80px - 40px - 60px); /* 80px = marge haute, 40px = marge basse, 60px = padding vertical */
+	padding:30px;
+	background:#fff;
+	border-radius:14px;
+	box-shadow:0px 0px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+#users h2 {
+	margin: 0;
+}
+
+#user-list {
+	display: flex;
+	flex-direction: column;
+	padding-top: 20px;
+	gap: 10px;
+}
+
+.userCard {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	width: 100%;
+	height: 20px;
+	background-color: #DDD;
+	border-radius: 14px;
+	font-size: 9pt;
+}
+
+.userCard .name {
+	width: 75%;
+	padding-left: 5px;
+
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.userCard .status {
+	position: absolute;
+	left: 5px;
+	top: 50%;
+	transform: translateY(-50%);
+    --size: 10px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+}
+
+.connected {
+	background-color: green;
+}
+
+.disconnected {
+	background-color: red;
 }
