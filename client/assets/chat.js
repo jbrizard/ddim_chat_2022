@@ -48,13 +48,16 @@ function sendMessage()
  */
 function receiveMessage(data)
 {
-	$('#chat #messages').append(
-		'<div class="message">'
-			+ '<span class="user">' + data.name  + '</span> ' 
-			+ data.message 
-	     + '</div>'
-	)
-	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+	console.dir(data)
+	if (!data.excludedUsers?.includes(socket.id) ?? true) {
+		$('#chat #messages').append(
+			'<div class="message">'
+				+ '<span class="user">' + data.name  + '</span> ' 
+				+ data.message 
+			 + '</div>'
+		)
+		.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur	
+	}
 }
 
 // différents status de connextion d'un utilisateur
@@ -68,10 +71,13 @@ function notifyUser(data)
 	$('#users #user-list').empty();
 	for (const userId in data.users) {
 		const user = data.users[userId];
-		$('#users #user-list').append(
-			`<div class="user">
-				<span class="name">${user.name}</span> 
-			</div>`
-		)	
+		
+		if (user.status === connectionStatus.CONNECTED) {
+			$('#users #user-list').append(
+				`<div class="user">
+					<span class="name">${user.name}</span> 
+				</div>`
+			);
+		}	
 	}
 }

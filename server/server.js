@@ -56,8 +56,8 @@ io.sockets.on('connection', function(socket)
 	});
 	  
 	socket.on("disconnect", function() {
-		users.notifyUser(io, socket, users.connectionStatus.DISCONNECTED);
 		users.disconnectUser(socket);
+		users.notifyUser(io, socket, users.connectionStatus.DISCONNECTED);
 	});
 });
 

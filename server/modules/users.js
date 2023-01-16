@@ -19,7 +19,7 @@ module.exports =  {
 }
 
 // Initialisation des users 
-var connectedUsers = {};
+var userList = {};
 
 /**
  * Ajoute un utilisateur
@@ -27,7 +27,7 @@ var connectedUsers = {};
 function connectUser(socket) 
 {
     if(!checkIfUserExists(socket)) {
-        connectedUsers[socket.id] = {
+        userList[socket.id] = {
             name: socket.name,
             status: connectionStatus.CONNECTED
         };
@@ -35,7 +35,7 @@ function connectUser(socket)
         // Log --
         console.log(`✅ Success: Added user ${socket.name}`);
     } else {
-        connectedUsers[socket.id].status = connectionStatus.CONNECTED;
+        userList[socket.id].status = connectionStatus.CONNECTED;
 
         // Log --
         console.log(`✅ Success: Connected user ${socket.name}`);
@@ -44,8 +44,8 @@ function connectUser(socket)
 
 function disconnectUser(socket) {
     if(checkIfUserExists(socket)) {
-        connectedUsers[socket.id].status = connectionStatus.DISCONNECTED;
-
+        userList[socket.id].status = connectionStatus.DISCONNECTED;
+        console.dir(userList[socket.id])
         // Log --
         console.log(`✅ Success: Disconnected user ${socket.name}`);
     }
@@ -56,7 +56,7 @@ function disconnectUser(socket) {
  */
 function checkIfUserExists(socket) 
 {
-    return socket.id in connectedUsers;
+    return socket.id in userList;
 }
 
 /**
@@ -64,7 +64,6 @@ function checkIfUserExists(socket)
  */
 function notifyUser(io, socket, type) 
 {
-    console.dir(connectedUsers)
     //edition dynamque du message en fonction du connectionStatus
 	let message = '';
     switch(type) 
@@ -74,10 +73,10 @@ function notifyUser(io, socket, type)
         default: break;
     }
 
-    io.sockets.emit('new_message', {name:'bot', message:message});
+    io.sockets.emit('new_message', {name:'bot', message:message, excludedUsers: [socket.id]});
     io.sockets.emit('notify_user', {
         type: type,
         userId: socket.id,
-        users: connectedUsers
+        users: userList
     });
 }
