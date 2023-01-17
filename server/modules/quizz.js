@@ -23,7 +23,7 @@ function messagePerso(io, message)
 {
     io.sockets.emit('new_message',
         {
-            name:'Spiderman',
+            name:'M.Quizz',
             message:'<span class="spiderman"> ' + message + '</span>',
             avatar:"<img src='/modules/avatar/quizz.svg' alt='Spiderman avatar' width='30px'>"
         });
