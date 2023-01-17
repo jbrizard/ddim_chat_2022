@@ -1,9 +1,21 @@
 ﻿// Connexion au socket
 var socket = io.connect(':8090');
+let usersList = [];
 
-// Demande un pseudo et envoie l'info au serveur
-var name = prompt('Quel est votre pseudo ?');
-socket.emit('user_enter', name);
+if (typeof(localStorage.user_name) == 'undefined')
+{
+	// Demande un pseudo et envoie l'info au serveur
+	var name = prompt('Quel est votre pseudo ?');
+
+	if (confirm('Voulez-vous enregistrer votre pseudo ?'))
+		localStorage.user_name = name;
+}
+else
+{
+	name = localStorage.user_name;
+}
+
+socket.emit('user_enter', localStorage.user_name);
 
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
@@ -73,12 +85,21 @@ function renderMessage(data)
 	const isSender = (typeof(data?.senderId) !== 'undefined' && data.senderId === socket.id);
 	const ownerClassName = [];
 	ownerClassName.push((isSender) ? 'isSender' : 'isReceiver');
-
+	if(data.message.includes('@'+name))
+	{
+		var audio = new Audio('sounds/wizz.mp3');
+		audio.play();
+		$('body').addClass('shaking');
+		setTimeout(function(){
+			$('body').removeClass('shaking');
+		},1600);
+	}
+	data.message = data.message.replace('@'+name,"<span class='ping'>@"+name+"</span>");
 	return (
 		`<div class="message ${ownerClassName.join(' ')}">
 			<div class="subMessage">
 				<span class="user"> ${data.name}</span>  
-				${data.message}			
+				<span class="text">${data.message}</span>			
 			</div>
 		</div>`
 	);
@@ -108,6 +129,7 @@ function notifyUser(data)
 {
 	// on vide le html correspondant à la liste d'utilisateurs
 	$('#users #user-list').empty();
+	usersList = [];
 
 	// on parcours tous les utilisateurs
 	for (const userId in data.users) 
@@ -115,6 +137,7 @@ function notifyUser(data)
 		// on ajoute la carte HTML de chaque utilisateur dans le DOM
 		const user = data.users[userId];
 		if (user.status === connectionStatus.CONNECTED) {
+			usersList.push(user);
 			$('#users #user-list').append(generateUserRow(user));
 		}	
 	}
