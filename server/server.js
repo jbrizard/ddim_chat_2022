@@ -21,6 +21,9 @@ var blague = require('./modules/blague.js');
 var avatar = require('./modules/avatar.js');
 var spiderman = require('./modules/spiderman.js')
 var quizz = require('./modules/quizz.js')
+var konami = require('./modules/konami.js');
+var youtubemusic = require('./modules/music_player.js');
+var tenor = require('./modules/tenor.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -114,6 +117,19 @@ io.sockets.on('connection', function(socket)
 
 		// Transmet le message au module Quizz
 		quizz.handleQuizz(io, message);
+
+		// Transmet le message au module Youtube
+		youtubemusic.handleMusicYoutube(io, message);
+
+		// Transmet le message au module Tenor
+		tenor.handleTenor(io, message);
+	});
+
+	// Réception du message konami
+	socket.on('konami', function()
+	{
+		// On dit à konami de s'activer
+		konami.handleKonami(io);
 	});
 
 	// récéption de l'évenement de suppression de l'historique
@@ -128,7 +144,6 @@ io.sockets.on('connection', function(socket)
 		users.disconnectUser(socket);
 		users.notifyUser(io, socket, users.connectionStatus.DISCONNECTED);
 	});
-
 
 	// Réception d'un gif
 	socket.on('gif', function(url)
