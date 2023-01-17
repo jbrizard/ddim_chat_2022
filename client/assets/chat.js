@@ -40,6 +40,9 @@ $('#help-toggle').click(function()
         $('#help-content').fadeToggle('fast');
 });
 
+// Action quand on clique sur le 'Supprimer historique du chat'
+$('#empty-chat-action').click(emptyChatHistory);
+
 /**
  * Sauvegarde un message dans le localstorage
  */
@@ -83,7 +86,6 @@ function receiveMessage(data)
 		//switch type
 		let finalMessageElement = '';
 		switch(data.type) {
-			case 'message': break;
 			case 'message': /*To implement; */ break;
 			case 'info': finalMessageElement = renderInfoMessage(data); break;
 			default: finalMessageElement = renderMessage(data); break;
@@ -159,6 +161,10 @@ function notifyUser(data)
 	}
 }
 
+/**
+ * Cette méthode vide la liste HTML des messages du chat et réinjecte les messages passer en paramètre
+ * @param {*} messages 
+ */
 function getMessagesHistory(messages) 
 {
 	// on vide le html correspondant à la liste des messages
@@ -168,6 +174,9 @@ function getMessagesHistory(messages)
 	}
 }
 
+/**
+ * Cette méthode génère le HTML représentant un utilisateur dans la liste d'utilisateur
+ */
 function generateUserRow(user) 
 {
 	return `
@@ -176,4 +185,14 @@ function generateUserRow(user)
 			<span class="name">${user.name}</span> 
 		</div>
 	`
+}
+
+/**
+ * Cette méthode est appelée lors du click sur 'Vider l'historique
+ */
+function emptyChatHistory() 
+{
+	// on vide le html correspondant à la liste des messages
+	$('#chat #messages').empty();
+	socket.emit('empty-chat-history', localStorage.user_name);
 }

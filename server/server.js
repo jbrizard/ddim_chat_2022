@@ -71,6 +71,13 @@ io.sockets.on('connection', function(socket)
 
 	});
 
+	// récéption de l'évenement de suppression de l'historique
+	socket.on('empty-chat-history', function()
+	{
+		// suppression de l'historique
+		messagesHistory.emptyHistory();
+	});
+
 	socket.on("disconnect", function() {
 		users.disconnectUser(socket);
 		users.notifyUser(io, socket, users.connectionStatus.DISCONNECTED);

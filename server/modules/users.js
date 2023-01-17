@@ -33,12 +33,12 @@ function connectUser(socket)
         };
         
         // Log --
-        console.log(`✅ Success: Added user ${socket.name}`);
+        console.log(`✅  Added user ${socket.name}`);
     } else {
         userList[socket.id].status = connectionStatus.CONNECTED;
 
         // Log --
-        console.log(`✅ Success: Connected user ${socket.name}`);
+        console.log(`✅  Connected user ${socket.name}`);
     }
 }
 
@@ -47,7 +47,7 @@ function disconnectUser(socket) {
         userList[socket.id].status = connectionStatus.DISCONNECTED;
         console.dir(userList[socket.id])
         // Log --
-        console.log(`✅ Success: Disconnected user ${socket.name}`);
+        console.log(`✅  Disconnected user ${socket.name}`);
     }
 }
 
