@@ -87,6 +87,10 @@ function register()
  */
 function receiveMessage(data)
 {
+    if(data.avatar === undefined){
+        data.avatar = "<img src='/modules/avatar/default.svg' alt='default avatar' width='30px'>";
+    }
+
 	$('#chat #messages').append(
 	 	'<div class="message">'
 		+  data.avatar
