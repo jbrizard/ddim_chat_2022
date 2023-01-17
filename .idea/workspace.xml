@@ -6,16 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ebe3cd90-6c4a-4004-bc99-3d84577cf0d4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/assets/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/assets/chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/modules/basket.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/modules/basket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/modules/blague.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/modules/blague.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/modules/coiffeur.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/modules/coiffeur.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/modules/commandes.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/modules/commandes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/modules/daffy.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/modules/daffy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/modules/eastereggs.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/modules/eastereggs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/modules/gifs.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/modules/gifs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/modules/meteo.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/modules/meteo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/modules/whisper.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/modules/whisper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/assets/modules/meteo/meteo.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/assets/modules/meteo/meteo.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +17,11 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitToolBoxStore">
@@ -37,12 +33,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1673968404" />
+                    <option name="branchName" value="develop" />
+                    <option name="lastUsedInstant" value="1673970383" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="develop" />
-                    <option name="lastUsedInstant" value="1673968403" />
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1673970240" />
                   </RecentBranch>
                 </list>
               </option>
@@ -61,16 +57,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Projects/ddim_chat_2022",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Projects/ddim_chat_2022&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Projects\ddim_chat_2022\client\assets\modules\avatar" />
