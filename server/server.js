@@ -9,6 +9,8 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 
+var sondage = require('./modules/sondage.js');
+
 // Initialisation du serveur HTTP
 var app = express();
 var server = http.createServer(app);
@@ -46,7 +48,17 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+
+		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		sondage.handleSondage(io, message, socket.name);
 	});
+
+	socket.on('click_response', function(params)
+	{
+		sondage.resultSondage(io, params.id, params.idSondage);
+	});
+
+
 });
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)
