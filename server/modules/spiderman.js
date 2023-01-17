@@ -8,10 +8,10 @@
 const { setMaxListeners } = require("events");
 const avatar = require("./avatar");
 module.exports =  {
-	handleSpider: handleSpider // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
+	handleSpider: handleSpider // permet d'appeler cette méthode dans server.js -> spiderman.handleSpiderman(...)
 }
 
-/**
+/*
  * Lorsqu'on appelle Spiderman, il répond...
  */
 function handleSpider(io, message)
@@ -49,6 +49,7 @@ function handleSpider(io, message)
 	
 }
 
+//Bloc de message de Spiderman
 function messagePerso(io, message)
 {
 	io.sockets.emit('new_message',

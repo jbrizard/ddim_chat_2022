@@ -124,7 +124,7 @@ h1 {
         border-radius: 3px;
 }
 
-/*modal*/
+/* modal */
 .modal{
 	position: fixed;
 	width: 100%;
@@ -155,7 +155,7 @@ h1 {
 .hidden{
 	display: none;
 }
-/*taille icone modal*/
+/* taille icone modal */
 .iconeRadio{
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -164,7 +164,7 @@ h1 {
 .icone{
 	width: 40px;
 }
-/* Button */
+/* Button modal */
 .button-primary {
 	display:inline-block;
 	border:solid 2px #888;

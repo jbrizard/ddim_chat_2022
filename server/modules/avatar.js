@@ -1,6 +1,6 @@
 /*
  * Nom : Avatar
- * Description : GEstion des avatar
+ * Description : Gestion des avatars
  * Auteur(s) : Clémentine Desrucques - Enzo Hardouin
  */
 

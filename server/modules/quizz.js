@@ -1,5 +1,11 @@
+/*
+ * Nom : Quizz !
+ * Description : Ce module est un Quizz
+ * Auteur(s) : Clem-Enzo
+ */
+
 module.exports = {
-    handleQuizz: handleQuizz
+    handleQuizz: handleQuizz // permet d'appeler cette méthode dans server.js
 }
 
 // Liste question et de réponse oui ou non, reponse variée pour plus de fun
@@ -20,6 +26,7 @@ const questions = {
     "F.U.C.K. signifie Fornication Under Consent of King.": "oui",
 }
 
+//initialisation des variables
 let start = false;
 let awaitAnswer = false;
 let randomAnswer = "non";
@@ -27,6 +34,8 @@ let randomAnswer = "non";
 function handleQuizz(io, message)
 {
     message = message.toLowerCase();
+
+    //Si on appel le quizz ...
     if (message.includes('quizz') || io.sockets.quizz === true)
     {
         io.sockets.quizz = true;
@@ -54,7 +63,7 @@ function handleQuizz(io, message)
                 {
                     io.sockets.quizzScore++;
                     messagePerso(io, "Bonne réponse, votre score est de " + io.sockets.quizzScore);
-                } else { // TODO: il vient tout le temps ici
+                } else { 
                     messagePerso(io, "Mauvaise réponse, votre score est de " + io.sockets.quizzScore);
                 }
                 awaitAnswer = false;
@@ -76,6 +85,7 @@ function handleQuizz(io, message)
     }
 }
 
+//Bloc de message du quizz
 function messagePerso(io, message)
 {
     io.sockets.emit('new_message',
