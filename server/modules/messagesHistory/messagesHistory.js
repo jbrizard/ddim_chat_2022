@@ -4,6 +4,7 @@
  * Auteur(s) : David Golay & Justin Sornay
  */
 
+const __messagesListPath = './modules/messagesHistory/messageList.json';
 const fs = require('fs'); //utilisé pour écrire des fichiers
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
@@ -27,37 +28,61 @@ function addToHistory(message)
             name: message.name,
             senderId: message.senderId,
             message: message.message,
-            creationDate: new Date().getDate(),
+            creationDate: new Date(Date.now()),
             reactions: [],
         }
     
         messageList.push(messageToStore);
-    
-        //Storage
-        try {
-            const json = JSON.stringify(messageList);
-            fs.writeFile('./modules/messagesHistory/messageList.json', json, 'utf8', () => {});
-
-            console.log(`✅ Success: Added message to history`);
-        } catch (storageError) {
-            console.dir('❌ Storing failed');
-            console.dir(storageError);
-        }
-
+        addMessageToStorage(messageToStore);
+       
     } catch (error) {
         console.log(error);
     }
 }
 
+function addMessageToStorage(messageToStore) {
+    //Storage
+    try {
+        const json = JSON.stringify(messageList);
+        fs.writeFile(__messagesListPath, json, 'utf8', () => {});
+
+        console.log(`✅ Success: Added message to history`);
+    } catch (storageError) {
+        console.log('❌ Storing failed');
+        console.log(storageError);
+    }
+}
+
+/**
+*
+**/
 function generateNewMessageId() {
     let generatedId = null;
     generatedId = messageList.length;
     return generatedId;
 }
 
+/**
+ * 
+ */
+async function getAllMessages(sockets) {
+    const storedList = getAllMessagesFromStorage();
+    console.dir(storedList);
+    sockets.emit('get_messages_history', storedList);
+}
 
-function getAllMessages(sockets) {
-    sockets.emit('get_messages_history', messageList);
+/**
+ * Récupère la liste de messages depuis le JSON de stockage
+ */
+ function getAllMessagesFromStorage() {
+    let res = [];
+    try {
+        const data = fs.readFileSync(__messagesListPath, 'utf8', {encoding:'utf8', flag:'r'});
+        res = JSON.parse(data);
+    } catch(error) {
+        console.dir('❌');
+    }
+    return res;
 }
 
 /**
@@ -66,26 +91,4 @@ function getAllMessages(sockets) {
 function emptyHistory(socket) {
     // Log --
     console.log(`✅ Success: Emptied message history`);
-}
-
-/**
- * Emission d'un message de nofication de connection/déconnection d'un user
- */
-function notifyUser(io, socket, type) 
-{
-    //edition dynamque du message en fonction du connectionStatus
-	let message = '';
-    switch(type) 
-    {
-        case connectionStatus.CONNECTED: message = `${socket.name} s'est connecté...`; break;
-        case connectionStatus.DISCONNECTED: message = `${socket.name} s'est déconnecté...`; break;
-        default: break;
-    }
-
-    io.sockets.emit('new_message', {name:'bot', message: message, type: 'info', excludedUsers: [socket.id]});
-    io.sockets.emit('notify_user', {
-        type: type,
-        userId: socket.id,
-        users: messageList
-    });
 }
