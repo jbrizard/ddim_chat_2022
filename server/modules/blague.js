@@ -38,7 +38,7 @@ function handleBlague(io, message) {
 			  // Envoie un message d'erreur au client
 			  io.sockets.emit('new_message', {
 				  name: 'Poti Blagueur',
-				  message: 'Désolé, je n\'ai pas pu récupérer une blague pour vous'
+				  message: 'Quelle est la différence entre un noir et un arbre ?<br>Un arbre ne tombe pas quand on lui met une corde au cou.'
 			  });
 		  });
 	}
