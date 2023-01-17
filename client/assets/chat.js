@@ -2,6 +2,8 @@
 var socket = io.connect(':8090');
 let usersList = [];
 
+let avatarPerso = null;
+
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
 socket.on('notify_user', notifyUser);
@@ -68,12 +70,13 @@ $('#register').click(register);
 // Action quand le button radio change de valeur
 $('.id-icone').change(iconSelected);
 
+$('#upload-avatar').change(previewFile);
+
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-input').keyup(function(evt)
 {
 	if (evt.keyCode === 13) // 13 = touche Entrée
 		sendMessage();
-	// 13 = touche Entrée
 });
 
 $('#pseudo').keyup(function(evt)
@@ -108,7 +111,8 @@ function sendMessage()
 	socket.emit('message', message);
 }
 
-function register() {
+function register()
+{
 	//récupère le pseudo
 	var pseudoInput = $('#pseudo');
 	var pseudoVal = pseudoInput.val();
@@ -124,6 +128,11 @@ function register() {
 	if (iconeVal === 0)
 		return;
 
+	if(avatarPerso != null)
+	{
+		iconeVal = avatarPerso;
+	}
+
 	// add class hidden to modal
 	$('#modal').addClass('hidden');
 
@@ -131,10 +140,31 @@ function register() {
 	socket.emit('user_enter', pseudoVal, iconeVal);
 }
 
-function iconSelected(){
+function iconSelected()
+{
 	$('.id-icone').parent().removeClass("icone-selected");
 	$('.id-icone:checked').parent().addClass("icone-selected");
 }
+
+function previewFile()
+{
+	const preview = document.getElementById('avatar-preview');
+	const file = document.getElementById('upload-avatar').files[0];
+	const reader = new FileReader();
+
+	reader.addEventListener("load", () =>
+	{
+		// on convertit l'image en une chaîne de caractères base64
+		preview.src = reader.result;
+		avatarPerso = reader.result;
+	}, false);
+
+	if (file)
+	{
+		reader.readAsDataURL(file);
+	}
+}
+
 
 /**
  * Affichage d'un message reçu par le serveur

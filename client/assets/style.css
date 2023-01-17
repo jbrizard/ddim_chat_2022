@@ -85,7 +85,7 @@ h1 {
 	border: 1px solid #888;
 	border-radius: 15px;
 }
-#uploadAvatar{
+.upload{
 	margin-top: 20px;
 }
 /* Avatar center */
@@ -111,6 +111,7 @@ h1 {
 
 .icone{
 	width: 40px;
+	height: 40px;
 }
 
 .icone-selected {
