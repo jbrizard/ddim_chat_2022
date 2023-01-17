@@ -10,6 +10,7 @@ var fs = require('fs');			// Accès au système de fichier
 var daffy = require('./modules/daffy.js');
 var konami = require('./modules/konami.js');
 var youtubemusic = require('./modules/music_player.js');
+var tenor = require('./modules/tenor.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -49,7 +50,7 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
 		youtubemusic.handleMusicYoutube(io, message);
-
+		tenor.handleTenor(io, message);
 	});
 
 	// Réception du message konami
