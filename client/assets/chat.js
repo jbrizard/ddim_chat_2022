@@ -11,15 +11,16 @@ socket.on('new_message', receiveMessage);
 // Gestion des événements diffusés par le serveur
 socket.on('new_emote_wall', () => {
 	const emoteList = [];
-	const nbEmotes = Math.random() * 200;
+	const nbEmotes = Math.random() * 100;
 
 	for (let i = 0; i < nbEmotes; i++) {
 		const startTop = document.body.clientHeight;
 		const startLeft = Math.random() * document.body.clientWidth;
+		const emoteUrlNumber = Math.ceil(Math.random() * 3);
 		const emote = `
 			<img 
-				src="./modules/blague/emoji_rire.png" 
-				alt="emote_rire" 
+				src="./modules/blague/emoji_${emoteUrlNumber}.png" 
+				alt="emote" 
 				width="100" 
 				height="100"
 				class="emote-wall-unit"
