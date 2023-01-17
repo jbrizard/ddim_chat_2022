@@ -2,6 +2,10 @@
 var socket = io.connect(':8090');
 let usersList = [];
 
+module.exports = {
+    socket: socket,
+}
+
 if (typeof(localStorage.user_name) == 'undefined')
 {
 	// Demande un pseudo et envoie l'info au serveur
@@ -20,6 +24,7 @@ socket.emit('user_enter', localStorage.user_name);
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
 socket.on('notify_user', notifyUser);
+socket.on('get_messages_history', getMessagesHistory);
 
 // Action quand on clique sur le bouton "Envoyer"
 $('#send-message').click(sendMessage);
@@ -158,6 +163,15 @@ function notifyUser(data)
 			usersList.push(user);
 			$('#users #user-list').append(generateUserRow(user));
 		}	
+	}
+}
+
+function getMessagesHistory(messages) 
+{
+	// on vide le html correspondant à la liste des messages
+	$('#chat #messages').empty();
+	for (const m of messages) {
+		$('#chat #messages').append(renderMessage(m)).scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur	
 	}
 }
 

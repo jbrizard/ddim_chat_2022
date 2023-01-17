@@ -9,6 +9,7 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var users = require('./modules/users.js');
+var messagesHistory = require('./modules/messagesHistory/messagesHistory.js');
 var gifs = require('./modules/gifs.js');
 var meteo = require('./modules/meteo.js');
 var coiffeur = require('./modules/coiffeur.js');
@@ -49,6 +50,9 @@ io.sockets.on('connection', function(socket)
 		// Ajoute un nouvel utilisateur
 		users.connectUser(socket);
 		users.notifyUser(io, socket, users.connectionStatus.CONNECTED);
+
+		//Appelle l'historique des messages
+		messagesHistory.getAllMessages(io.sockets);
 	});
 
 	// Réception d'un message
@@ -64,7 +68,11 @@ io.sockets.on('connection', function(socket)
 			return;
 
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message, senderId: socket.id});
+		const newMessage = {name:socket.name, message:message, senderId: socket.id};
+		io.sockets.emit('new_message', newMessage);
+
+		// Ajoute le message à l'historique
+		messagesHistory.addToHistory(newMessage);
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
