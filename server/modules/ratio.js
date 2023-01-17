@@ -12,11 +12,12 @@ module.exports = {
 
 function handleMessage(io, socket, message)
 {
+    console.log(process.env['OPENAI_APIKEY']);
     if(rules(socket,message))
     {
         sentiment(message).then((res)=>{
-            console.log("Résultat OPEN AI :");
-            console.log(res.data['choices'][0]);
+            //console.log("Résultat OPEN AI :");
+            //console.log(res.data['choices'][0]);
             if(res.data['choices'][0].text.includes('1'))
             {
                 const resps = [
@@ -26,7 +27,11 @@ function handleMessage(io, socket, message)
                     'RATIO AHAHAHA',
                     'Tu feras gaffe tu as laissé tombé ce ratio gros looser.'
                 ]
-                io.sockets.emit('new_message', {name:"Ratio", message:resps[Math.floor(Math.random()*resps.length)]});
+                io.sockets.emit('new_message', {
+                    name:"Ratio",
+                    message:resps[Math.floor(Math.random()*resps.length)],
+                    avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
+                });
             }
         }).catch((err)=>{
             console.log(err);
