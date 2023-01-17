@@ -47,17 +47,55 @@ function sendMessage()
  * Affichage d'un message reçu par le serveur
  */
 function receiveMessage(data)
-{
-	if (!data.excludedUsers?.includes(socket.id) ?? true) {
-		$('#chat #messages').append(
-			'<div class="message">'
-				+ '<span class="user">' + data.name  + '</span> ' 
-				+ data.message 
-			 + '</div>'
-		)
-		.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur	
+{	
+	const isCurrentNotExcluded = (!data?.excludedUsers?.includes(socket.id) ?? true); //client courrant n'est pas dans la liste d'exclusion
+	if (isCurrentNotExcluded) {
+
+		//switch type
+		let finalMessageElement = '';
+		switch(data.type) {
+			case 'message': break;
+			case 'message': /*To implement; */ break;
+			case 'info': finalMessageElement = renderInfoMessage(data); break;
+			default: finalMessageElement = renderMessage(data); break;
+		}
+
+		$('#chat #messages').append(finalMessageElement).scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur	
 	}
 }
+
+/**
+ * Génère le HTML d'un message
+ */
+function renderMessage(data)
+{
+	const isSender = (typeof(data?.senderId) !== 'undefined' && data.senderId === socket.id);
+	const ownerClassName = [];
+	ownerClassName.push((isSender) ? 'isSender' : 'isReceiver');
+
+	return (
+		`<div class="message ${ownerClassName.join(' ')}">
+			<div class="subMessage">
+				<span class="user"> ${data.name}</span>  
+				${data.message}			
+			</div>
+		</div>`
+	);
+}
+
+/**
+ * Génère le HTML d'un message informatif
+ */
+ function renderInfoMessage(data)
+ {
+	return (
+	`<div class="message info">
+		<div class="subMessage">
+		${data.message}			
+		</div>
+	</div>`
+	);
+ }
 
 // différents status de connextion d'un utilisateur
 const connectionStatus = {
