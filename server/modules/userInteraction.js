@@ -6,7 +6,8 @@
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
 module.exports =  {
-    announceUser: announceUser // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
+    announceUser: announceUser, // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
+    userIsWriting: userIsWriting // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
 }
 
 /**
@@ -19,4 +20,15 @@ function announceUser (socket, name)
     {
         user: name,
     });
+}
+/**
+ * Action a exécuter lorsque qu'un utilisateur est en train d'écrire un message
+ */
+function userIsWriting (socket, name)
+{
+    // Envoie les données suivantes au client
+    socket.broadcast.emit('user_tiping',
+        {
+            user: name,
+        });
 }

@@ -14,8 +14,12 @@ $('#send-message').click(sendMessage);
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-input').keyup(function(evt)
 {
+	//L'utilisateur est en train d'écrire
+	socket.emit('new_user_tiping', name);
+
 	if (evt.keyCode == 13) // 13 = touche Entrée
 		sendMessage();
+
 });
 
 // Action quand on clique sur le bouton Aide (?)
@@ -48,6 +52,7 @@ function sendMessage()
  */
 function receiveMessage(data)
 {
+	clearUserWriting()
 	$('#chat #messages').append(
 		'<div class="message">'
 			+ '<span class="user">' + data.name  + '</span> ' 
