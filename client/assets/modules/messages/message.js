@@ -6,12 +6,14 @@ function initHistory()
 {
     if (typeof(localStorage.history) !== 'undefined') 
     {
-        history = JSON.parse(localStorage.history);
+        const newHistory = JSON.parse(localStorage.history);
 
-        if (step === -1) 
+        if (history.length !== newHistory.length) 
         {
-            step = history.length;
+            step = newHistory.length;
         }
+
+        history = newHistory;
     }
 }
 
