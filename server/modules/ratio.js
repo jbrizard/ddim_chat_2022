@@ -12,23 +12,32 @@ module.exports = {
 
 function handleMessage(io, socket, message)
 {
-    sentiment(message).then((res)=>{
-        console.log("Résultat OPEN AI :");
-        console.log(res.data['choices'][0]);
-        if(res.data['choices'][0].text.includes('1'))
+    if((process.env['ACTIVATE_RATIO_BOT']??false))
+    {
+        if(Math.floor(Math.random()*10) >= 7)
         {
-            const resps = [
-                'Mange ce gros ratio sale looser',
-                'AHAHA! T\'es trop une merde + big ratio sur toi',
-                'Ton père a bien fait de partir quand tu étais encore enfant espèce de sous-humain. Ratio + longue vie à Booba.',
-                'RATIO AHAHAHA',
-                'Tu feras gaffe tu as laissé tombé ce ratio gros looser.'
-            ]
-            io.sockets.emit('new_message', {name:"Ratio", message:resps[Math.floor(Math.random()*resps.length)]});
+            if(message.startsWith(socket.name) || message.startsWith('@'))
+                return;
+
+            sentiment(message).then((res)=>{
+                console.log("Résultat OPEN AI :");
+                console.log(res.data['choices'][0]);
+                if(res.data['choices'][0].text.includes('1'))
+                {
+                    const resps = [
+                        'Mange ce gros ratio sale looser',
+                        'AHAHA! T\'es trop une merde + big ratio sur toi',
+                        'Ton père a bien fait de partir quand tu étais encore enfant espèce de sous-humain. Ratio + longue vie à Booba.',
+                        'RATIO AHAHAHA',
+                        'Tu feras gaffe tu as laissé tombé ce ratio gros looser.'
+                    ]
+                    io.sockets.emit('new_message', {name:"Ratio", message:resps[Math.floor(Math.random()*resps.length)]});
+                }
+            }).catch((err)=>{
+                console.log(err);
+            })
         }
-    }).catch((err)=>{
-        console.log(err);
-    })
+    }
 }
 
 async function sentiment(message)
