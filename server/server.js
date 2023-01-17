@@ -8,6 +8,8 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var konami = require('./modules/konami.js');
+var youtubemusic = require('./modules/music_player.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -46,8 +48,17 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+		youtubemusic.handleMusicYoutube(io, message);
+
+	});
+
+	// Réception du message konami
+	socket.on('konami', function()
+	{
+		// On dit à konami de s'activer
+		konami.handleKonami(io);
 	});
 });
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)
-server.listen(8080);
+server.listen(8090);
