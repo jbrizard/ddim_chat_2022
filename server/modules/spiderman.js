@@ -31,7 +31,12 @@ function handleSpider(io, message)
 		else if (message.includes('vol'))
 		{
 			messagePerso(io,'Je suis une araignée pas un pigeon !');
-		} else if (message.includes('quitte'))
+		} 
+		else if (message.includes('salut'))
+		{
+			messagePerso(io,'Salut, ça va ?');
+		} 
+		else if (message.includes('quitte'))
 		{
 			messagePerso(io,'Bye !');
 			io.sockets.spiderman = false;
