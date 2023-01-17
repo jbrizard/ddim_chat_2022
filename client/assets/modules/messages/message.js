@@ -1,23 +1,32 @@
 // Chargement des modules perso
-var chat = require('../../chat.js');
 socket.on('get_messages_history', getMessagesHistory);
 
 const historyFiltered = [];
+let step = -1;
 
 function initHistory(messages) {
     for (const message of messages) {
-        historyFiltered.push({
-            
-        });    
+        if (socket.id === message.senderId) {
+            historyFiltered.push(message);  
+        }  
+    }
+    step = historyFiltered.length;
+}
+
+function showPreviousMessage(messageInput) {
+    step = (step-1 > 0) ? step - 1 : 0;
+
+    if (typeof(historyFiltered[step]) !== 'undefined') {
+        messageInput.value = historyFiltered[step].message;
     }
 }
 
-function showPreviousMessage() {
-
-}
-
-function showNextMessage() {
-
+function showNextMessage(messageInput) {
+    step = (step < historyFiltered.length-1) ? step + 1 : historyFiltered.length-1;
+    
+    if (typeof(historyFiltered[step]) !== 'undefined') {
+        messageInput.value = historyFiltered[step].message;
+    }
 }
 
 function getMessagesHistory(messages) {
@@ -26,11 +35,11 @@ function getMessagesHistory(messages) {
     messageInput.addEventListener('onkeydown', (e) => {
         switch (e.keyCode) {
             case 38: {
-                showPreviousMessage();
+                showPreviousMessage(messageInput);
                 break;
             }
             case 40: {
-                showNextMessage();
+                showNextMessage(messageInput);
                 break;
             }
         }

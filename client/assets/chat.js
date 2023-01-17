@@ -2,10 +2,6 @@
 var socket = io.connect(':8090');
 let usersList = [];
 
-module.exports = {
-    socket: socket,
-}
-
 if (typeof(localStorage.user_name) == 'undefined')
 {
 	// Demande un pseudo et envoie l'info au serveur
