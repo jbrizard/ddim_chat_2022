@@ -44,16 +44,16 @@ $('#help-toggle').click(function()
 $('#empty-chat-action').click(emptyChatHistory);
 
 /**
- * Sauvegarde un message dans le localstorage
+ * Sauvegarde un message dans le sessionstorage
  */
 function hydrateLocalHistory(message) {
-	if (typeof(localStorage.history) === 'undefined') {
-		localStorage.history = JSON.stringify([]);
+	if (typeof(sessionStorage.history) === 'undefined') {
+		sessionStorage.history = JSON.stringify([]);
 	}
 
-	const history = JSON.parse(localStorage.history);
+	const history = JSON.parse(sessionStorage.history);
 	history.push(message);
-	localStorage.history = JSON.stringify(history);
+	sessionStorage.history = JSON.stringify(history);
 }
 
 /**

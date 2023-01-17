@@ -4,9 +4,9 @@ let step = -1;
 
 function initHistory() 
 {
-    if (typeof(localStorage.history) !== 'undefined') 
+    if (typeof(sessionStorage.history) !== 'undefined') 
     {
-        const newHistory = JSON.parse(localStorage.history);
+        const newHistory = JSON.parse(sessionStorage.history);
 
         if (history.length !== newHistory.length) 
         {
