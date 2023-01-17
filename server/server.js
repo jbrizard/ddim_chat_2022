@@ -49,12 +49,10 @@ io.sockets.on('connection', function(socket)
 		message = ent.encode(message);
 
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message});
-
+		io.sockets.emit('new_message', {name:socket.name, message:message, senderId: socket.id});
+		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
-
-
 
 		// Transmet le message au module Météo
 		meteo.handleMessage(io, socket, message);

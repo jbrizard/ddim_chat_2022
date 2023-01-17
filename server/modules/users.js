@@ -73,7 +73,7 @@ function notifyUser(io, socket, type)
         default: break;
     }
 
-    io.sockets.emit('new_message', {name:'bot', message:message, excludedUsers: [socket.id]});
+    io.sockets.emit('new_message', {name:'bot', message: message, type: 'info', excludedUsers: [socket.id]});
     io.sockets.emit('notify_user', {
         type: type,
         userId: socket.id,
