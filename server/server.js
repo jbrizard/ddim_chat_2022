@@ -70,10 +70,10 @@ io.sockets.on('connection', function(socket)
 		if (whisp)
 			return;
 
-		message = ent.encode(message);
-
 		//On traite le message pour savoir si c'est une commande ou non
-		message = commandes.handleCommandes(io, message)
+		message = commandes.handleCommandes(io, message, socket)
+		if (message === null)
+			return;
 
 		// Transmet le message à tous les utilisateurs (broadcast)
 		const newMessage = {name:socket.name, message:message, senderId: socket.id};
