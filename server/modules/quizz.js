@@ -15,9 +15,9 @@ const questions = {
     "Suis-je un robot ?": "non",
     "Le coeur d'une crevette est logé dans sa tête.": "oui",
     "Plus de 50% des gens, à travers le monde, n'ont jamais fait ou n'ont jamais reçu d'appels téléphoniques.": "oui",
-    "Les rats se multiplient si rapidement qu'en 18 mois, un couple de rat peut avoir plus d'un million de descendants.": "oui",
+    "Les mille-pattes ont 1000 pattes.": "non",
     "Le briquet a été inventé avant l'allumette.": "oui",
-    "À travers le monde, 23% des problèmes aux photocopieurs sont causés par des gens qui s'assoient sur l'appareil pour photocopier leur derrière.": "oui",
+    "La Russie est le 2ème plus grand pays du monde.": "non",
     "La plupart des 'rouges à lèvres' contiennent des écailles de poisson.": "oui",
     "À l'origine, le Coca-Cola était vert.": "oui",
     "Le plus jeune Pape était âgé de 11 ans.": "oui",
@@ -80,7 +80,7 @@ function handleQuizz(io, message)
             let randomQuestion = Object.keys(questions)[Math.floor(Math.random() * Object.keys(questions).length)];
             randomAnswer = questions[randomQuestion];
 
-            messagePerso(io, "Question:" + randomQuestion + " - Réponse: " + randomAnswer);
+            messagePerso(io, "Question: " + randomQuestion);
         }
     }
 }
