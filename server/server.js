@@ -14,7 +14,10 @@ var gifs = require('./modules/gifs.js');
 var meteo = require('./modules/meteo.js');
 var coiffeur = require('./modules/coiffeur.js');
 var whisper = require('./modules/whisper.js');
+var eastereggs = require('./modules/eastereggs.js');
+var commandes = require('./modules/commandes.js');
 var basket = require('./modules/basket.js');
+var blague = require('./modules/blague.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -28,7 +31,7 @@ app.get('/', function(req, res)
 {
 	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
 });
-
+  
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 
@@ -54,7 +57,7 @@ io.sockets.on('connection', function(socket)
 		//Appelle l'historique des messages
 		messagesHistory.getAllMessages(io.sockets);
 	});
-
+	
 	// Réception d'un message
 	socket.on('message', function(message)
 	{
@@ -67,6 +70,11 @@ io.sockets.on('connection', function(socket)
 		if (whisp)
 			return;
 
+		message = ent.encode(message);
+
+		//On traite le message pour savoir si c'est une commande ou non
+		message = commandes.handleCommandes(io, message)
+
 		// Transmet le message à tous les utilisateurs (broadcast)
 		const newMessage = {name:socket.name, message:message, senderId: socket.id};
 		io.sockets.emit('new_message', newMessage);
@@ -77,15 +85,20 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
 
+		// Transmet le message au module EasterEggs (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		eastereggs.handleEasterEggs(io, message);
+		
 		// Transmet le message au module Basket
 		basket.onMessage(io, message);
+
+		//Transmet le message au module Blague
+		blague.handleBlague(io, message)
 
 		// Transmet le message au module Météo
 		meteo.handleMessage(io, socket, message);
 
 		// Transmet le message au module Coiffeur
 		coiffeur.handleCoiffeur(io, socket, message);
-
 	});
 
 	socket.on("disconnect", function() {
@@ -128,5 +141,5 @@ io.sockets.on('connection', function(socket)
 	});
 });
 
-// Lance le serveur sur le port 8080 (http://localhost:8080)
+// Lance le serveur sur le port 8090 (http://localhost:8090)
 server.listen(8090);
