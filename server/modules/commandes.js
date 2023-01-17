@@ -55,7 +55,7 @@ function handleCommandes(io, message)
         case '/help':
         {
             //Transforme le message
-            newMessage = '<br> Commandes disponibles : <br> /tableflip : (╯°□°）╯︵ ┻━┻ <br> /unflip : ┬─┬﻿ ノ( ゜-゜ノ) <br> /shrug : ¯\\_(ツ)_/¯ <br> /lenny : ( ͡° ͜ʖ ͡°)';
+            newMessage = '<br> <strong>Commandes disponibles : <br> /tableflip :</strong> (╯°□°）╯︵ ┻━┻ <br> <strong>/unflip :</strong> ┬─┬﻿ ノ( ゜-゜ノ) <br> <strong>/shrug :</strong> ¯\\_(ツ)_/¯ <br> <strong>/lenny :</strong> ( ͡° ͜ʖ ͡°) <br> <strong>/youtube Vidéo à regarder :</strong> Affiche la vidéo à regarder <br> <strong>/sondage Question? Réponse1 & Réponse2 :</strong> Propose un sondage avec 2 réponses possibles <br> <strong>/musique Nom de la musique :</strong> Permet d\'écouter une musique ';
 
             //Renvoie le message au serveur
             return newMessage;
