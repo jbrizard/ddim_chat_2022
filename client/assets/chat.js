@@ -1,4 +1,4 @@
-﻿// Connexion au socket
+// Connexion au socket
 var socket = io.connect(':8090');
 let usersList = [];
 
@@ -85,7 +85,7 @@ function renderMessage(data)
 	const isSender = (typeof(data?.senderId) !== 'undefined' && data.senderId === socket.id);
 	const ownerClassName = [];
 	ownerClassName.push((isSender) ? 'isSender' : 'isReceiver');
-	if(data.message.includes('@'+name))
+	if (data.message.includes('@'+name))
 	{
 		var audio = new Audio('sounds/wizz.mp3');
 		audio.play();
@@ -106,7 +106,8 @@ function renderMessage(data)
 }
 
 
-function renderWhisperMessage(data) {
+function renderWhisperMessage(data)
+{
 	const isSender = (typeof(data?.senderId) !== 'undefined' && data.senderId === socket.id);
 	const ownerClassName = [];
 	ownerClassName.push((isSender) ? 'isSender' : 'isReceiver');
@@ -152,7 +153,8 @@ function notifyUser(data)
 	{
 		// on ajoute la carte HTML de chaque utilisateur dans le DOM
 		const user = data.users[userId];
-		if (user.status === connectionStatus.CONNECTED) {
+		if (user.status === connectionStatus.CONNECTED)
+		{
 			usersList.push(user);
 			$('#users #user-list').append(generateUserRow(user));
 		}	
