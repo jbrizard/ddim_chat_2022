@@ -24,7 +24,8 @@
 }
 .meteo_infos .m_city
 {
-    font-size: 2rem;
+    font-size: 1.7rem;
+    line-height: 100%;
 }
 .meteo_temp
 {
