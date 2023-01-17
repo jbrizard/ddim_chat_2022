@@ -12,7 +12,6 @@ module.exports = {
 
 function handleMessage(io, socket, message)
 {
-    console.log(process.env['OPENAI_APIKEY']);
     if(rules(socket,message))
     {
         sentiment(message).then((res)=>{
@@ -42,7 +41,7 @@ function handleMessage(io, socket, message)
 
 function rules(socket, message)
 {
-    if((process.env['ACTIVATE_RATIO_BOT']??false))
+    if(!(process.env['ACTIVATE_RATIO_BOT']??false))
         return false;
 
     if(message.split(' ').length < 3)
