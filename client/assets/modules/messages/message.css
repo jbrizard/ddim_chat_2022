@@ -108,9 +108,18 @@
 }
 
 .message .subMessage {
-    max-width: 40%;
+    max-width: 70%;
 
     padding: 5px 10px;
+
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 3px;
+}
+
+.message .subMessage .text {
+	line-height: 125%;
 }
 
 .message.info {
