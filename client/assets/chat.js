@@ -24,14 +24,16 @@ $('#upload-avatar').change(previewFile);
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-input').keyup(function(evt)
 {
-	if (evt.keyCode == 13) {
+	if (evt.keyCode == 13) 
+	{
 		sendMessage();
 	} // 13 = touche Entrée
 });
 
 $('#pseudo').keyup(function(evt)
 {
-	if (evt.keyCode == 13) {
+	if (evt.keyCode == 13) 
+	{
 		register();
 	} // 13 = touche Entrée
 });
@@ -61,7 +63,8 @@ function sendMessage()
 	socket.emit('message', message);
 }
 
-function register() {
+function register() 
+{
 	//récupère le pseudo
 	var pseudoInput = $('#pseudo');
 	var pseudoVal = pseudoInput.val();
@@ -77,7 +80,8 @@ function register() {
 	if (iconeVal === 0)
 		return;
 
-	if(avatarPerso != null){
+	if(avatarPerso != null)
+	{
 		iconeVal = avatarPerso;
 	}
 
@@ -88,23 +92,27 @@ function register() {
 	socket.emit('user_enter', pseudoVal, iconeVal);
 }
 
-function iconSelected(){
+function iconSelected()
+{
 	$('.id-icone').parent().removeClass("icone-selected");
 	$('.id-icone:checked').parent().addClass("icone-selected");
 }
 
-function previewFile() {
+function previewFile() 
+{
 	const preview = document.getElementById('avatar-preview');
 	const file = document.getElementById('upload-avatar').files[0];
 	const reader = new FileReader();
 
-	reader.addEventListener("load", () => {
+	reader.addEventListener("load", () => 
+	{
 		// on convertit l'image en une chaîne de caractères base64
 		preview.src = reader.result;
 		avatarPerso = reader.result;
 	}, false);
 
-	if (file) {
+	if (file) 
+	{
 		reader.readAsDataURL(file);
 	}
 }
