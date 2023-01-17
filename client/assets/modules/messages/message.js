@@ -1,40 +1,57 @@
 // Chargement des modules perso
-socket.on('get_messages_history', getMessagesHistory);
-
-let historyFiltered = [];
+let history = [];
 let step = -1;
 
-function initHistory(messages) {
-    if (Array.isArray(messages)) {
-        historyFiltered = messages.filter((message) => {
-            console.log('socket.id', socket.id);
-            console.log('message.senderId', message.senderId);
-            return socket.id === message.senderId
-        });
-        step = historyFiltered.length;
-    }
-}
-initHistory();
+function initHistory() 
+{
+    if (typeof(localStorage.history) !== 'undefined') 
+    {
+        history = JSON.parse(localStorage.history);
 
-function showPreviousMessage(messageInput) {
-    step = (step-1 > 0) ? step - 1 : 0;
-    console.dir(historyFiltered);
-    if (typeof(historyFiltered[step]) !== 'undefined') {
-        messageInput.value = historyFiltered[step].message;
+        if (step === -1) 
+        {
+            step = history.length;
+        }
     }
 }
 
-function showNextMessage(messageInput) {
-    step = (step < historyFiltered.length-1) ? step + 1 : historyFiltered.length-1;
-    if (typeof(historyFiltered[step]) !== 'undefined') {
-        messageInput.value = historyFiltered[step].message;
+function showPreviousMessage(messageInput) 
+{
+    if (step-1 > 0) 
+    {
+        step--;
+        console.dir('step--');
+    }
+    else
+    {
+        step = 0;
+    }
+    if (typeof(history[step]) !== 'undefined') {
+        messageInput.value = history[step];
     }
 }
 
-function getMessagesHistory(messages) {
-    initHistory(messages);
+function showNextMessage(messageInput) 
+{
+    if (step < history.length-1) 
+    {
+        step++;
+    }
+    else
+    {
+        step = history.length-1;
+    }
+    if (typeof(history[step]) !== 'undefined') 
+    {
+        messageInput.value = history[step];
+    }
+}
+
+function init() 
+{
     const messageInput = document.querySelector('#message-input');
     messageInput.addEventListener('keydown', (e) => {
+        initHistory();
         switch (e.keyCode) {
             case 38: {
                 showPreviousMessage(messageInput);
@@ -47,3 +64,4 @@ function getMessagesHistory(messages) {
         }
     });
 }
+init();

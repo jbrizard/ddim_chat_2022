@@ -8,7 +8,9 @@ if (typeof(localStorage.user_name) == 'undefined')
 	var name = prompt('Quel est votre pseudo ?');
 
 	if (confirm('Voulez-vous enregistrer votre pseudo ?'))
+	{
 		localStorage.user_name = name;
+	}
 }
 else
 {
@@ -39,6 +41,19 @@ $('#help-toggle').click(function()
 });
 
 /**
+ * Sauvegarde un message dans le localstorage
+ */
+function hydrateLocalHistory(message) {
+	if (typeof(localStorage.history) === 'undefined') {
+		localStorage.history = JSON.stringify([]);
+	}
+
+	const history = JSON.parse(localStorage.history);
+	history.push(message);
+	localStorage.history = JSON.stringify(history);
+}
+
+/**
  * Envoi d'un message au serveur
  */
 function sendMessage()
@@ -54,6 +69,7 @@ function sendMessage()
 	
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
+	hydrateLocalHistory(message);
 }
 
 /**
