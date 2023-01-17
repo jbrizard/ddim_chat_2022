@@ -20,18 +20,22 @@ function handleSpider(io, message)
 	message = message.toLowerCase();
 	
 	// Est-ce qu'il contient une référence à Spiderman ?
-	if (message.includes('spiderman'))
+	if (message.includes('spiderman') || io.sockets.spiderman === true)
 	{
-		
+		io.sockets.spiderman = true;
 		if (message.includes('calcul'))
 		{
 			// Si oui, envoie la réponse de Spiderman...
 			messagePerso(io,"2+2=4, c'est tout ce que je sais.");
 		}
-		if (message.includes('vol'))
+		else if (message.includes('vol'))
 		{
 			messagePerso(io,'Je suis une araignée pas un pigeon !');
-		} 
+		} else if (message.includes('quitte'))
+		{
+			messagePerso(io,'Bye !');
+			io.sockets.spiderman = false;
+		}
 		else 
 		{
 			messagePerso(io,'Un grand pouvoir implique de grandes responsabilitées.');
