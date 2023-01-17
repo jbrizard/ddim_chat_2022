@@ -5,6 +5,7 @@ var ioLib = require('socket.io');	// WebSocket
 var ent = require('ent');		// Librairie pour encoder/décoder du HTML
 var path = require('path');		// Gestion des chemins d'accès aux fichiers	
 var fs = require('fs');			// Accès au système de fichier
+require('dotenv').config();
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
@@ -24,6 +25,7 @@ var quizz = require('./modules/quizz.js')
 var konami = require('./modules/konami.js');
 var youtubemusic = require('./modules/music_player.js');
 var tenor = require('./modules/tenor.js');
+var ratio = require('./modules/ratio.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -123,6 +125,10 @@ io.sockets.on('connection', function(socket)
 
 		// Transmet le message au module Tenor
 		tenor.handleTenor(io, message);
+
+		// Transmet le message au module ratio
+		ratio.handleMessage(io, socket, message);
+
 	});
 
 	// Réception du message konami

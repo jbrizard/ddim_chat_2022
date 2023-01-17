@@ -82,7 +82,7 @@ async function getMeteo(lat, long)
             lat: lat,
             lon: long,
             units: "metric",
-            appid: "0ef45343810d76c828c055f190f83a25",
+            appid: process.env['OPEN_WEATHER_MAP_APIKEY'],
             lang: "fr"
         }
     });
