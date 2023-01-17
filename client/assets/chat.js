@@ -116,7 +116,7 @@ function renderMessage(data)
 	return (
 		`<div class="message ${ownerClassName.join(' ')}">
 			<div class="subMessage">
-				<span class="user"> ${data.name}</span>  
+				<span class="user">${data.name}</span>  
 				<span class="text">${data.message}</span>			
 			</div>
 		</div>`
