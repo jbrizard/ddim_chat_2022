@@ -9,6 +9,7 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var basket = require('./modules/basket.js');
+const rainbow = require('./modules/rainbow.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -56,6 +57,8 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Basket
 		basket.onMessage(io, message);
+
+		rainbow.handleRainbow(io, message);
 	});
 });
 

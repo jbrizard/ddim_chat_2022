@@ -7,6 +7,7 @@ socket.emit('user_enter', name);
 
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
+socket.on('change_background', changeBackground)
 
 // Action quand on clique sur le bouton "Envoyer"
 $('#send-message').click(sendMessage);
@@ -56,3 +57,15 @@ function receiveMessage(data)
 	)
 	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 }
+
+function changeBackground()
+{
+	$("body").addClass('rainbow');
+
+	setTimeout(function()
+	{
+		$("body").removeClass('rainbow');
+	}, 2000);
+
+}
+
