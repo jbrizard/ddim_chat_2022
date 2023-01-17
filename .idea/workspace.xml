@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ebe3cd90-6c4a-4004-bc99-3d84577cf0d4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/client/assets/modules/avatar/iconfinder-1-avatar-2754574_120513.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/assets/modules/avatar/01.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/assets/modules/avatar/iconfinder-10-avatar-2754575_120521.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/assets/modules/avatar/05.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/assets/modules/avatar/iconfinder-11-avatar-2754576_120520.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/assets/modules/avatar/06.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/assets/modules/avatar/iconfinder-3-avatar-2754579_120516.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/assets/modules/avatar/02.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/assets/modules/avatar/iconfinder-4-avatar-2754580_120522.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/assets/modules/avatar/03.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/assets/modules/avatar/iconfinder-7-avatar-2754582_120519.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/assets/modules/avatar/04.svg" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2K8cQRPqYnADgQxDU4tF3eTsqwZ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Projects/ddim_chat_2022",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projects\ddim_chat_2022\client\assets\modules\avatar" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ebe3cd90-6c4a-4004-bc99-3d84577cf0d4" name="Changes" comment="" />
+      <created>1673359633998</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1673359633998</updated>
+      <workItem from="1673359636339" duration="2545000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

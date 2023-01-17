@@ -2,20 +2,16 @@
 var socket = io.connect(':8090');
 let usersList = [];
 
+// Demande un pseudo et envoie l'info au serveur
 if (typeof(localStorage.user_name) == 'undefined')
 {
-	// Demande un pseudo et envoie l'info au serveur
-	var name = prompt('Quel est votre pseudo ?');
-
-	if (confirm('Voulez-vous enregistrer votre pseudo ?'))
-		localStorage.user_name = name;
+	// TODO: Open modal register
 }
-else
-{
+else {
 	name = localStorage.user_name;
+	avatar = localStorage.user_avatar;
+	socket.emit('user_enter', name);
 }
-
-socket.emit('user_enter', localStorage.user_name);
 
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
@@ -77,11 +73,25 @@ socket.on('new_emote_wall', () =>
 // Action quand on clique sur le bouton "Envoyer"
 $('#send-message').click(sendMessage);
 
+// Action quand on clcique sur le bouton "inscription"
+$('#register').click(register);
+
+// Action quand le button radio change de valeur
+$('.id-icone').change(iconSelected);
+
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-input').keyup(function(evt)
 {
-	if (evt.keyCode == 13) // 13 = touche Entrée
+	if (evt.keyCode === 13) // 13 = touche Entrée
 		sendMessage();
+	// 13 = touche Entrée
+});
+
+$('#pseudo').keyup(function(evt)
+{
+	if (evt.keyCode === 13) {
+		register();
+	} // 13 = touche Entrée
 });
 
 // Action quand on clique sur le bouton Aide (?)
@@ -89,6 +99,7 @@ $('#help-toggle').click(function()
 {
         $('#help-content').fadeToggle('fast');
 });
+
 
 /**
  * Envoi d'un message au serveur
@@ -108,11 +119,45 @@ function sendMessage()
 	socket.emit('message', message);
 }
 
+function register() {
+	//récupère le pseudo
+	var pseudoInput = $('#pseudo');
+	var pseudoVal = pseudoInput.val();
+	//Pas d'envoie si pas de pseudo
+	if (pseudoVal == '')
+		return;
+	//récupère icone
+	var iconeVal = 0;
+
+	iconeVal = $('.id-icone:checked').val();
+
+	//Pas d'envoie si pas d'icone
+	if (iconeVal === 0)
+		return;
+
+	// add class hidden to modal
+	$('#modal').addClass('hidden');
+
+	//envoie pseudo et icone au serveur
+	socket.emit('user_enter', pseudoVal, iconeVal);
+}
+
+function iconSelected(){
+	$('.id-icone').parent().removeClass("icone-selected");
+	$('.id-icone:checked').parent().addClass("icone-selected");
+}
+
 /**
  * Affichage d'un message reçu par le serveur
  */
 function receiveMessage(data)
-{	
+{
+	if(data.avatar === undefined){
+		data.avatar = "<img src='/modules/avatar/default.svg' alt='default avatar' width='30px'>";
+	}
+
+//TODO: Ajouter data.avatar dans les résultats
+
 	const isCurrentNotExcluded = (!data?.excludedUsers?.includes(socket.id) ?? true); //client courrant n'est pas dans la liste d'exclusion
 	if (isCurrentNotExcluded)
 	{
@@ -128,7 +173,7 @@ function receiveMessage(data)
 			default: finalMessageElement = renderMessage(data); break;
 		}
 
-		$('#chat #messages').append(finalMessageElement).scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur	
+		$('#chat #messages').append(finalMessageElement).scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 	}
 }
 
@@ -200,14 +245,14 @@ const connectionStatus = {
     DISCONNECTED: 'disconnected',
 }
 
-function notifyUser(data) 
+function notifyUser(data)
 {
 	// on vide le html correspondant à la liste d'utilisateurs
 	$('#users #user-list').empty();
 	usersList = [];
 
 	// on parcours tous les utilisateurs
-	for (const userId in data.users) 
+	for (const userId in data.users)
 	{
 		// on ajoute la carte HTML de chaque utilisateur dans le DOM
 		const user = data.users[userId];
@@ -215,21 +260,21 @@ function notifyUser(data)
 		{
 			usersList.push(user);
 			$('#users #user-list').append(generateUserRow(user));
-		}	
+		}
 	}
 }
 
-function getMessagesHistory(messages) 
+function getMessagesHistory(messages)
 {
 	// on vide le html correspondant à la liste des messages
 	$('#chat #messages').empty();
 	for (const m of messages)
 	{
-		$('#chat #messages').append(renderMessage(m)).scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur	
+		$('#chat #messages').append(renderMessage(m)).scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 	}
 }
 
-function generateUserRow(user) 
+function generateUserRow(user)
 {
 	return `
 		<div class="userCard">

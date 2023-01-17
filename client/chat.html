@@ -70,6 +70,14 @@
 			<li>
 				<strong>Module Basket</strong> : faites un max de rebonds ! (/basket)
 			</li>
+			<li>
+				<strong>Module Spiderman</strong> : il tisse sa toile. ("Spiderman")
+				<br>"quitte" pour quitter le module
+			</li>
+			<li>
+				<strong>Module Quizz</strong> : vrai ou faux. ("Quizz")
+				<br>"quitte" pour quitter le module
+			</li>
 		</ul>
 	</div>
 
@@ -87,6 +95,91 @@
 	</div>
 
 	<audio id="basket-bounce" src="modules/basket/bounce.mp3" autostart="0"></audio>
+
+	<div class="modal" id="modal">
+
+		<div class="modal-content">
+			<h2 class="modal-title">Bienvenue</h2>
+
+			<label>Choisissez votre image de profil :</label><br/>
+			<div class="iconeRadio">
+
+				<div class="icone-selected">
+					<input  type="radio" name="imgProfil" class="id-icone hidden" id="icon-1" value="1" checked />
+					<label for="icon-1"><img class="icone" src="modules/avatar/1.svg" alt="icone1" /></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden"  id="icon-2" value="2" />
+					<label for="icon-2"><img class="icone" src="modules/avatar/2.svg" alt="icone2" /></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="3"  id="icon-3"/>
+					<label for="icon-3"><img class="icone" src="modules/avatar/3.svg" alt="icone3" /></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="4"  id="icon-4"/>
+					<label for="icon-4"><img class="icone" src="modules/avatar/4.svg" alt="icone4" /></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="5"  id="icon-5"/>
+					<label for="icon-5"><img class="icone" src="modules/avatar/5.svg" alt="icone5" /></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="6"  id="icon-6"/>
+					<label for="icon-6"><img class="icone" src="modules/avatar/6.svg" alt="icone6"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="7"  id="icon-7"/>
+					<label for="icon-7"><img class="icone" src="modules/avatar/7.svg" alt="icone7"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="8"  id="icon-8"/>
+					<label for="icon-8"><img class="icone" src="modules/avatar/8.svg" alt="icone8"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="9"  id="icon-9"/>
+					<label for="icon-9"><img class="icone icone-selected" src="modules/avatar/9.svg" alt="icone9"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="10"  id="icon-10"/>
+					<label for="icon-10"><img class="icone" src="modules/avatar/10.svg" alt="icone10"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="11"  id="icon-11"/>
+					<label for="icon-11"><img class="icone" src="modules/avatar/11.svg" alt="icone11"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="12"  id="icon-12"/>
+					<label for="icon-12"><img class="icone" src="modules/avatar/12.svg" alt="icone12"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="13"  id="icon-13"/>
+					<label for="icon-13"><img class="icone" src="modules/avatar/13.svg" alt="icone13"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="14"  id="icon-14"/>
+					<label for="icon-14"><img class="icone" src="modules/avatar/14.svg" alt="icone14"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="15"  id="icon-15"/>
+					<label for="icon-15"><img class="icone" src="modules/avatar/15.svg" alt="icone15"/></label>
+				</div>
+			</div>
+
+			<!-- upload img profil -->
+			<div>
+				<input type="file" id="uploadAvatar" class="idIcone" name="imgProfil" accept="image/png, image/jpeg">
+			</div>
+
+			<br/>&nbsp;
+			<br/>
+			<label for="pseudo">Votre pseudo :</label><br>
+			<input type="text" id="pseudo" autofocus autocomplete placeholder="Pseudo"/>
+			<br/>&nbsp;
+			<br/>
+			<input type="button" id="register" value="Valider" class="button-primary"/>
+		</div>
+	</div>
 
 	<script type="text/javascript" src="chat.js"></script>
 	<script type="text/javascript" src="/modules/gifs/gifs.js"></script>

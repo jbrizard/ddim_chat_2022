@@ -18,6 +18,9 @@ var eastereggs = require('./modules/eastereggs.js');
 var commandes = require('./modules/commandes.js');
 var basket = require('./modules/basket.js');
 var blague = require('./modules/blague.js');
+var avatar = require('./modules/avatar.js');
+var spiderman = require('./modules/spiderman.js')
+var quizz = require('./modules/quizz.js')
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -43,12 +46,13 @@ io.sockets.on('connection', function(socket)
 {
 	// Ajoute le client au jeu de basket
 	basket.addClient(socket);
-	
+
 	// Arrivée d'un utilisateur
-	socket.on('user_enter', function(name)
+	socket.on('user_enter', function(name, avatarId)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
+		socket.avatarId = avatarId;
 
 		// Ajoute un nouvel utilisateur
 		users.connectUser(socket);
@@ -76,7 +80,12 @@ io.sockets.on('connection', function(socket)
 			return;
 
 		// Transmet le message à tous les utilisateurs (broadcast)
-		const newMessage = {name:socket.name, message:message, senderId: socket.id};
+		const newMessage = {
+			name:socket.name,
+			message:message,
+			senderId: socket.id,
+			avatar: avatar.getAvatar(socket.avatarId)
+		};
 		io.sockets.emit('new_message', newMessage);
 
 		// Ajoute le message à l'historique
@@ -87,7 +96,7 @@ io.sockets.on('connection', function(socket)
 
 		// Transmet le message au module EasterEggs (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		eastereggs.handleEasterEggs(io, message);
-		
+
 		// Transmet le message au module Basket
 		basket.onMessage(io, message);
 
@@ -99,6 +108,12 @@ io.sockets.on('connection', function(socket)
 
 		// Transmet le message au module Coiffeur
 		coiffeur.handleCoiffeur(io, socket, message);
+
+		// Transmet le message au module Spiderman
+		spiderman.handleSpider(io, message);
+
+		// Transmet le message au module Quizz
+		quizz.handleQuizz(io, message);
 	});
 
 	socket.on("disconnect", function()
