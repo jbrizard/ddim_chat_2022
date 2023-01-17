@@ -6,9 +6,10 @@ module.exports = {
  */
 function handleCoiffeur(io, socket, message)
 {
-    endsWith = ['quoi', 'quoi.', "quoi .", "quoi?", "quoi ?", "quoi!", "quoi !", "koi","koi.",'koi?','koi ?','koi!','koi !'];
+    const messageFormatted = message.replace(/[^a-zA-Z]/g, '');
+    endsWith = ['quoi', 'koi', 'coi', 'qoua', 'quoua', 'coua', 'koua', 'cuoua', 'kuoua', 'kaw', 'quaw', 'qoi', 'qaw', 'caw', 'cuaw', 'kuaw'];
     endsWith.forEach(function (quoi){
-        if(message.toLowerCase().endsWith(quoi)){
+        if(messageFormatted.toLowerCase().endsWith(quoi)){
             setTimeout(function(){
                 io.sockets.emit('new_message',
                     {
@@ -17,8 +18,6 @@ function handleCoiffeur(io, socket, message)
                         senderId: "bot"
                     });
             },150);
-
         }
     });
-
 }

@@ -88,19 +88,20 @@
 	user-select: none;
 }
 
-.message.isReceiver {
-    justify-content: flex-end;
-}
-
-.message.isSender .subMessage {
-    background-color: rgb(152, 152, 219);
+.message.isReceiver .subMessage {
+    background-color: rgb(201, 201, 201);
 
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top-left-radius: 15px;
 }
-.message.isReceiver .subMessage {
-    background-color: rgb(201, 201, 201);
+
+.message.isSender {
+    justify-content: flex-end;
+}
+
+.message.isSender .subMessage {
+    background-color: rgb(152, 152, 219);
 
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
