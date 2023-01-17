@@ -6,12 +6,12 @@
 
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>	<!-- fichier injecté par NodeJS -->
-	<script type="text/javascript" src="chat.js" defer></script>
 
 	<link rel="stylesheet" href="style.css" />
 	<link rel="stylesheet" href="/modules/daffy/daffy.css" />
 	<link rel="stylesheet" href="/modules/gifs/gifs.css" />
 	<link rel="stylesheet" href="/modules/meteo/meteo.css" />
+	<link rel="stylesheet" href="/modules/arobase/arobase.css" />
 </head>
 
 <body>
@@ -27,6 +27,15 @@
 		</div>
 
 		<div id="tools">
+			<div class="arobase-wrapper" style="display: none;">
+				<ul id="arobase-list">
+					<li>@Romain</li>
+					<li class="active">@Lucien</li>
+					<li>@Hugo</li>
+					<li>@Ronan</li>
+					<li>@Clément</li>
+				</ul>
+			</div>
 			<input type="text" id="message-input" />
 			<button id="send-gif" title="Envoyer un GIF" aria-describedby="tooltip" onkeyup="event.preventDefault()">
 				<svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -63,5 +72,6 @@
 
 	<script type="text/javascript" src="chat.js"></script>
 	<script type="text/javascript" src="/modules/gifs/gifs.js"></script>
+	<script type="text/javascript" src="/modules/arobase/arobase.js"></script>
 </body>
 </html>

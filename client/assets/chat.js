@@ -1,5 +1,6 @@
 ﻿// Connexion au socket
 var socket = io.connect(':8090');
+let usersList = [];
 
 if (typeof(localStorage.user_name) == 'undefined')
 {
@@ -80,6 +81,7 @@ function notifyUser(data)
 {
 	// on vide le html correspondant à la liste d'utilisateurs
 	$('#users #user-list').empty();
+	usersList = [];
 
 	// on parcours tous les utilisateurs
 	for (const userId in data.users) 
@@ -87,6 +89,7 @@ function notifyUser(data)
 		// on ajoute la carte HTML de chaque utilisateur dans le DOM
 		const user = data.users[userId];
 		if (user.status === connectionStatus.CONNECTED) {
+			usersList.push(user);
 			$('#users #user-list').append(generateUserRow(user));
 		}	
 	}

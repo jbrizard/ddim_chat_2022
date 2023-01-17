@@ -24,7 +24,7 @@ app.get('/', function(req, res)
 {
 	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
 });
-  
+
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 
@@ -41,33 +41,33 @@ io.sockets.on('connection', function(socket)
 		users.connectUser(socket);
 		users.notifyUser(io, socket, users.connectionStatus.CONNECTED);
 	});
-	
+
 	// Réception d'un message
 	socket.on('message', function(message)
 	{
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
-		
+
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message});
-		
+
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
 
-	 
-// Lance le serveur sur le port 8090 (http://localhost:8090)
+
+
 		// Transmet le message au module Météo
 		meteo.handleMessage(io, socket, message);
 
 	});
-	
-		socket.on("disconnect", function() {
+
+	socket.on("disconnect", function() {
 		users.disconnectUser(socket);
 		users.notifyUser(io, socket, users.connectionStatus.DISCONNECTED);
 	});
-});
 
-	// Réception d'un gif
+
+// Réception d'un gif
 	socket.on('gif', function(url)
 	{
 		// Par sécurité, on encode les caractères spéciaux
@@ -99,7 +99,7 @@ io.sockets.on('connection', function(socket)
 		});
 
 	});
-
+});
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)
 server.listen(8090);
