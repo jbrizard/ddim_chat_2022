@@ -7,8 +7,12 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>	<!-- fichier injecté par NodeJS -->
 		
+        <script type="text/javascript" src="chat.js" defer></script>
+		<script type="text/javascript" src="modules/basket/basket.js" defer></script>
+		
 		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="/modules/daffy/daffy.css" />
+		<link rel="stylesheet" href="/modules/basket/basket.css" />
 	</head>
 	
 	<body>
@@ -18,23 +22,37 @@
 			<div id="messages">
 				
 			</div>
-                        
-                        <div id="tools">
-                                <input type="text" id="message-input" />
-                                
-                                <input type="button" id="send-message" value="Envoyer" />
-                        </div>
+			
+			<div id="tools">
+					<input type="text" id="message-input" />
+					
+					<input type="button" id="send-message" value="Envoyer" />
+			</div>
+		</div>
+
+		<div id="help">
+				<div id="help-toggle">?</div>
+				<ul id="help-content">
+						<li>
+								<strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
+								<strong>Module Basket</strong> : faites un max de rebonds ! (/basket)
+						</li>
+				</ul>
 		</div>
 		
-                <div id="help">
-                        <div id="help-toggle">?</div>
-                        <ul id="help-content">
-                                <li>
-                                        <strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
-                                </li>
-                        </ul>
-                </div>
-                
-		<script type="text/javascript" src="chat.js"></script>
+		<div id="basket">
+			<div id="others-mouse-pos"></div>
+		
+			<div class="ball"></div>
+		</div>
+		
+		<div id="basket-scores">
+			<div id="current-player"></div>
+			<div id="stats">
+				<strong>Meilleur joueur : <span class="best-player">???</span></strong>
+			</div>
+		</div>
+
+		<audio id="basket-bounce" src="modules/basket/bounce.mp3" autostart="0"></audio>
 	</body>
 </html>
