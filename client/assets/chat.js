@@ -1,6 +1,7 @@
 ﻿// Connexion au socket
 var socket = io.connect(':8090');
 let usersList = [];
+let currentUserName = "";
 
 let avatarPerso = null;
 
@@ -136,6 +137,9 @@ function register()
 	// add class hidden to modal
 	$('#modal').addClass('hidden');
 
+	// Stocke le pseudo dans une variable globale
+	currentUserName = pseudoVal;
+
 	//envoie pseudo et icone au serveur
 	socket.emit('user_enter', pseudoVal, iconeVal);
 }
@@ -201,7 +205,7 @@ function renderMessage(data)
 	const ownerClassName = [];
 	ownerClassName.push((isSender) ? 'isSender' : 'isReceiver');
 
-	if (data.message.includes('@'+name))
+	if (data.message.includes('@'+currentUserName))
 	{
 		var audio = new Audio('sounds/wizz.mp3');
 		audio.play();
@@ -212,7 +216,8 @@ function renderMessage(data)
 		},1600);
 	}
 
-	data.message = data.message.replace('@'+name,"<span class='ping'>@"+name+"</span>");
+	data.message = data.message.replace('@'+currentUserName,"<span class='ping'>@"+currentUserName+"</span>");
+
 	return (
 		`<div class="message ${ownerClassName.join(' ')}">
 			<div class="subMessage">
