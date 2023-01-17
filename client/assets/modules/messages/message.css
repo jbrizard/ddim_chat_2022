@@ -12,7 +12,7 @@
 #messages {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 5px;
 
     padding: 15px;
 
