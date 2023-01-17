@@ -145,7 +145,7 @@ h1 {
 	border: 1px solid #888;
 	border-radius: 15px;
 }
-#uploadAvatar{
+.upload{
 	margin-top: 20px;
 }
 /* Avatar center */
