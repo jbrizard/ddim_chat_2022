@@ -11,6 +11,7 @@ var daffy = require('./modules/daffy.js');
 var eastereggs = require('./modules/eastereggs.js');
 var commandes = require('./modules/commandes.js');
 var basket = require('./modules/basket.js');
+var blague = require('./modules/blague.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -64,6 +65,9 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Basket
 		basket.onMessage(io, message);
+
+		//Transmet le message au module Blague
+		blague.handleBlague(io, message)
 	});
 	
 });

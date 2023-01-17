@@ -18,23 +18,55 @@ function handleCommandes(io, message)
 	message = message.toLowerCase();
     let newMessage = '';
 
-	console.log(message);
-
     switch(message)
     {
         case '/tableflip':
         {
             //Transforme le message
             newMessage = '(╯°□°）╯︵ ┻━┻';
-            break;
+
+            //Renvoie le message au serveur
+            return newMessage;
+        }
+        case '/shrug':
+        {
+            //Transforme le message
+            newMessage = '¯\\_(ツ)_/¯';
+
+            //Renvoie le message au serveur
+            return newMessage;
+        }
+        case '/lenny':
+        {
+            //Transforme le message
+            newMessage = '( ͡° ͜ʖ ͡°)';
+
+            //Renvoie le message au serveur
+            return newMessage;
+        }
+        case '/unflip':
+        {
+            //Transforme le message
+            newMessage = '┬─┬﻿ ノ( ゜-゜ノ)';
+
+            //Renvoie le message au serveur
+            return newMessage;
+        }
+        case '/help':
+        {
+            //Transforme le message
+            newMessage = '<br> Commandes disponibles : <br> /tableflip : (╯°□°）╯︵ ┻━┻ <br> /unflip : ┬─┬﻿ ノ( ゜-゜ノ) <br> /shrug : ¯\\_(ツ)_/¯ <br> /lenny : ( ͡° ͜ʖ ͡°)';
+
+            //Renvoie le message au serveur
+            return newMessage;
         }
         default: 
         {
             //Si le message ne correspond à aucune commande, on le renvoie tel quel
             newMessage = message;
-            break;
+
+            //Renvoie le message au serveur
+            return newMessage;
         }
     }
-    //Renvoie le message au serveur
-    return newMessage;
 }
