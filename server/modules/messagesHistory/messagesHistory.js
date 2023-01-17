@@ -67,7 +67,6 @@ function generateNewMessageId() {
  */
 async function getAllMessages(sockets) {
     const storedList = getAllMessagesFromStorage();
-    console.dir(storedList);
     sockets.emit('get_messages_history', storedList);
 }
 

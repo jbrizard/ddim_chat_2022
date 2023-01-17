@@ -46,7 +46,6 @@ function connectUser(socket)
 function disconnectUser(socket) {
     if(checkIfUserExists(socket)) {
         userList[socket.id].status = connectionStatus.DISCONNECTED;
-        console.dir(userList[socket.id])
         // Log --
         console.log(`✅ Success: Disconnected user ${socket.name}`);
     }

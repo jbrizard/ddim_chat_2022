@@ -48,7 +48,6 @@ function addClient(socket)
 	// événement envoyé par chaque client 30 fois par secondes
 	socket.on('mouseInteraction', function(relativeMousePos, mousePos, ballPos)
 	{
-                console.log('interact');
 		socket.relativeMousePos = relativeMousePos;
 		socket.mousePos = mousePos;
 		
