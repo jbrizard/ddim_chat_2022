@@ -174,7 +174,7 @@ function generateUserRow(user)
 /**
  * Cette méthode est appelée lors du click sur 'Vider l'historique
  */
-function emptyChatHistory(messages) 
+function emptyChatHistory() 
 {
 	// on vide le html correspondant à la liste des messages
 	$('#chat #messages').empty();
