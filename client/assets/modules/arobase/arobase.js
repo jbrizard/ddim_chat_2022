@@ -1,6 +1,5 @@
 let arobasing = false;
 
-console.log('TEs')
 $('#message-input').on('keyup',function(event) {
     switch (event.which) {
         case 38:
