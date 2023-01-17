@@ -20,7 +20,6 @@ function showPreviousMessage(messageInput)
     if (step-1 > 0) 
     {
         step--;
-        console.dir('step--');
     }
     else
     {
