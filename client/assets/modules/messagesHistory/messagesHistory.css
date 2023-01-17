@@ -1,10 +1,11 @@
-.toolbox {
+#chat .toolbox {
+    position: absolute;
+    left: 0;
+    top: -45px;
     border-radius: 50%;
 }
 
-.toolbox .history {
-    position: absolute;
-    left: 20px;
+#chat .toolbox .history {
     max-width: max-content;
     background-color: #eeeeee;
     padding: 9px;
