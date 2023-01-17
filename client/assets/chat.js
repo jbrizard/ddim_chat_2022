@@ -1,6 +1,8 @@
 ﻿// Connexion au socket
 var socket = io.connect(':8090');
 
+let avatarPerso = null;
+
 // Demande un pseudo et envoie l'info au serveur
 //var name = prompt('Quel est votre pseudo ?');
 //socket.emit('user_enter', name, 2);
@@ -16,6 +18,8 @@ $('#register').click(register);
 
 // Action quand le button radio change de valeur
 $('.id-icone').change(iconSelected);
+
+$('#upload-avatar').change(previewFile);
 
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-input').keyup(function(evt)
@@ -73,6 +77,10 @@ function register() {
 	if (iconeVal === 0)
 		return;
 
+	if(avatarPerso != null){
+		iconeVal = avatarPerso;
+	}
+
 	// add class hidden to modal
 	$('#modal').addClass('hidden');
 
@@ -84,6 +92,23 @@ function iconSelected(){
 	$('.id-icone').parent().removeClass("icone-selected");
 	$('.id-icone:checked').parent().addClass("icone-selected");
 }
+
+function previewFile() {
+	const preview = document.getElementById('avatar-preview');
+	const file = document.getElementById('upload-avatar').files[0];
+	const reader = new FileReader();
+
+	reader.addEventListener("load", () => {
+		// on convertit l'image en une chaîne de caractères base64
+		preview.src = reader.result;
+		avatarPerso = reader.result;
+	}, false);
+
+	if (file) {
+		reader.readAsDataURL(file);
+	}
+}
+
 
 /**
  * Affichage d'un message reçu par le serveur

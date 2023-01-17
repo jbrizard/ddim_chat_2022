@@ -11,5 +11,10 @@ module.exports =  {
 
 /* Get aléatoire avatar */
 function getAvatar(avatarId) {
-    return "<img src='/modules/avatar/" + avatarId + ".svg' alt='' width='30px'>";
+    // test si avatarId est un nombre
+    if (!isNaN(avatarId)) {
+        return "<img src='/modules/avatar/" + avatarId + ".svg' alt='' width='30px'>";
+    }else{
+        return "<img src='"+ avatarId + "' alt='' width='30px'>";
+    }
 }
