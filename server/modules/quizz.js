@@ -30,6 +30,7 @@ const questions = {
 let start = false;
 let awaitAnswer = false;
 let randomAnswer = "non";
+var nbQuizz = 0;
 
 function handleQuizz(io, message)
 {
@@ -59,11 +60,14 @@ function handleQuizz(io, message)
         {
             if (message.includes('oui') || message.includes('non'))
             {
+                
                 if (message.includes(randomAnswer))
                 {
                     io.sockets.quizzScore++;
+                    nbQuizz++;
                     messagePerso(io, "Bonne réponse, votre score est de " + io.sockets.quizzScore);
                 } else { 
+                    nbQuizz++;
                     messagePerso(io, "Mauvaise réponse, votre score est de " + io.sockets.quizzScore);
                 }
                 awaitAnswer = false;
@@ -76,11 +80,21 @@ function handleQuizz(io, message)
         {
           awaitAnswer = true;
 
+          //Si nbQuizz = 5 alors fin
+          if(nbQuizz==5)
+          {
+            messagePerso(io, "Fin du quiz, tu as " + io.sockets.quizzScore +" points.");
+            io.sockets.quizz = false;
+            start = false;
+            return;
+
+          } else {
           // get random question and answer from questions object and send it to the let randomAnswer = "non";
             let randomQuestion = Object.keys(questions)[Math.floor(Math.random() * Object.keys(questions).length)];
             randomAnswer = questions[randomQuestion];
 
             messagePerso(io, "Question: " + randomQuestion);
+          }
         }
     }
 }

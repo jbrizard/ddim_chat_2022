@@ -145,6 +145,9 @@ h1 {
 	border: 1px solid #888;
 	border-radius: 15px;
 }
+#uploadAvatar{
+	margin-top: 20px;
+}
 /* Avatar center */
 .message {
 	display: flex;
