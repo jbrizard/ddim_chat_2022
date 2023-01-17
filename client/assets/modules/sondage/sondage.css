@@ -1,0 +1,59 @@
+/* Module Daffy */
+#espace-sondage {
+    position: absolute;
+    width: 25%;
+    top: 0;
+    border-radius: 10px;
+    background-color: #fff;
+    padding-bottom: 1rem;
+    max-height: 100%;
+    overflow-y: scroll;
+    display: none;
+}
+
+#conseil-sondage{
+    font-size: small;
+}
+
+.button-sondage{
+    border: none;
+    color: white;
+    background-color: rgb(4, 4, 29);
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-sondage:disabled{
+    cursor: auto;
+    background-color: rgb(177, 177, 177);
+}
+
+.sondage{
+    width: 80%;
+    background-color: rgb(220, 220, 220);
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.btn-response{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.response{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#number-two, #number-one{
+    font-weight: bold;
+    margin: 0 0.5rem;
+}

@@ -26,6 +26,7 @@ var konami = require('./modules/konami.js');
 var youtubemusic = require('./modules/music_player.js');
 var tenor = require('./modules/tenor.js');
 var ratio = require('./modules/ratio.js');
+var sondage = require('./modules/sondage.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -98,6 +99,9 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+
+		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		sondage.handleSondage(io, message, socket.name);
 
 		// Transmet le message au module EasterEggs (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		eastereggs.handleEasterEggs(io, message);
@@ -173,6 +177,11 @@ io.sockets.on('connection', function(socket)
 			io.to(socket.id).emit('results_search_gifs', {gifs:res, offset:offset});
 		});
 
+	});
+
+	socket.on('click_response', function(params)
+	{
+		sondage.resultSondage(io, params.id, params.idSondage);
 	});
 
 	// Démarrage de la récupération des gifs trending et renvoi du résultat au client
