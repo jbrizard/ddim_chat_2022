@@ -29,7 +29,8 @@ function handleMusicYoutube(io, message)
         {
             name:'YoutubeMusic',
             message:'<span>Si l\'audio est \"vide\", voici le lien de la musique que j\'ai trouvée : <a class="ytb_link" target="_blank"></a></span>'
-                   +'<audio class="youtube" autoplay controls loop></audio>'
+                   +'<audio class="youtube" autoplay controls loop></audio>',
+            avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
         });
 
         // On récupère les paramètres de la commande

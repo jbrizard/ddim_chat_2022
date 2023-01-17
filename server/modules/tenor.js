@@ -37,7 +37,8 @@ function handleTenor(io, message)
             io.sockets.emit('new_message',
             {
                 name:'Tenor',
-                message:"<img class='gifTenor'></img>"
+                message:"<img class='gifTenor'>",
+                avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
             });
 
             // On continue le traitement en envoyant ce message au client
@@ -50,7 +51,8 @@ function handleTenor(io, message)
             {
                 name:'Tenor',
                 message:"<span>Mauvaise syntaxe.</span>"
-                       +"<span>Exemple : /tenor hug</span>"
+                       +"<span>Exemple : /tenor hug</span>",
+                avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
             });
         }
 	}
