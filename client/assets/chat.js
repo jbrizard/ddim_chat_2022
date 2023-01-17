@@ -38,15 +38,18 @@ function sendMessage()
 	var input = $('#message-input');
 	var message = input.val();	
 	input.val('');
-	
+	if ($("#upload")[0].files[0])
+	{
+		sendFile ()
+	}
 	// On n'envoie pas un message vide
 	if (message == '')
 		return;
 	
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
-
 	$('#message-viewed').hide();
+
 }
 
 /**
@@ -65,14 +68,4 @@ function receiveMessage(data)
 	$('#chat #messages').scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 }
 
-/**
- * Affichage du check et du nom de la personne ayant vu le dernier message
- */
-socket.on('last_message_viewed', lastMessageViewed);
 
-function lastMessageViewed(data)
-{
-	$('#message-viewed').css("display", "flex").appendTo(".message:last");
-	$('#who-viewed').text("vu par " + data.name);
-
-}
