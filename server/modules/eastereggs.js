@@ -24,7 +24,8 @@ function handleEasterEggs(io, message)
 		io.sockets.emit('new_message',
 		{
 			name:'EasterEggs',
-			message:'<br><img src="modules/eastereggs/Clement.jpg">'
+			message:'<br><img src="modules/eastereggs/Clement.jpg">',
+			avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
 		});
 	}
 	else if (message.includes('justin'))
@@ -33,7 +34,8 @@ function handleEasterEggs(io, message)
 		io.sockets.emit('new_message',
 		{
 			name:'EasterEggs',
-			message:'<br><img src="modules/eastereggs/Justin.jpg">'
+			message:'<br><img src="modules/eastereggs/Justin.jpg">',
+			avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
 		});
 	}
 	else if (message.includes('david'))
@@ -42,7 +44,8 @@ function handleEasterEggs(io, message)
 		io.sockets.emit('new_message',
 		{
 			name:'EasterEggs',
-			message:'<br><img src="modules/eastereggs/David.jpg">'
+			message:'<br><img src="modules/eastereggs/David.jpg">',
+			avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
 		});
 	}
 	else if (message.includes('romain'))
@@ -51,7 +54,8 @@ function handleEasterEggs(io, message)
 		io.sockets.emit('new_message',
 		{
 			name:'EasterEggs',
-			message:'<br><img src="modules/eastereggs/Romain.jpg">'
+			message:'<br><img src="modules/eastereggs/Romain.jpg">',
+			avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
 		});
 	}
 	else if (message.includes('lucien'))
@@ -60,7 +64,8 @@ function handleEasterEggs(io, message)
 		io.sockets.emit('new_message',
 		{
 			name:'EasterEggs',
-			message:'<br><img src="modules/eastereggs/Lucien.jpg">'
+			message:'<br><img src="modules/eastereggs/Lucien.jpg">',
+			avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
 		});
 	}
 }

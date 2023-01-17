@@ -1,3 +1,4 @@
+const avatar = require("./avatar");
 module.exports = {
     handleMessage: handleMessage
 }
@@ -25,7 +26,8 @@ function handleMessage(io, socket, message, users)
         name: socket.name,
         type: 'whisper',
         message: message,
-        senderId: socket.id
+        senderId: socket.id,
+        avatar: avatar.getAvatar(socket.avatarId)
     };
 
     io.to(socketId).emit('new_message', opts);

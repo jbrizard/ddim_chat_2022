@@ -89,7 +89,11 @@ function onMessage(io, message)
 {
         if (message == '/basket')
         {
-                io.sockets.emit('new_message', { name: 'Basket !', message: 'Utilisez "/basket start" pour lancer le jeu ou "/basket stop" pour l\'arrêter' });
+                io.sockets.emit('new_message', {
+					name: 'Basket !',
+					message: 'Utilisez "/basket start" pour lancer le jeu ou "/basket stop" pour l\'arrêter',
+					avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
+				});
                 return;
         }
         

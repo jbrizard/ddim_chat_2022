@@ -25,7 +25,8 @@ function handleBlague(io, message) {
 			  let joke = response.data.setup ? `${response.data.setup} ${response.data.delivery}` : response.data.joke;
 			  io.sockets.emit('new_message', {
 				  name: 'Poti Blagueur',
-				  message: joke
+				  message: joke,
+				  avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
 			  });
               
             // Transmet le message à tous les utilisateurs (broadcast)
@@ -36,7 +37,8 @@ function handleBlague(io, message) {
 			  // Envoie un message d'erreur au client
 			  io.sockets.emit('new_message', {
 				  name: 'Poti Blagueur',
-				  message: 'Quelle est la différence entre un noir et un arbre ?<br>Un arbre ne tombe pas quand on lui met une corde au cou.'
+				  message: 'Quelle est la différence entre un noir et un arbre ?<br>Un arbre ne tombe pas quand on lui met une corde au cou.',
+				  avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
 			  });
 		  });
 	}

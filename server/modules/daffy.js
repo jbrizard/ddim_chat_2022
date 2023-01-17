@@ -26,7 +26,7 @@ function handleDaffy(io, message)
 		{
 			name:'Daffy!!',
 			message:'<span class="daffy">Coin Coin !</span>',
-			avatar:"<img src='/modules/avatar/0.svg' alt='Daffy avatar' width='30px'>" // pas d'avatar pour Daffy
+			avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
 		});
 	}
 }

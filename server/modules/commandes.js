@@ -5,6 +5,8 @@
  */
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
+const avatar = require("./avatar");
+
 module.exports =  {
 	handleCommandes: handleCommandes// permet d'appeler cette méthode dans server.js -> Commandes.handleCommandes()...)
 }
@@ -56,7 +58,12 @@ function handleCommandes(io, message, socket)
             //Transforme le message
             newMessage = '<br> <strong>Commandes disponibles : <br> /tableflip :</strong> (╯°□°）╯︵ ┻━┻ <br> <strong>/unflip :</strong> ┬─┬﻿ ノ( ゜-゜ノ) <br> <strong>/shrug :</strong> ¯\\_(ツ)_/¯ <br> <strong>/lenny :</strong> ( ͡° ͜ʖ ͡°) <br> <strong>/youtube Vidéo à regarder :</strong> Affiche la vidéo à regarder <br> <strong>/sondage Question? Réponse1 & Réponse2 :</strong> Propose un sondage avec 2 réponses possibles <br> <strong>/musique Nom de la musique :</strong> Permet d\'écouter une musique ';
 
-            const msg = {name:socket.name, message:newMessage, senderId: socket.id};
+            const msg = {
+                name:socket.name,
+                message:newMessage,
+                senderId: socket.id,
+                avatar: avatar.getAvatar(socket.avatarId)
+            };
             io.to(socket.id).emit('new_message', msg);
             //Renvoie le message au serveur
             return null;

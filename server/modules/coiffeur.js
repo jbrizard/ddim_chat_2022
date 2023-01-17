@@ -18,7 +18,8 @@ function handleCoiffeur(io, socket, message)
                     {
                         name:"Coiffeur",
                         message:'<img class="gif" src="https://media.tenor.com/zvg8w0FkecYAAAAC/feur-theobabac.gif" />',
-                        senderId: "bot"
+                        senderId: "bot",
+                        avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
                     });
             },150);
         }

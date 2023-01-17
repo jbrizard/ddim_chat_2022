@@ -22,7 +22,8 @@ function handleMessage(io,socket, message)
         {
             io.to(socket.id).emit('new_message', {
                 name:"Météo",
-                message:"<em>La ville n'a pas été trouvée.\r\n Merci d'utiliser /meteo Nom de la ville.</em>"
+                message:"<em>La ville n'a pas été trouvée.\r\n Merci d'utiliser /meteo Nom de la ville.</em>",
+                avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
             });
             return;
         }
@@ -45,13 +46,18 @@ function handleMessage(io,socket, message)
                 '  </div>\n' +
                 '</div>';
 
-            io.sockets.emit('new_message', {name:"Météo", message:responseMsg});
+            io.sockets.emit('new_message', {
+                name:"Météo",
+                message:responseMsg,
+                avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
+            });
         })
         .catch(function (error)
         {
             io.to(socket.id).emit('new_message', {
                 name:"Météo",
-                message:"<em>Le bot météo est indisponible pour le moment :(</em>"
+                message:"<em>Le bot météo est indisponible pour le moment :(</em>",
+                avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
             });
         });
     });

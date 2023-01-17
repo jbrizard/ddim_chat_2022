@@ -145,8 +145,6 @@ function receiveMessage(data)
 		data.avatar = "<img src='/modules/avatar/default.svg' alt='default avatar' width='30px'>";
 	}
 
-//TODO: Ajouter data.avatar dans les résultats
-
 	const isCurrentNotExcluded = (!data?.excludedUsers?.includes(socket.id) ?? true); //client courrant n'est pas dans la liste d'exclusion
 	if (isCurrentNotExcluded)
 	{

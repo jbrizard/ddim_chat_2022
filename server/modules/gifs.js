@@ -1,4 +1,5 @@
 const axios = require('axios')
+const avatar = require("./avatar");
 
 module.exports = {
     handleGif: handleGif,
@@ -45,7 +46,8 @@ function handleGifMessage(io, socket, url)
         {
             name:socket.name,
             message:'<img class="gif" src="'+url+'" />',
-            senderId: socket.id
+            senderId: socket.id,
+            avatar: avatar.getAvatar(socket.avatarId)
         });
 
 }
