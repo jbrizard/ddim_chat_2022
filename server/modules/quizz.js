@@ -24,27 +24,34 @@ let start = false;
 let awaitAnswer = false;
 let randomAnswer = "non";
 
-function handleQuizz(io, message){
+function handleQuizz(io, message)
+{
     message = message.toLowerCase();
-    if (message.includes('quizz') || io.sockets.quizz === true){
+    if (message.includes('quizz') || io.sockets.quizz === true)
+    {
         io.sockets.quizz = true;
-        if (!start){
+        if (!start)
+        {
             messagePerso(io, "Bienvenue dans le quizz");
             start = true;
             io.sockets.quizzScore = 0;
             awaitAnswer = false;
         }
 
-        if (message.includes('quitte')){
+        if (message.includes('quitte'))
+        {
             messagePerso(io, "Bye !");
             io.sockets.quizz = false;
             start = false;
             return;
         }
 
-        if (awaitAnswer){
-            if (message.includes('oui') || message.includes('non')){
-                if (message.includes(randomAnswer)){
+        if (awaitAnswer)
+        {
+            if (message.includes('oui') || message.includes('non'))
+            {
+                if (message.includes(randomAnswer))
+                {
                     io.sockets.quizzScore++;
                     messagePerso(io, "Bonne réponse, votre score est de " + io.sockets.quizzScore);
                 } else { // TODO: il vient tout le temps ici
@@ -56,7 +63,8 @@ function handleQuizz(io, message){
             }
         }
 
-        if(!awaitAnswer){
+        if(!awaitAnswer)
+        {
           awaitAnswer = true;
 
           // get random question and answer from questions object and send it to the let randomAnswer = "non";
