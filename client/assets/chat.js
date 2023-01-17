@@ -14,6 +14,9 @@ $('#send-message').click(sendMessage);
 // Action quand on clcique sur le bouton "inscription"
 $('#register').click(register);
 
+// Action quand le button radio change de valeur
+$('.id-icone').change(iconSelected);
+
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-input').keyup(function(evt)
 {
@@ -54,8 +57,7 @@ function sendMessage()
 	socket.emit('message', message);
 }
 
-function register()
-{
+function register() {
 	//récupère le pseudo
 	var pseudoInput = $('#pseudo');
 	var pseudoVal = pseudoInput.val();
@@ -65,11 +67,7 @@ function register()
 	//récupère icone
 	var iconeVal = 0;
 
-	for (i=0; i<document.getElementsByClassName("idIcone").length; i++) {
-		if (document.getElementsByClassName("idIcone")[i].checked) {
-			iconeVal = document.getElementsByClassName("idIcone")[i].value;
-		}
-	}
+	iconeVal = $('.id-icone:checked').val();
 
 	//Pas d'envoie si pas d'icone
 	if (iconeVal === 0)
@@ -80,6 +78,11 @@ function register()
 
 	//envoie pseudo et icone au serveur
 	socket.emit('user_enter', pseudoVal, iconeVal);
+}
+
+function iconSelected(){
+	$('.id-icone').parent().removeClass("icone-selected");
+	$('.id-icone:checked').parent().addClass("icone-selected");
 }
 
 /**
