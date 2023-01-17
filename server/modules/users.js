@@ -62,7 +62,7 @@ function checkIfUserExists(socket)
 /**
  * Emission d'un message de nofication de connection/déconnection d'un user
  */
-function notifyUser(io, socket, type) 
+function notifyUser(io, socket, type)
 {
     //edition dynamque du message en fonction du connectionStatus
 	let message = '';
