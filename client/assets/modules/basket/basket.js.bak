@@ -45,8 +45,6 @@ function stopBasket()
         
         ball.fadeOut(500);
         scores.fadeOut(500);
-        
-	othersMousePos.empty();
 }
 
 
