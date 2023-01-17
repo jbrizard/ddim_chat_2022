@@ -84,6 +84,8 @@
     align-items: center;
     
     width: 100%;
+
+	user-select: none;
 }
 
 .message.isReceiver {
