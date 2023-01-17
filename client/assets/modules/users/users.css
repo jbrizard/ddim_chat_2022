@@ -61,3 +61,9 @@
 .disconnected {
 	background-color: red;
 }
+.user {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 3px;
+}

@@ -2,17 +2,6 @@
 var socket = io.connect(':8090');
 let usersList = [];
 
-// Demande un pseudo et envoie l'info au serveur
-if (typeof(localStorage.user_name) == 'undefined')
-{
-	// TODO: Open modal register
-}
-else {
-	name = localStorage.user_name;
-	avatar = localStorage.user_avatar;
-	socket.emit('user_enter', name);
-}
-
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
 socket.on('notify_user', notifyUser);
@@ -161,19 +150,17 @@ function receiveMessage(data)
 	const isCurrentNotExcluded = (!data?.excludedUsers?.includes(socket.id) ?? true); //client courrant n'est pas dans la liste d'exclusion
 	if (isCurrentNotExcluded)
 	{
-
-		//switch type
-		let finalMessageElement = '';
+		// Changement du rendu en fonction du type de message
+		let messageElement = '';
 		switch(data.type)
 		{
 			case 'message': break;
-			case 'message': /*To implement; */ break;
-			case 'info': finalMessageElement = renderInfoMessage(data); break;
-			case 'whisper': finalMessageElement = renderWhisperMessage(data); break;
-			default: finalMessageElement = renderMessage(data); break;
+			case 'info': messageElement = renderInfoMessage(data); break;
+			case 'whisper': messageElement = renderWhisperMessage(data); break;
+			default: messageElement = renderMessage(data); break;
 		}
 
-		$('#chat #messages').append(finalMessageElement).scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+		$('#chat #messages').append(messageElement).scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 	}
 }
 
@@ -201,7 +188,7 @@ function renderMessage(data)
 	return (
 		`<div class="message ${ownerClassName.join(' ')}">
 			<div class="subMessage">
-				<span class="user"> ${data.name}</span>  
+				<span class="user">${data.avatar} ${data.name}</span>  
 				<span class="text">${data.message}</span>			
 			</div>
 		</div>`
@@ -218,7 +205,7 @@ function renderWhisperMessage(data)
 	return (
 		`<div class="message ${ownerClassName.join(' ')} whisper-msg">
 			<div class="subMessage">
-				<span class="user">~ ${data.name}</span>  
+				<span class="user">~ ${data.avatar} ${data.name}</span>  
 				<span class="text"><em>${data.message}</em></span>			
 			</div>
 		</div>`
