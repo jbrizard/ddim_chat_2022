@@ -69,6 +69,7 @@ function receiveMessage(data)
 			case 'message': break;
 			case 'message': /*To implement; */ break;
 			case 'info': finalMessageElement = renderInfoMessage(data); break;
+			case 'whisper': finalMessageElement = renderWhisperMessage(data); break;
 			default: finalMessageElement = renderMessage(data); break;
 		}
 
@@ -99,6 +100,22 @@ function renderMessage(data)
 			<div class="subMessage">
 				<span class="user"> ${data.name}</span>  
 				<span class="text">${data.message}</span>			
+			</div>
+		</div>`
+	);
+}
+
+
+function renderWhisperMessage(data) {
+	const isSender = (typeof(data?.senderId) !== 'undefined' && data.senderId === socket.id);
+	const ownerClassName = [];
+	ownerClassName.push((isSender) ? 'isSender' : 'isReceiver');
+
+	return (
+		`<div class="message ${ownerClassName.join(' ')} whisper-msg">
+			<div class="subMessage">
+				<span class="user">~ ${data.name}</span>  
+				<span class="text"><em>${data.message}</em></span>			
 			</div>
 		</div>`
 	);

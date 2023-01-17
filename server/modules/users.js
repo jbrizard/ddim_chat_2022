@@ -16,6 +16,7 @@ module.exports =  {
 	connectUser: connectUser, // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
     disconnectUser: disconnectUser, // permet de supprimer un user de la liste des users connectés
     notifyUser: notifyUser, //Permet d'ajouter un message de notification d'arrivée d'un nouvel user dans le chat
+    users: users,
 }
 
 // Initialisation des users 
@@ -79,4 +80,9 @@ function notifyUser(io, socket, type)
         userId: socket.id,
         users: userList
     });
+}
+
+function users()
+{
+    return userList;
 }

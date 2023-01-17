@@ -12,6 +12,7 @@ var users = require('./modules/users.js');
 var gifs = require('./modules/gifs.js');
 var meteo = require('./modules/meteo.js');
 var coiffeur = require('./modules/coiffeur.js');
+var whisper = require('./modules/whisper.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -48,6 +49,10 @@ io.sockets.on('connection', function(socket)
 	{
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
+
+		let whisp = whisper.handleMessage(io, socket, message, users.users());
+		if (whisp)
+			return;
 
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message, senderId: socket.id});

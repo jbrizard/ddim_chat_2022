@@ -18,7 +18,7 @@ function handleMessage(io,socket, message)
     // get city
     getCityLatLong(result[1]).then(function(res)
     {
-        if (res.length == 0)
+        if (res.length === 0)
         {
             io.to(socket.id).emit('new_message', {
                 name:"Météo",
