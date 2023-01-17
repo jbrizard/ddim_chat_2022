@@ -73,6 +73,16 @@ io.sockets.on('connection', function(socket)
 			socket.broadcast.emit('last_message_viewed', {name:socket.name});
 		}
 	})
+
+	//Utilisateur en train d'écrire
+	socket.on('new_user_tiping', function(name)
+	{
+		// Stocke le nom de l'utilisateur dans l'objet socket
+		socket.name = name;
+
+		// Transmet le nom au module UserInteraction
+		userInteraction.userIsWriting(socket, name);
+	});
 });
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)
