@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="/modules/messages/message.css" />
 	<link rel="stylesheet" href="/modules/arobase/arobase.css" />
 	<link rel="stylesheet" href="/modules/whisper/whisper.css" />
+	<link rel="stylesheet" href="/modules/basket/basket.css" />
 </head>
 
 <body>
@@ -66,11 +67,30 @@
 			<li>
 				<strong>Module Météo</strong> : /meteo Nom de la ville
 			</li>
+			<li>
+				<strong>Module Basket</strong> : faites un max de rebonds ! (/basket)
+			</li>
 		</ul>
 	</div>
+
+	<div id="basket">
+		<div id="others-mouse-pos"></div>
+
+		<div class="ball"></div>
+	</div>
+
+	<div id="basket-scores">
+		<div id="current-player"></div>
+		<div id="stats">
+			<strong>Meilleur joueur : <span class="best-player">???</span></strong>
+		</div>
+	</div>
+
+	<audio id="basket-bounce" src="modules/basket/bounce.mp3" autostart="0"></audio>
 
 	<script type="text/javascript" src="chat.js"></script>
 	<script type="text/javascript" src="/modules/gifs/gifs.js"></script>
 	<script type="text/javascript" src="/modules/arobase/arobase.js"></script>
+	<script type="text/javascript" src="modules/basket/basket.js"></script>
 </body>
 </html>

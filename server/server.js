@@ -13,6 +13,7 @@ var gifs = require('./modules/gifs.js');
 var meteo = require('./modules/meteo.js');
 var coiffeur = require('./modules/coiffeur.js');
 var whisper = require('./modules/whisper.js');
+var basket = require('./modules/basket.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -30,9 +31,15 @@ app.get('/', function(req, res)
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 
+// Initialisation du module Basket
+basket.init(io);
+
 // Gestion des connexions au socket
 io.sockets.on('connection', function(socket)
 {
+	// Ajoute le client au jeu de basket
+	basket.addClient(socket);
+	
 	// Arrivée d'un utilisateur
 	socket.on('user_enter', function(name)
 	{
@@ -50,7 +57,9 @@ io.sockets.on('connection', function(socket)
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
 
+		// Transmet le message au module whisper
 		let whisp = whisper.handleMessage(io, socket, message, users.users());
+		// Si le message est un MP, ne pas poursuivre
 		if (whisp)
 			return;
 
@@ -59,6 +68,9 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+
+		// Transmet le message au module Basket
+		basket.onMessage(io, message);
 
 		// Transmet le message au module Météo
 		meteo.handleMessage(io, socket, message);
