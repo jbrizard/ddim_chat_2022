@@ -34,7 +34,7 @@ app.get('/', function(req, res)
 {
 	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
 });
-  
+
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 
@@ -61,7 +61,7 @@ io.sockets.on('connection', function(socket)
 		//Appelle l'historique des messages
 		messagesHistory.getAllMessages(io.sockets);
 	});
-	
+
 	// Réception d'un message
 	socket.on('message', function(message)
 	{
@@ -114,6 +114,13 @@ io.sockets.on('connection', function(socket)
 
 		// Transmet le message au module Quizz
 		quizz.handleQuizz(io, message);
+	});
+
+	// récéption de l'évenement de suppression de l'historique
+	socket.on('empty-chat-history', function()
+	{
+		// suppression de l'historique
+		messagesHistory.emptyHistory();
 	});
 
 	socket.on("disconnect", function()

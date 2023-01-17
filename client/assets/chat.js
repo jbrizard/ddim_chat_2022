@@ -82,9 +82,8 @@ $('#message-input').keyup(function(evt)
 
 $('#pseudo').keyup(function(evt)
 {
-	if (evt.keyCode === 13) {
+	if (evt.keyCode === 13)
 		register();
-	} // 13 = touche Entrée
 });
 
 // Action quand on clique sur le bouton Aide (?)
@@ -93,6 +92,21 @@ $('#help-toggle').click(function()
         $('#help-content').fadeToggle('fast');
 });
 
+// Action quand on clique sur le 'Supprimer historique du chat'
+$('#empty-chat-action').click(emptyChatHistory);
+
+/**
+ * Sauvegarde un message dans le sessionstorage
+ */
+function hydrateLocalHistory(message) {
+	if (typeof(sessionStorage.history) === 'undefined') {
+		sessionStorage.history = JSON.stringify([]);
+	}
+
+	const history = JSON.parse(sessionStorage.history);
+	history.push(message);
+	sessionStorage.history = JSON.stringify(history);
+}
 
 /**
  * Envoi d'un message au serveur
@@ -110,6 +124,7 @@ function sendMessage()
 	
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
+	hydrateLocalHistory(message);
 }
 
 function register()
@@ -228,7 +243,6 @@ function renderMessage(data)
 	);
 }
 
-
 function renderWhisperMessage(data)
 {
 	const isSender = (typeof(data?.senderId) !== 'undefined' && data.senderId === socket.id);
@@ -284,6 +298,10 @@ function notifyUser(data)
 	}
 }
 
+/**
+ * Cette méthode vide la liste HTML des messages du chat et réinjecte les messages passer en paramètre
+ * @param {*} messages
+ */
 function getMessagesHistory(messages)
 {
 	// on vide le html correspondant à la liste des messages
@@ -294,6 +312,9 @@ function getMessagesHistory(messages)
 	}
 }
 
+/**
+ * Cette méthode génère le HTML représentant un utilisateur dans la liste d'utilisateur
+ */
 function generateUserRow(user)
 {
 	return `
@@ -302,4 +323,14 @@ function generateUserRow(user)
 			<span class="name">${user.name}</span> 
 		</div>
 	`
+}
+
+/**
+ * Cette méthode est appelée lors du click sur 'Vider l'historique
+ */
+function emptyChatHistory()
+{
+	// on vide le html correspondant à la liste des messages
+	$('#chat #messages').empty();
+	socket.emit('empty-chat-history', localStorage.user_name);
 }

@@ -1,38 +1,70 @@
 // Chargement des modules perso
-var chat = require('../../chat.js');
-socket.on('get_messages_history', getMessagesHistory);
+let history = [];
+let step = -1;
 
-const historyFiltered = [];
+function initHistory() 
+{
+    if (typeof(sessionStorage.history) !== 'undefined') 
+    {
+        const newHistory = JSON.parse(sessionStorage.history);
 
-function initHistory(messages) {
-    for (const message of messages) {
-        historyFiltered.push({
-            
-        });    
+        if (history.length !== newHistory.length) 
+        {
+            step = newHistory.length;
+        }
+
+        history = newHistory;
     }
 }
 
-function showPreviousMessage() {
-
+function showPreviousMessage(messageInput) 
+{
+    if (step-1 > 0) 
+    {
+        step--;
+    }
+    else
+    {
+        step = 0;
+    }
+    if (typeof(history[step]) !== 'undefined') {
+        messageInput.value = history[step];
+    }
 }
 
-function showNextMessage() {
-
+function showNextMessage(messageInput) 
+{
+    if (step < history.length-1) 
+    {
+        step++;
+    }
+    else
+    {
+        step = history.length-1;
+    }
+    if (typeof(history[step]) !== 'undefined') 
+    {
+        messageInput.value = history[step];
+    }
 }
 
-function getMessagesHistory(messages) {
-    initHistory(messages);
-    const messageInput = $('#message-input');
-    messageInput.addEventListener('onkeydown', (e) => {
+function init() 
+{
+    const messageInput = document.querySelector('#message-input');
+    messageInput.addEventListener('keydown', (e) => {
+        initHistory();
         switch (e.keyCode) {
             case 38: {
-                showPreviousMessage();
+                e.preventDefault();
+                showPreviousMessage(messageInput);
                 break;
             }
             case 40: {
-                showNextMessage();
+                e.preventDefault();
+                showNextMessage(messageInput);
                 break;
             }
         }
     });
 }
+init();

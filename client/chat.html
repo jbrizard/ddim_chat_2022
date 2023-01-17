@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="/modules/meteo/meteo.css" />
 	<link rel="stylesheet" href="/modules/users/users.css" />
 	<link rel="stylesheet" href="/modules/messages/message.css" />
+	<link rel="stylesheet" href="/modules/messagesHistory/messagesHistory.css" />
 	<link rel="stylesheet" href="/modules/arobase/arobase.css" />
 	<link rel="stylesheet" href="/modules/whisper/whisper.css" />
 	<link rel="stylesheet" href="/modules/basket/basket.css" />
@@ -26,6 +27,9 @@
 			<div id="user-list"></div>
 		</div>
 		<div id="chat">
+			<div class="toolbox">
+				<div id="empty-chat-action" class="history">❌ Vider le chat</div>
+			</div>
 			<div id="messages">
 
 			</div>
@@ -103,7 +107,7 @@
 
 			<label>Choisissez votre image de profil :</label><br/>
 			<div class="iconeRadio">
-				
+
 				<div class="icone-selected">
 					<input  type="radio" name="imgProfil" class="id-icone hidden" id="icon-1" value="1" checked />
 					<label for="icon-1"><img class="icone" src="modules/avatar/1.svg" alt="icone1" /></label>
@@ -111,7 +115,7 @@
 				<div>
 					<input  type="radio" name="imgProfil" class="id-icone hidden"  id="icon-2" value="2" />
 					<label for="icon-2"><img class="icone" src="modules/avatar/2.svg" alt="icone2" /></label>
-				</div>	
+				</div>
 				<div>
 					<input  type="radio" name="imgProfil" class="id-icone hidden" value="3"  id="icon-3"/>
 					<label for="icon-3"><img class="icone" src="modules/avatar/3.svg" alt="icone3" /></label>
@@ -165,7 +169,7 @@
 					<label for="icon-15"><img class="icone" src="modules/avatar/15.svg" alt="icone15"/></label>
 				</div>
 			</div>
-			
+
 			<!-- upload img profil -->
 			<div>
 				<p>OU</p>
@@ -184,6 +188,7 @@
 	</div>
 
 	<script type="text/javascript" src="chat.js"></script>
+	<script type="text/javascript" src="/modules/messages/message.js"></script>
 	<script type="text/javascript" src="/modules/gifs/gifs.js"></script>
 	<script type="text/javascript" src="/modules/arobase/arobase.js"></script>
 	<script type="text/javascript" src="modules/basket/basket.js"></script>

@@ -78,7 +78,6 @@ $('#message-input').on('keyup', function(event)
 // Quand on appuie sur une touche
 $(document).on('keydown',function(event)
 {
-
     // Si on est pas en train de faire un @, on ne fait rien
     if (!arobasing)
         return;

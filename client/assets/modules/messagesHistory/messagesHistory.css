@@ -1,0 +1,14 @@
+#chat .toolbox {
+    position: absolute;
+    left: 0;
+    top: -45px;
+    border-radius: 50%;
+}
+
+#chat .toolbox .history {
+    max-width: max-content;
+    background-color: #eeeeee;
+    padding: 9px;
+    border-radius: 50px;
+    font-size: 9pt;
+}
