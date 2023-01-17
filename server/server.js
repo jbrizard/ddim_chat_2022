@@ -11,6 +11,7 @@ var daffy = require('./modules/daffy.js');
 var users = require('./modules/users.js');
 var gifs = require('./modules/gifs.js');
 var meteo = require('./modules/meteo.js');
+var coiffeur = require('./modules/coiffeur.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -56,6 +57,9 @@ io.sockets.on('connection', function(socket)
 
 		// Transmet le message au module Météo
 		meteo.handleMessage(io, socket, message);
+
+		// Transmet le message au module Coiffeur
+		coiffeur.handleCoiffeur(io, socket, message);
 
 	});
 
