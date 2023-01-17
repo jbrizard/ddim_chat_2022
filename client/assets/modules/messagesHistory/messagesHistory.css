@@ -1,0 +1,13 @@
+.toolbox {
+    border-radius: 50%;
+}
+
+.toolbox .history {
+    position: absolute;
+    left: 20px;
+    max-width: max-content;
+    background-color: #eeeeee;
+    padding: 9px;
+    border-radius: 50px;
+    font-size: 9pt;
+}
