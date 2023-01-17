@@ -84,12 +84,21 @@ function renderMessage(data)
 	const isSender = (typeof(data?.senderId) !== 'undefined' && data.senderId === socket.id);
 	const ownerClassName = [];
 	ownerClassName.push((isSender) ? 'isSender' : 'isReceiver');
-
+	if(data.message.includes('@'+name))
+	{
+		var audio = new Audio('sounds/wizz.mp3');
+		audio.play();
+		$('body').addClass('shaking');
+		setTimeout(function(){
+			$('body').removeClass('shaking');
+		},1600);
+	}
+	data.message = data.message.replace('@'+name,"<span class='ping'>@"+name+"</span>");
 	return (
 		`<div class="message ${ownerClassName.join(' ')}">
 			<div class="subMessage">
 				<span class="user"> ${data.name}</span>  
-				${data.message}			
+				<span class="text">${data.message}</span>			
 			</div>
 		</div>`
 	);

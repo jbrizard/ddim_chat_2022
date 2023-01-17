@@ -38,13 +38,14 @@ async function handleTrendingGif()
 /**
  * Envoi de l'image dans le chat
  */
-function handleGifMessage(io, name, url)
+function handleGifMessage(io, socket, url)
 {
     // Si oui, envoie la réponse de Daffy...
     io.sockets.emit('new_message',
         {
-            name:name,
-            message:'<img class="gif" src="'+url+'" />'
+            name:socket.name,
+            message:'<img class="gif" src="'+url+'" />',
+            senderId: socket.id
         });
 
 }

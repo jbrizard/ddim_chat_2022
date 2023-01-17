@@ -2,6 +2,13 @@ let arobasing = false;
 
 console.log('TEs')
 $('#message-input').on('keyup',function(event) {
+    switch (event.which) {
+        case 38:
+        case 40:
+        case 9:
+            return;
+    }
+
     let val = $('#message-input').val();
     let split = val.split(" ");
 
@@ -28,7 +35,7 @@ $('#message-input').on('keyup',function(event) {
     const search = split[split.length-1].substring(1);
     let usersToShow = [];
     usersList.forEach(function(user){
-        if (user.name.startsWith(search) || search === '')
+        if (user.name.toUpperCase().startsWith(search.toUpperCase()) || search === '')
         {
             // si l'utilisateur répond à la recherche, ajouter à usersToShow
             usersToShow.push(user);

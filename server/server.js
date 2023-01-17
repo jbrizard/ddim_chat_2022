@@ -72,7 +72,7 @@ io.sockets.on('connection', function(socket)
 		url = ent.encode(url);
 
 		// Transmet le gif à tous les utilisateurs (broadcast)
-		gifs.handleGifMessage(io,socket.name,url)
+		gifs.handleGifMessage(io, socket, url)
 	});
 
 	// Démarrage du recherche de gif et renvoi du résultat au client
