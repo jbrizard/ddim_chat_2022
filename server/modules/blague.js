@@ -22,8 +22,6 @@ function handleBlague(io, message) {
 		axios.get('https://v2.jokeapi.dev/joke/Any?lang=fr')
 		  .then(response => {
 			  // Envoie la blague au client
-              console.log(response.data);
-              console.log(response.data.setup);
 			  let joke = response.data.setup ? `${response.data.setup} ${response.data.delivery}` : response.data.joke;
 			  io.sockets.emit('new_message', {
 				  name: 'Poti Blagueur',
