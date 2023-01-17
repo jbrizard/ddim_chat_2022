@@ -5,6 +5,7 @@ var ioLib = require('socket.io');	// WebSocket
 var ent = require('ent');		// Librairie pour encoder/décoder du HTML
 var path = require('path');		// Gestion des chemins d'accès aux fichiers	
 var fs = require('fs');			// Accès au système de fichier
+require('dotenv').config();
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
@@ -14,6 +15,7 @@ var meteo = require('./modules/meteo.js');
 var coiffeur = require('./modules/coiffeur.js');
 var whisper = require('./modules/whisper.js');
 var basket = require('./modules/basket.js');
+var ratio = require('./modules/ratio.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -77,6 +79,9 @@ io.sockets.on('connection', function(socket)
 
 		// Transmet le message au module Coiffeur
 		coiffeur.handleCoiffeur(io, socket, message);
+
+		// Transmet le message au module ratio
+		ratio.handleMessage(io, socket, message);
 
 	});
 
