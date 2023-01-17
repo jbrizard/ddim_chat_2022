@@ -52,6 +52,7 @@ function init()
 {
     const messageInput = document.querySelector('#message-input');
     messageInput.addEventListener('keydown', (e) => {
+        e.preventDefault();
         initHistory();
         switch (e.keyCode) {
             case 38: {
