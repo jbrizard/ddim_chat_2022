@@ -32,21 +32,23 @@ function handleMessage(io,socket, message)
 
         getMeteo(lat,long).then(function (res)
         {
-            let responseMsg = '<div class="meteo_wrapper">\n' +
-                '   <div class="meteo_icon">\n' +
+            let responseMsg = '<div class="meteo-wrapper">\n' +
+                '   <div class="meteo-icon">\n' +
                 '     <img src="http://openweathermap.org/img/wn/'+res.weather[0].icon+'@2x.png" />\n' +
                 '  </div>\n' +
-                '  <div class="meteo_infos">\n' +
-                '    <span class="m_city">'+res.name+'</span>\n' +
+                '  <div class="meteo-infos">\n' +
+                '    <span class="m-city">'+res.name+'</span>\n' +
                 '    <span>'+res.weather[0].description[0].toUpperCase()+ res.weather[0].description.substring(1)+'</span>\n' +
                 '  </div>\n' +
-                '  <div class="meteo_temp">\n' +
+                '  <div class="meteo-temp">\n' +
                 '    <span>'+(Math.round(res.main?.temp) ?? '?')+'°</span>C\n' +
                 '  </div>\n' +
                 '</div>';
 
             io.sockets.emit('new_message', {name:"Météo", message:responseMsg});
-        }).catch(function (error) {
+        })
+        .catch(function (error)
+        {
             io.to(socket.id).emit('new_message', {
                 name:"Météo",
                 message:"<em>Le bot météo est indisponible pour le moment :(</em>"
@@ -55,7 +57,8 @@ function handleMessage(io,socket, message)
     });
 }
 
-async function getCityLatLong(city) {
+async function getCityLatLong(city)
+{
     const res = await axios.get('https://nominatim.openstreetmap.org/search', {
         params: {
             city: city,
@@ -65,7 +68,8 @@ async function getCityLatLong(city) {
     return await res.data;
 }
 
-async function getMeteo(lat, long) {
+async function getMeteo(lat, long)
+{
 
     const res = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
         params: {

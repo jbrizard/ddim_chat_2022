@@ -101,13 +101,14 @@ io.sockets.on('connection', function(socket)
 		coiffeur.handleCoiffeur(io, socket, message);
 	});
 
-	socket.on("disconnect", function() {
+	socket.on("disconnect", function()
+	{
 		users.disconnectUser(socket);
 		users.notifyUser(io, socket, users.connectionStatus.DISCONNECTED);
 	});
 
 
-// Réception d'un gif
+	// Réception d'un gif
 	socket.on('gif', function(url)
 	{
 		// Par sécurité, on encode les caractères spéciaux
@@ -123,7 +124,8 @@ io.sockets.on('connection', function(socket)
 		// Par sécurité, on encode les caractères spéciaux
 		search = ent.encode(search);
 
-		gifs.handleGif(search, offset).then(function (res) {
+		gifs.handleGif(search, offset).then(function (res)
+		{
 			// Transmet le message à l'utilisateur
 			io.to(socket.id).emit('results_search_gifs', {gifs:res, offset:offset});
 		});
@@ -133,7 +135,8 @@ io.sockets.on('connection', function(socket)
 	// Démarrage de la récupération des gifs trending et renvoi du résultat au client
 	socket.on('trending_gifs', function()
 	{
-		gifs.handleTrendingGif().then(function (res) {
+		gifs.handleTrendingGif().then(function (res)
+		{
 			// Transmet le message à l'utilisateur
 			io.to(socket.id).emit('results_search_gifs', {gifs:res});
 		});

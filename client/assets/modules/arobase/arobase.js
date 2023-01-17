@@ -1,7 +1,11 @@
 let arobasing = false;
 
-$('#message-input').on('keyup',function(event) {
-    switch (event.which) {
+// Quand un texte est écrit dans le champ de message
+$('#message-input').on('keyup', function(event)
+{
+    // Si la touche est [Tab, Up, Down]
+    switch (event.which)
+    {
         case 38:
         case 40:
         case 9:
@@ -11,6 +15,7 @@ $('#message-input').on('keyup',function(event) {
     let val = $('#message-input').val();
     let split = val.split(" ");
 
+    // Si le dernier char est un espace, on ne cache le popover
     if (arobasing && (val.charAt(val.length-1) === " "))
     {
         $('.arobase-wrapper').hide();
@@ -18,6 +23,7 @@ $('#message-input').on('keyup',function(event) {
         return;
     }
 
+    // Si le dernier mot est pas un @, on cache le popover
     if (!split[split.length-1].startsWith('@'))
     {
         $('.arobase-wrapper').hide();
@@ -41,14 +47,18 @@ $('#message-input').on('keyup',function(event) {
         }
     });
 
+    // On trie les utilisateurs par ordre alphabétique
     usersToShow.sort(function (a,b){
         a = a.name.toUpperCase();
         b = b.name.toUpperCase();
         return (a < b) ? -1 : (a > b) ? 1 : 0;
     })
 
+    // On ajoute les utilisateurs à la liste en ne prenant que les 5 premiers
     usersToShow.slice(0,5).forEach(function (user,index){
         var el = $('<li></li>');
+
+        // On active le premier élément de la liste
         if(index===0)
             el.addClass('active');
 
@@ -56,19 +66,26 @@ $('#message-input').on('keyup',function(event) {
         $('#arobase-list').append(el);
     })
 
+    // Si la liste est vide, on affiche un message
     if(usersToShow.length === 0)
         $('#arobase-list').append($('<span>Personne ici !</span>'));
 
+    // On affiche le popover
     $('.arobase-wrapper').show();
 
 });
 
-$(document).on('keydown',function(event) {
+// Quand on appuie sur une touche
+$(document).on('keydown',function(event)
+{
+
+    // Si on est pas en train de faire un @, on ne fait rien
     if (!arobasing)
         return;
 
     // When pressing ARROW UP
-    if (event.which === 38){
+    if (event.which === 38)
+    {
         event.preventDefault();
 
         //up
@@ -84,6 +101,7 @@ $(document).on('keydown',function(event) {
         }
 
     }
+
     // When pressing ARROW DOWN
     else if (event.which === 40)
     {
@@ -102,6 +120,7 @@ $(document).on('keydown',function(event) {
         }
 
     }
+
     // When pressing TAB
     else if (event.which === 9)
     {
@@ -113,7 +132,5 @@ $(document).on('keydown',function(event) {
         split[split.length-1] = "@"+$('#arobase-list li.active').text();
 
         $('#message-input').val(split.join(' '));
-
-
     }
 });

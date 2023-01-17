@@ -40,7 +40,8 @@ function getSocketId(name, users)
     if (name[0] === '@')
         name = name.substring(1);
 
-    for (const [key, user] of Object.entries(users)) {
+    for (const [key, user] of Object.entries(users))
+    {
         if (user.name === name)
             return key
     }

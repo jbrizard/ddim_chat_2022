@@ -23,11 +23,13 @@ socket.on('notify_user', notifyUser);
 socket.on('get_messages_history', getMessagesHistory);
 
 // Gestion des événements diffusés par le serveur
-socket.on('new_emote_wall', () => {
+socket.on('new_emote_wall', () =>
+{
 	const emoteList = [];
 	const nbEmotes = Math.random() * 100;
 
-	for (let i = 0; i < nbEmotes; i++) {
+	for (let i = 0; i < nbEmotes; i++)
+	{
 		const startTop = document.body.clientHeight;
 		const startLeft = Math.random() * document.body.clientWidth;
 		const emoteUrlNumber = Math.ceil(Math.random() * 3);
@@ -52,19 +54,21 @@ socket.on('new_emote_wall', () => {
 	}
 
 	const body = $('body');
-	for (const emote of emoteList) {
+	for (const emote of emoteList)
+	{
 		body.append(emote);
 	}
 
 	const emoteListElements = Array.from(document.querySelectorAll('.emote-wall-unit'));
-	console.dir(emoteListElements)
-	for (const emote of emoteListElements) {
+	for (const emote of emoteListElements)
+	{
 		const endLeft = Math.random() * document.body.clientWidth;
 		const endTop = Math.random() * document.body.clientHeight * 2;
 		emote.style.transform = `translate(-${endLeft}px, -${endTop}px)`;
 		emote.style.opacity = '0';
 
-		setTimeout(() => {
+		setTimeout(() =>
+		{
 			$(emote).remove();
 		}, 5000);
 	}
@@ -110,11 +114,13 @@ function sendMessage()
 function receiveMessage(data)
 {	
 	const isCurrentNotExcluded = (!data?.excludedUsers?.includes(socket.id) ?? true); //client courrant n'est pas dans la liste d'exclusion
-	if (isCurrentNotExcluded) {
+	if (isCurrentNotExcluded)
+	{
 
 		//switch type
 		let finalMessageElement = '';
-		switch(data.type) {
+		switch(data.type)
+		{
 			case 'message': break;
 			case 'message': /*To implement; */ break;
 			case 'info': finalMessageElement = renderInfoMessage(data); break;
@@ -140,7 +146,8 @@ function renderMessage(data)
 		var audio = new Audio('sounds/wizz.mp3');
 		audio.play();
 		$('body').addClass('shaking');
-		setTimeout(function(){
+		setTimeout(function()
+		{
 			$('body').removeClass('shaking');
 		},1600);
 	}
@@ -216,7 +223,8 @@ function getMessagesHistory(messages)
 {
 	// on vide le html correspondant à la liste des messages
 	$('#chat #messages').empty();
-	for (const m of messages) {
+	for (const m of messages)
+	{
 		$('#chat #messages').append(renderMessage(m)).scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur	
 	}
 }

@@ -1,4 +1,4 @@
-.meteo_wrapper
+.meteo-wrapper
 {
     display: flex;
     width: 100%;
@@ -12,27 +12,27 @@
     justify-content: space-around;
 
 }
-.meteo_icon img
+.meteo-icon img
 {
     filter: drop-shadow(0 0 0.75rem rgba(0,0,0,.3));
 }
-.meteo_infos
+.meteo-infos
 {
     margin-right: 1.5rem;
     display:flex;
     flex-direction:column;
 }
-.meteo_infos .m_city
+.meteo-infos .m-city
 {
     font-size: 1.7rem;
     line-height: 100%;
 }
-.meteo_temp
+.meteo-temp
 {
     font-weight: bold;
     font-size:1.8rem;
 }
-.meteo_temp span
+.meteo-temp span
 {
     font-size: 3rem;
     font-weight: normal;

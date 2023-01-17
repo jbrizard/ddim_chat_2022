@@ -10,13 +10,17 @@ $('#send-gif').click(function(event)
     }
 });
 
-$('#tooltip-body').on('scroll', function (event) {
+// Quand on scroll dans le popover de gifs
+$('#tooltip-body').on('scroll', function (event)
+{
     const scrolltop = $('#tooltip-body').scrollTop();
     const height = $('.tooltip-content').eq(0).height();
     const heightView = $('#tooltip-body').height();
     const limit = parseInt(height) - (2 * (parseInt(heightView)));
 
-    if (scrolltop >= limit) {
+    // Si on a scroll bas, on load les gifs suivants
+    if (scrolltop >= limit)
+    {
         offset++;
         socket.emit('search_gifs', $('#search-gif').val(), offset);
     }
@@ -51,7 +55,8 @@ let sizeRight = 0.0;
 let offset = 0;
 function hydrateGifs(gifs)
 {
-    if (gifs['offset'] == 0) {
+    if (gifs['offset'] == 0)
+    {
         sizeLeft = 0;
         sizeRight = 0;
         offset = 0;
