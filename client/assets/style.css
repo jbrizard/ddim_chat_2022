@@ -41,6 +41,7 @@ h1 {
 	text-align: left;
 }
 #messages .message {
+	position: relative;
 	padding:4px 20px;
 }
 #messages .message:nth-child(2n) {
@@ -128,4 +129,28 @@ h1 {
         text-align: left;
         box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
         border-radius: 3px;
+}
+
+
+/*Etat du dernier message*/
+
+#message-viewed {
+	position: absolute;
+	display: none;
+	justify-content: end;
+	width: 90%;
+}
+
+#message-viewed img {
+	width: 20px;
+}
+
+/*Personne ayant vu le message*/
+
+#who-viewed {
+	display: flex;
+    justify-content: end;
+    font-size: 1vh;
+    flex-flow: column;
+    padding: 5px;
 }

@@ -14,3 +14,13 @@ function announceUser(data)
         .scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 
 }
+
+/**
+ * Vérifie si l'utilisateur en cours est en focus sur le chat 
+ */
+setInterval(checkFocus, 2000);
+function checkFocus(){
+    if (document.hasFocus()) {
+        socket.emit('user_has_focus');
+    }
+}

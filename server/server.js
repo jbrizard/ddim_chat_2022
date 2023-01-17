@@ -17,6 +17,10 @@ var server = http.createServer(app);
 // Initialisation du websocket
 var io = ioLib.listen(server)
 
+
+// Variable qui stock le dernier utilisateur ayant envoyé un message
+var lastMessageUser= null;
+
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)
 {
@@ -38,6 +42,9 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message au module UserInteraction (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		userInteraction.announceUser(socket, name);
 	});
+
+    // Transmet le statut du message au module UserInteraction (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+    
 	
 	// Réception d'un message
 	socket.on('message', function(message)
@@ -50,7 +57,22 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+
+		// Enregistre le dernier utilisateur ayant envoyé un message
+		lastMessageUser = socket;
 	});
+	
+
+	// Réception d'un focus
+	socket.on('user_has_focus', function()
+	{
+		// Vérifie si un autre utilisateur (différent du dernier utlisateur) est en focus sur le chat
+		if (lastMessageUser != socket && lastMessageUser != null)
+		{
+			// Informe les autres utilisateurs (sauf celui qui a le focus ) que le dernier message a été vu
+			socket.broadcast.emit('last_message_viewed', {name:socket.name});
+		}
+	})
 });
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)

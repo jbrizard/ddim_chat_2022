@@ -41,6 +41,8 @@ function sendMessage()
 	
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
+
+	$('#message-viewed').hide();
 }
 
 /**
@@ -53,6 +55,19 @@ function receiveMessage(data)
 			+ '<span class="user">' + data.name  + '</span> ' 
 			+ data.message 
 	     + '</div>'
-	)
-	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+	);
+
+	$('#chat #messages').scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+}
+
+/**
+ * Affichage du check et du nom de la personne ayant vu le dernier message
+ */
+socket.on('last_message_viewed', lastMessageViewed);
+
+function lastMessageViewed(data)
+{
+	$('#message-viewed').css("display", "flex").appendTo(".message:last");
+	$('#who-viewed').text("vu par " + data.name);
+
 }
