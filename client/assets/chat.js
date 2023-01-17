@@ -1,10 +1,6 @@
-// Connexion au socket
+﻿// Connexion au socket
 var socket = io.connect(':8090');
 let usersList = [];
-
-module.exports = {
-    socket: socket,
-}
 
 if (typeof(localStorage.user_name) == 'undefined')
 {
