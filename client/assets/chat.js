@@ -77,7 +77,12 @@ $('#upload-avatar').change(previewFile);
 $('#message-input').keyup(function(evt)
 {
 	if (evt.keyCode === 13) // 13 = touche Entrée
+	//L'utilisateur est en train d'écrire
+	socket.emit('new_user_tiping', name);
+
+	if (evt.keyCode == 13) // 13 = touche Entrée
 		sendMessage();
+
 });
 
 $('#pseudo').keyup(function(evt)
@@ -117,7 +122,10 @@ function sendMessage()
 	var input = $('#message-input');
 	var message = input.val();	
 	input.val('');
-	
+	if ($("#upload")[0].files[0])
+	{
+		sendFile ()
+	}
 	// On n'envoie pas un message vide
 	if (message == '')
 		return;
@@ -125,6 +133,8 @@ function sendMessage()
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
 	hydrateLocalHistory(message);
+	$('#message-viewed').hide();
+
 }
 
 function register()
@@ -190,6 +200,8 @@ function previewFile()
  */
 function receiveMessage(data)
 {
+	clearUserWriting()
+
 	if(data.avatar === undefined){
 		data.avatar = "<img src='/modules/avatar/default.svg' alt='default avatar' width='30px'>";
 	}

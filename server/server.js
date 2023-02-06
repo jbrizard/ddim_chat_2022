@@ -28,6 +28,8 @@ var tenor = require('./modules/tenor.js');
 var ratio = require('./modules/ratio.js');
 var sondage = require('./modules/sondage.js');
 var chatGPT = require('./modules/chatgpt.js');
+var userInteraction = require('./modules/userInteraction.js');
+var uploadFile = require('./modules/uploadFile.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -35,6 +37,10 @@ var server = http.createServer(app);
 
 // Initialisation du websocket
 var io = ioLib.listen(server);
+
+
+// Variable qui stock le dernier utilisateur ayant envoyé un message
+var lastMessageUser= null;
 
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)
@@ -55,7 +61,7 @@ io.sockets.on('connection', function(socket)
 	basket.addClient(socket);
 
 	// Arrivée d'un utilisateur
-	socket.on('user_enter', function(name, avatarId)
+	socket.on('user_enter', function(name)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
@@ -67,7 +73,14 @@ io.sockets.on('connection', function(socket)
 
 		//Appelle l'historique des messages
 		messagesHistory.getAllMessages(io.sockets);
+
+		// Transmet le message au module UserInteraction (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		userInteraction.announceUser(socket, name);
 	});
+
+
+    // Transmet le statut du message au module UserInteraction (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+
 
 	// Réception d'un message
 	socket.on('message', function(message)
@@ -137,6 +150,8 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message au module ChatGPT
 		chatGPT.handleMessage(io, message);
 
+		// Enregistre le dernier utilisateur ayant envoyé un message
+		lastMessageUser = socket;
 	});
 
 	// Réception du message konami
@@ -151,6 +166,33 @@ io.sockets.on('connection', function(socket)
 	{
 		// suppression de l'historique
 		messagesHistory.emptyHistory();
+	});
+
+	// Réception d'un focus
+	socket.on('user_has_focus', function()
+	{
+		// Vérifie si un autre utilisateur (différent du dernier utlisateur) est en focus sur le chat
+		if (lastMessageUser !== socket && lastMessageUser != null)
+		{
+			// Informe les autres utilisateurs (sauf celui qui a le focus ) que le dernier message a été vu
+			socket.broadcast.emit('last_message_viewed', {name:socket.name});
+		}
+	})
+
+	//Utilisateur en train d'écrire
+	socket.on('new_user_tiping', function(name)
+	{
+		// Stocke le nom de l'utilisateur dans l'objet socket
+		socket.name = name;
+
+		// Transmet le nom au module UserInteraction
+		userInteraction.userIsWriting(socket, name);
+	});
+	//Nouvelle envoie de fichier
+	socket.on('file', function(file, name, type, user)
+	{
+		// Transmet les différentes variables au module uploadFile
+		uploadFile.sendFile(io, file, name, user)
 	});
 
 	socket.on("disconnect", function()

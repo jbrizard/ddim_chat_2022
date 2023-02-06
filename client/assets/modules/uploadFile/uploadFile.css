@@ -1,0 +1,78 @@
+#upload {
+    visibility: hidden;
+}
+.upload-button {
+    width: 24px;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    margin: -0.5rem 2rem 0 -10rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: rgba(100, 100, 111, 0.8) 0px 7px 29px 0px;
+}
+.uploaded-file {
+    z-index: 10;
+    position: absolute;
+    display: none;
+    top: 56%;
+    margin-left: 1rem;
+    border-radius: 1rem;
+    width: 16rem;
+    height: 16rem;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.uploaded-file img {
+    margin: 2rem;
+    object-fit: cover;
+    max-width: 12rem;
+    height: fit-content;
+    max-height: 12rem;
+}
+.delete-file {
+    position: absolute;
+    top: 4%;
+    left: 85%;
+}
+#file-name {
+    font-size: 1rem;
+    position: absolute;
+    top: 90%;
+    left: 7%;
+}
+.image-message {
+    width: 16rem;
+    height: 16rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.image-message img {
+    margin: 2rem;
+    object-fit: cover;
+    max-width: 12rem;
+    height: fit-content;
+    max-height: 12rem;
+}
+.file-message {
+    display: flex;
+    height: 8rem;
+}
+.file-message img{
+    height: 8rem;
+}
+.file-message .download {
+    display: flex;
+    flex-direction: column;
+}
+.file-message .download a {
+    margin-top: 1rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    text-decoration: none;
+}
+
