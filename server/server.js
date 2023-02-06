@@ -36,10 +36,22 @@ var server = http.createServer(app);
 // Initialisation du websocket
 var io = ioLib.listen(server);
 
+app.get('/', function(req, res){
+	res.sendFile(path.resolve(__dirname + '/../client/home.html'));
+});
+
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
-app.get('/', function(req, res)
+app.get('/chat', function(req, res)
 {
 	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
+});
+
+app.get('/contact', function(req, res){
+	res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
+});
+
+app.post('/contact', function(req, res){
+	// Process
 });
 
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
