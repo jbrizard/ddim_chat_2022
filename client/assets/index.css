@@ -14,10 +14,9 @@ body {
 }
 
 .logo {
-    position: relative;
-    top: -50%;
-
     width: 50px;
+
+    transform: translateY(50%);
 }
 
 .redirectContainer {
