@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	
+		<title>Chat</title>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>	<!-- fichier injecté par NodeJS -->
 		
@@ -100,9 +100,13 @@
 		</div>
 	</div>
 	<!-- fin fenêtre -->
-
+	<div class="menu">
 		<h1>Le Chat !</h1>
-		
+		<div class="btMenu">
+			<button type="button" onclick="fonctionAccueil()">Accueil</button>
+    		<button type="button" onclick="fonctionContact()">Contact</button>
+		</div>
+	</div>	
 		<div id="chat">
 			<div id="messages">
 				
@@ -135,3 +139,12 @@
 		<script type="text/javascript" src="chat.js"></script>
 	</body>
 </html>
+
+<script>
+	function fonctionAccueil(){
+		document.location.href="http://localhost:8090/"; 
+    }
+    function fonctionContact(){
+        document.location.href="http://localhost:8090/contact";
+    }
+</script>

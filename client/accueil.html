@@ -4,6 +4,48 @@
     <title>Accueil</title>
 </head>
 <body>
-<h1>Accuei</h1>
+<h1>Accueil</h1>
+<div>
+    <p>logo à venir</p>
+    <img/>
+</div>
+<div class="bt">
+    <button type="button" onclick="fonctionChat()">Chat</button>
+    <button type="button" onclick="fonctionContact()">Contact</button>
+</div>
 </body>
 </html>
+
+<script>
+    function fonctionChat(){
+        document.location.href="http://localhost:8090/chat"; 
+    }
+    function fonctionContact(){
+        document.location.href="http://localhost:8090/contact";
+    }
+</script>
+
+<style>
+    .bt{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    body{
+        background:rgb(197, 197, 197);
+    }
+    h1, p{
+        text-align: center;
+    }
+    h1{
+        font-size: 50px;
+    }
+    button{
+        background-color: black;
+        color: azure;
+        margin: 10px;
+        padding: 10px;
+        font-size: 30px;
+        cursor: pointer;
+    }
+</style>
