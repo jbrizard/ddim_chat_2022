@@ -10,6 +10,9 @@ var fs = require('fs');			// Accès au système de fichier
 var daffy = require('./modules/daffy.js');
 var userInteraction = require('./modules/userInteraction.js');
 
+// Initialise le tableau des users qui ont vu le dernier message
+var names = [];
+
 // Initialisation du serveur HTTP
 var app = express();
 var server = http.createServer(app);
@@ -60,6 +63,9 @@ io.sockets.on('connection', function(socket)
 
 		// Enregistre le dernier utilisateur ayant envoyé un message
 		lastMessageUser = socket;
+
+		// Vide le tableau des users ayant vu le dernier message
+		names = [];
 	});
 	
 
@@ -69,8 +75,13 @@ io.sockets.on('connection', function(socket)
 		// Vérifie si un autre utilisateur (différent du dernier utlisateur) est en focus sur le chat
 		if (lastMessageUser != socket && lastMessageUser != null)
 		{
+			// Ajoute le user en cours (=socket.name) a un tableau pour enregistrer tous ceux qui ont vu le dernier message
+			if(names.includes(socket.name) == false){ // vérifie que l'user n'est pas déja dans le tableau
+				names.push(socket.name);
+			}
+			
 			// Informe les autres utilisateurs (sauf celui qui a le focus ) que le dernier message a été vu
-			socket.broadcast.emit('last_message_viewed', {name:socket.name});
+			socket.broadcast.emit('last_message_viewed', {names:names});
 		}
 	})
 
@@ -86,4 +97,4 @@ io.sockets.on('connection', function(socket)
 });
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)
-server.listen(8080);
+server.listen(8090);

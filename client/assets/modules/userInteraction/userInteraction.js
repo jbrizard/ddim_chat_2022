@@ -2,6 +2,8 @@
 var timeoutHandle ;
 socket.on('announce_user', announceUser);
 socket.on('user_tiping', userWriting);
+socket.on('last_message_viewed', lastMessageViewed);
+
 /**
  * Enleve les noms d'utilisateur et cache le message
  */
@@ -28,11 +30,25 @@ function announceUser(data)
 }
 
 /**
+ * Affichage du check et du nom de la personne ayant vu le dernier message
+ */
+ function lastMessageViewed(data)
+ {
+     $('#message-viewed').css("display", "flex").appendTo(".message:last");
+     // data.name devient data.names
+     // il faut parcourir le tableau et l'afficher après "vu par..." (voir méthode join()...)
+     $('#who-viewed').text("vu par " + data.names.join());
+ 
+ }
+
+/**
  * Vérifie si l'utilisateur en cours est en focus sur le chat 
  */
 setInterval(checkFocus, 2000);
-function checkFocus(){
-    if (document.hasFocus()) {
+function checkFocus()
+{
+    if (document.hasFocus())
+    {
         socket.emit('user_has_focus');
     }
 }

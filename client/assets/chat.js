@@ -1,5 +1,5 @@
 ﻿// Connexion au socket
-var socket = io.connect(':8080');
+var socket = io.connect(':8090');
 
 // Demande un pseudo et envoie l'info au serveur
 var name = prompt('Quel est votre pseudo ?');
@@ -63,16 +63,4 @@ function receiveMessage(data)
 	);
 
 	$('#chat #messages').scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
-}
-
-/**
- * Affichage du check et du nom de la personne ayant vu le dernier message
- */
-socket.on('last_message_viewed', lastMessageViewed);
-
-function lastMessageViewed(data)
-{
-	$('#message-viewed').css("display", "flex").appendTo(".message:last");
-	$('#who-viewed').text("vu par " + data.name);
-
 }
