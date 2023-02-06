@@ -9,26 +9,55 @@
 		
 		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="/modules/daffy/daffy.css" />
+		<link rel="stylesheet" href="/modules/uploadFile/uploadFile.css" />
 	</head>
 	
 	<body>
 		<h1>Le Chat !</h1>
-		
 		<div id="chat">
-			
+			<label for="upload" class="upload-button">
+				<span class="svg-icon svg-icon-primary svg-icon-2x">
+					<svg  width="24px" height="24px" viewBox="0 0 24 24" >
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<rect x="0" y="0" width="24" height="24"/>
+							<path d="M2,13 C2,12.5 2.5,12 3,12 C3.5,12 4,12.5 4,13 C4,13.3333333 4,15 4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 C2,15 2,13.3333333 2,13 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+							<rect fill="#000000" opacity="0.3" x="11" y="2" width="2" height="14" rx="1"/>
+							<path d="M12.0362375,3.37797611 L7.70710678,7.70710678 C7.31658249,8.09763107 6.68341751,8.09763107 6.29289322,7.70710678 C5.90236893,7.31658249 5.90236893,6.68341751 6.29289322,6.29289322 L11.2928932,1.29289322 C11.6689749,0.916811528 12.2736364,0.900910387 12.6689647,1.25670585 L17.6689647,5.75670585 C18.0794748,6.12616487 18.1127532,6.75845471 17.7432941,7.16896473 C17.3738351,7.57947475 16.7415453,7.61275317 16.3310353,7.24329415 L12.0362375,3.37797611 Z" fill="#000000" fill-rule="nonzero"/>
+						</g>
+					</svg>
+				</span>
+			</label>
+			<input type="file"
+				   id="upload" name="upload"
+				   onchange="newUploadedFile(this)"
+			>
+			<div class="uploaded-file" id="upload-file">
+				<span id="file-name"></span>
+				<span class="delete-file" id="delete-file" onclick="deleteFile()">
+						<svg width="32px" height="32px" viewBox="0 0 24 24">
+							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<rect x="0" y="0" width="24" height="24"/>
+								<path d="M6,8 L18,8 L17.106535,19.6150447 C17.04642,20.3965405 16.3947578,21 15.6109533,21 L8.38904671,21 C7.60524225,21 6.95358004,20.3965405 6.89346498,19.6150447 L6,8 Z M8,10 L8.45438229,14.0894406 L15.5517885,14.0339036 L16,10 L8,10 Z" fill="#DC4E4E" fill-rule="nonzero"/>
+								<path d="M14,4.5 L14,3.5 C14,3.22385763 13.7761424,3 13.5,3 L10.5,3 C10.2238576,3 10,3.22385763 10,3.5 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#DC4E4E" opacity="0.3"/>
+							</g>
+						</svg>
+					</span>
+				<img id="upload-preview" src="#" alt="uploaded file"/>
+			</div>
 			<div id="messages">
+
 				<div id="message-viewed">
 					<img src="check.png" alt="check_icon">
 					<span id="who-viewed"></span>
 				</div>
-			
+
 				<div id="user-writing" class="user-writing d-flex flex-row">
 					<div id="list-user-writing" class="d-flex flex-row"></div>
 
 					<span>is typing</span>
 					<div class="dot-typing"></div>
 				</div>
-                        
+
 
 			</div>
 			<div id="tools">
@@ -48,5 +77,6 @@
                 
 		<script type="text/javascript" src="chat.js"></script>
 		<script type="text/javascript" src="modules/userInteraction/userInteraction.js"></script>
+		<script type="text/javascript" src="modules/uploadFile/uploadFile.js"></script>
 	</body>
 </html>

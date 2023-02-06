@@ -38,15 +38,18 @@ function sendMessage()
 	var input = $('#message-input');
 	var message = input.val();	
 	input.val('');
-	
+	if ($("#upload")[0].files[0])
+	{
+		sendFile ()
+	}
 	// On n'envoie pas un message vide
 	if (message == '')
 		return;
 	
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
-
 	$('#message-viewed').hide();
+
 }
 
 /**

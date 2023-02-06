@@ -9,6 +9,7 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var userInteraction = require('./modules/userInteraction.js');
+var uploadFile = require('./modules/uploadFile.js');
 
 // Initialise le tableau des users qui ont vu le dernier message
 var names = [];
@@ -93,6 +94,12 @@ io.sockets.on('connection', function(socket)
 
 		// Transmet le nom au module UserInteraction
 		userInteraction.userIsWriting(socket, name);
+	});
+	//Nouvelle envoie de fichier
+	socket.on('file', function(file, name, type, user)
+	{
+		// Transmet les différentes variables au module uploadFile
+		uploadFile.sendFile(io, file, name, user)
 	});
 });
 

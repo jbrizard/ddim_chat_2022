@@ -87,3 +87,14 @@ function userWriting(data)
     // Démarrer un compte à rebours qui cachera le message si pas de nouvelle activité
     timeoutHandle = window.setTimeout(clearUserWriting,1000);
 }
+
+/**
+ * Affichage du check et du nom de la personne ayant vu le dernier message
+ */
+function lastMessageViewed(data)
+{
+    console.log("aaaaa")
+    $('#message-viewed').css("display", "flex").appendTo(".message:last");
+    $('#who-viewed').text("vu par " + data.name);
+
+}
