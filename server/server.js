@@ -61,7 +61,7 @@ io.sockets.on('connection', function(socket)
 	basket.addClient(socket);
 
 	// Arrivée d'un utilisateur
-	socket.on('user_enter', function(name)
+	socket.on('user_enter', function(name, avatarId)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
