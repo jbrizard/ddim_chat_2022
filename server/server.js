@@ -25,6 +25,11 @@ app.get('/', function(req, res)
 	res.sendFile(path.resolve(__dirname + '/../client/accueil.html'));
 });
 
+app.get('/home', function(req, res)
+{
+	res.sendFile(path.resolve(__dirname + '/../client/accueil.html'));
+});
+
 app.get('/contact', function(req, res)
 {
 	res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
