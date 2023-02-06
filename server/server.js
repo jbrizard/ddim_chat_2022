@@ -10,6 +10,7 @@ var fs = require('fs');			// Accès au système de fichier
 var daffy = require('./modules/daffy.js');
 var basket = require('./modules/basket.js');
 const rainbow = require('./modules/rainbow.js');
+const smiley = require('./modules/smiley.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -48,6 +49,8 @@ io.sockets.on('connection', function(socket)
 	{
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
+
+		message = smiley.handleSmiley(io, message);
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message});

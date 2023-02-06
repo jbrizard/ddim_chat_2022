@@ -7,7 +7,7 @@ socket.emit('user_enter', name);
 
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
-socket.on('change_background', changeBackground)
+socket.on('change_background', changeBackground);
 
 // Action quand on clique sur le bouton "Envoyer"
 $('#send-message').click(sendMessage);
@@ -68,4 +68,6 @@ function changeBackground()
 	}, 2000);
 
 }
+
+
 
