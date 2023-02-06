@@ -22,10 +22,47 @@ var server = http.createServer(app);
 var io = ioLib.listen(server);
 
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
-app.get('/', function(req, res)
-{
-	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
-});
+app.route('/')
+	.get(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/index.html'));
+	})
+	.post(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/index.html'));
+	})
+	.put(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/index.html'));
+	});
+
+app.route('/chat')
+	.get(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
+	})
+	.post(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
+	})
+	.put(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
+	});
+
+app.route('/contact')
+	.get(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
+	})
+	.post(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
+	})
+	.put(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
+	});
 
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
