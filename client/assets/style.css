@@ -14,6 +14,8 @@ body {
 	/*font-family:Arial;
 	font-family: 'Coustard', serif;*/
 	font-family: 'Roboto', Arial, sans-serif;
+	background: url("images/background.jpg") no-repeat center center fixed;
+	background-size: cover;
 }
 
 h1 {

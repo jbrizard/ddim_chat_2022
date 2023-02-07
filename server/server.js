@@ -27,7 +27,6 @@ var youtubemusic = require('./modules/music_player.js');
 var tenor = require('./modules/tenor.js');
 var ratio = require('./modules/ratio.js');
 var sondage = require('./modules/sondage.js');
-var chatGPT = require('./modules/chatgpt.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -145,9 +144,6 @@ io.sockets.on('connection', function(socket)
 
 		// Transmet le message au module ratio
 		ratio.handleMessage(io, socket, message);
-
-		// Transmet le message au module ChatGPT
-		chatGPT.handleMessage(io, message);
 
 	});
 

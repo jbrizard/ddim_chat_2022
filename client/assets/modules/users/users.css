@@ -7,11 +7,15 @@
 	padding:30px;
 	background:#fff;
 	border-radius:14px;
-	box-shadow:0px 0px 20px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px #000;
+    background: rgba( 255, 255, 255, 0.2 );
+	backdrop-filter: blur( 4px );
+	-webkit-backdrop-filter: blur( 4px );
 }
 
 #users h2 {
 	margin: 0;
+	color: #fff;
 }
 
 #user-list {

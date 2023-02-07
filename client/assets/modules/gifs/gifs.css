@@ -4,6 +4,9 @@
 }
 #send-gif {
     position: relative;
+    box-shadow: 0 0 10px #000;
+	backdrop-filter: blur( 4px );
+	-webkit-backdrop-filter: blur( 4px );
 }
 #send-gif svg {
     pointer-events: none;

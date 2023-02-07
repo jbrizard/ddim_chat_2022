@@ -1,20 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de contact</title>
+	<link rel="stylesheet" href="style-form.css" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-    <form>
-        <label for="name">Pseudo</label>
-        <input type="text" name="name" id="name" placeholder="Votre nom" required>
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="Votre email" required>
-        <label for="message">Message</label>
-        <textarea name="message" id="message" cols="30" rows="10" placeholder="Votre message" required></textarea>
-        <input type="submit" value="Envoyer">
-    </form>
+
+<div class="container">
+<div class="row">
+<div class="col-sm-4">
+<h3>Contactez l'équipe du chat ici!</h3>
+<hr>
+<address>
+<p><strong>Email:</strong> chat@equipeddim.fr</p>
+</address>
+</div>
+    
+    <div class="col-sm-8 contact-form">
+        <form id="contact" method="post" class="form" role="form">
+            <div class="row">
+                <div class="col-xs-6 col-md-6 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required autofocus />
+                </div>
+                <div class="col-xs-6 col-md-6 form-group">
+                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
+                </div>
+            </div>
+            <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-md-12 form-group">
+                    <button class="btn btn-primary pull-right" type="submit">Submit</button>
+                    <a class="btn btn-primary" href="/">Retour à l'accueil</a>
+        </form>
+    </div>
+</div>
 </body>
 </html>
