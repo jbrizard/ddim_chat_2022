@@ -28,6 +28,10 @@ var youtubemusic = require('./modules/music_player.js');
 var tenor = require('./modules/tenor.js');
 var ratio = require('./modules/ratio.js');
 var sondage = require('./modules/sondage.js');
+var chatGPT = require('./modules/chatgpt.js');
+var userInteraction = require('./modules/userInteraction.js');
+var uploadFile = require('./modules/uploadFile.js');
+var skribbl = require('./modules/skribbl.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -49,6 +53,12 @@ app.get('/', function(req, res){
 
 // Chat
 app.get('/chat', function(req, res)
+
+// Variable qui stock le dernier utilisateur ayant envoyé un message
+var lastMessageUser= null;
+
+// Traitement des requêtes HTTP (une seule route pour l'instant = racine)
+app.get('/', function(req, res)
 {
 	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
 });
@@ -109,8 +119,15 @@ io.sockets.on('connection', function(socket)
 		users.notifyUser(io, socket, users.connectionStatus.CONNECTED);
 
 		//Appelle l'historique des messages
-		messagesHistory.getAllMessages(io.sockets);
+		//messagesHistory.getAllMessages(io.sockets);
+
+		// Transmet le message au module UserInteraction (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		userInteraction.announceUser(socket, name);
 	});
+
+
+    // Transmet le statut du message au module UserInteraction (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+
 
 	// Réception d'un message
 	socket.on('message', function(message)
@@ -177,6 +194,14 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message au module ratio
 		ratio.handleMessage(io, socket, message);
 
+		// Transmet le message au module ChatGPT
+		chatGPT.handleMessage(io, message);
+
+		// Skribbl
+		skribbl.handleSkribblAnswer(io,message,{name:socket.name});
+
+		// Enregistre le dernier utilisateur ayant envoyé un message
+		lastMessageUser = socket;
 	});
 
 	// Réception du message konami
@@ -191,6 +216,33 @@ io.sockets.on('connection', function(socket)
 	{
 		// suppression de l'historique
 		messagesHistory.emptyHistory();
+	});
+
+	// Réception d'un focus
+	socket.on('user_has_focus', function()
+	{
+		// Vérifie si un autre utilisateur (différent du dernier utlisateur) est en focus sur le chat
+		if (lastMessageUser !== socket && lastMessageUser != null && socket.name != 'undefined')
+		{
+			// Informe les autres utilisateurs (sauf celui qui a le focus ) que le dernier message a été vu
+			socket.broadcast.emit('last_message_viewed', {name:socket.name});
+		}
+	})
+
+	//Utilisateur en train d'écrire
+	socket.on('new_user_tiping', function(name)
+	{
+		// Stocke le nom de l'utilisateur dans l'objet socket
+		socket.name = name;
+
+		// Transmet le nom au module UserInteraction
+		userInteraction.userIsWriting(socket, name);
+	});
+	//Nouvelle envoie de fichier
+	socket.on('file', function(file, name, type, user)
+	{
+		// Transmet les différentes variables au module uploadFile
+		uploadFile.sendFile(io, file, name, user)
 	});
 
 	socket.on("disconnect", function()
@@ -237,6 +289,35 @@ io.sockets.on('connection', function(socket)
 			io.to(socket.id).emit('results_search_gifs', {gifs:res});
 		});
 
+	});
+
+
+	// Appel de la fontion du module pour débuter le skribbl
+	socket.on('skribbl_start', function()
+	{
+		skribbl.handleSkribblStart(io,socket);
+	});
+
+	//Envoi à tous les jours : la fenêtre se ferme
+	socket.on('skribbl_close_game', function()
+	{
+		io.sockets.emit("skribble_close_window");
+	});
+
+	//Affichage en temps réel des dessins chez tous les clients
+	socket.on('skribbl_draw', function(skribblMove,skribblLine,color)
+	{
+		socket.broadcast.emit('skribbl_draw_canvas', skribblMove, skribblLine,color);
+	});
+
+	//Affichage chez tous les clients que les tracés s'effacent
+	socket.on('send_erase_canvas',function(){
+		io.sockets.emit("erase_drawings");
+	});
+
+	//Appel fonction pour stopper le jeu
+	socket.on('skribbl_send_stop_game',function(){
+		skribbl.handleSkribblStop(io);
 	});
 });
 

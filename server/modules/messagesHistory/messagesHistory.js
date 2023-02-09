@@ -46,10 +46,10 @@ function addMessageToStorage(messageToStore) {
         const json = JSON.stringify(messageList);
         fs.writeFile(__messagesListPath, json, 'utf8', () => {});
 
-        console.log(`✅  Added message to history`);
+        //console.log(`✅  Added message to history`);
     } catch (storageError) {
-        console.log('❌ Storing failed');
-        console.log(storageError);
+        //console.log('❌ Storing failed');
+        //console.log(storageError);
     }
 }
 
@@ -90,7 +90,7 @@ async function getAllMessages(sockets) {
  */
 function emptyHistory(socket) {
     // Log --
-    console.log(`✅  Emptied history`);
+    //console.log(`✅  Emptied history`);
     const json = JSON.stringify([]);
     fs.writeFile(__messagesListPath, json, 'utf8', () => {});
 }
