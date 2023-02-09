@@ -37,7 +37,8 @@ function announceUser(data)
      $('#message-viewed').css("display", "flex").appendTo(".message:last");
      // data.name devient data.names
      // il faut parcourir le tableau et l'afficher après "vu par..." (voir méthode join()...)
-     $('#who-viewed').text("vu par " + data.names.join());
+     console.log(data);
+     $('#who-viewed').text("vu par " + data.names.join(', '));
  
  }
 
@@ -86,15 +87,4 @@ function userWriting(data)
     }
     // Démarrer un compte à rebours qui cachera le message si pas de nouvelle activité
     timeoutHandle = window.setTimeout(clearUserWriting,1000);
-}
-
-/**
- * Affichage du check et du nom de la personne ayant vu le dernier message
- */
-function lastMessageViewed(data)
-{
-    console.log("aaaaa")
-    $('#message-viewed').css("display", "flex").appendTo(".message:last");
-    $('#who-viewed').text("vu par " + data.name);
-
 }
