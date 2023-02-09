@@ -22,15 +22,13 @@
 
 	height:calc(100% - 15px - 60px); /* 15px = padding-top, 60px = formulaire en dessous  */
 	width: calc(100% - (15px*2));
-	overflow-y:scroll;
+	overflow-y:auto;
 	margin-bottom:20px;
 	font-size:12px;
-	border-radius:8px;
 	border-right: solid 1px #eaeaea;
     border-bottom: solid 2px #DDD;
 	background:#eee;
 	text-align: left;
-	
 	border-radius:14px;
     box-shadow: 0 0 10px #000;
     background: rgba( 255, 255, 255, 0.2 );

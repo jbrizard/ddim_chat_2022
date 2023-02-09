@@ -76,9 +76,10 @@ app.post('/contact', async function(req, res){
 	// send mail with defined transport object
 	let info = await transporter.sendMail({
 		from: '"NodeJS" <nodejs@lucienpuget.fr>', // sender address
-		to: req.body.email??'', // list of receivers
+		to: 'ddim@yopmail.com', // list of receivers
 		subject:  req.body.name+' vous contacte !', // Subject line
 		text:  req.body.message, // plain text body
+		replyTo : req.body.email??''
 	});
 
 	res.sendFile(path.resolve(__dirname + '/../client/contact.html'));

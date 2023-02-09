@@ -20,8 +20,9 @@ p, a{
     margin-top: -150px;
     margin-left: -150px;
     /* Définit la largeur et la hauteur du conteneur */
-    width: 30vw;
-    height: 30vh;
+    max-width:600px!important;
+    width: 100%;
+
     /* Définit l'arrondi des bords */
     border-radius: 5px;
     /* Définit l'ombre portée */
