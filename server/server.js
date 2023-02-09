@@ -30,6 +30,7 @@ var sondage = require('./modules/sondage.js');
 var chatGPT = require('./modules/chatgpt.js');
 var userInteraction = require('./modules/userInteraction.js');
 var uploadFile = require('./modules/uploadFile.js');
+var skribbl = require('./modules/skribbl.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -149,6 +150,9 @@ io.sockets.on('connection', function(socket)
 
 		// Transmet le message au module ChatGPT
 		chatGPT.handleMessage(io, message);
+		
+		// Skribbl
+		skribbl.handleSkribblAnswer(io,message,{name:socket.name});
 
 		// Enregistre le dernier utilisateur ayant envoyé un message
 		lastMessageUser = socket;
@@ -239,6 +243,35 @@ io.sockets.on('connection', function(socket)
 			io.to(socket.id).emit('results_search_gifs', {gifs:res});
 		});
 
+	});
+	
+	
+	// Appel de la fontion du module pour débuter le skribbl
+	socket.on('skribbl_start', function()
+	{
+		skribbl.handleSkribblStart(io,socket);
+	});
+
+	//Envoi à tous les jours : la fenêtre se ferme
+	socket.on('skribbl_close_game', function()
+	{
+		io.sockets.emit("skribble_close_window");
+	});
+
+	//Affichage en temps réel des dessins chez tous les clients
+	socket.on('skribbl_draw', function(skribblMove,skribblLine,color)
+	{
+		socket.broadcast.emit('skribbl_draw_canvas', skribblMove, skribblLine,color);	
+	});
+
+	//Affichage chez tous les clients que les tracés s'effacent
+	socket.on('send_erase_canvas',function(){
+		io.sockets.emit("erase_drawings");
+	});
+
+	//Appel fonction pour stopper le jeu
+	socket.on('skribbl_send_stop_game',function(){
+		skribbl.handleSkribblStop(io);
 	});
 });
 

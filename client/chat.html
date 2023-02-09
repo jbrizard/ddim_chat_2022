@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="/modules/basket/basket.css" />
 	<link rel="stylesheet" href="/modules/sondage/sondage.css" />
 	<link rel="stylesheet" href="/modules/uploadFile/uploadFile.css" />
+	<link rel="stylesheet" href="/modules/skribbl/skribbl.css" />
 </head>
 
 <body>
@@ -102,6 +103,40 @@
 				</button>
 				<input type="button" id="send-message" value="Envoyer" />
 			</div>
+		</div>
+	</div>
+
+
+	<div id="skribbl">
+		<div class="skribbl">
+			<h2>Skribbl</h2>
+			<input type="button" id="start-skribbl" value="Jouer" />
+			<input type="button" id="stop-skribbl" value="Stopper le jeu " />
+			<div class="skribbl_word_box">
+				<p>Le mot à faire deviner est :</p>
+				<p id="skribbl_word"></p>
+			</div>
+			<div id="skribbl_colors">
+				<input id="skribbl_choice_color" type="color" value="#000000">
+				<img id="skribbl_bin" src="modules/skribbl/bin.png">
+			</div>
+		</div>
+
+		<div class="canva">
+			<canvas id="canvas"></canvas>
+		</div>
+
+		<div class="end_game">
+			<img src="modules/skribbl/cup.png">
+			<h2>Bravo <span class="name"></span> !</h2>
+			<img class="suppr" src="modules/skribbl/close.png">
+		</div>
+
+		<div class="timeout">
+			<img src="modules/skribbl/timeout.png">
+			<h2>Temps écoulé !</h2>
+			<p>Vous avez perdu la partie...</p>
+			<img class="suppr" src="modules/skribbl/close.png">
 		</div>
 	</div>
 
@@ -250,5 +285,6 @@
 	<script type="text/javascript" src="modules/sondage/moduleSondage.js"></script>
 	<script type="text/javascript" src="modules/userInteraction/userInteraction.js"></script>
 	<script type="text/javascript" src="modules/uploadFile/uploadFile.js"></script>
+	<script type="text/javascript" src="modules/skribbl/skribbl.js"></script>
 </body>
 </html>
