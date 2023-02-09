@@ -9,6 +9,7 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var youtube = require('./modules/youtube.js');
+var skribbl = require('./modules/skribbl.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -35,7 +36,7 @@ io.sockets.on('connection', function(socket)
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
 	});
-	
+	 
 	// Réception d'un message
 	socket.on('message', function(message)
 	{
@@ -44,11 +45,40 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message});
-		
+				
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
-		youtube.handleYoutube(io, message);
+		youtube.handleYoutube(io,message);
+		skribbl.handleSkribblAnswer(io,message,{name:socket.name});
 	});
+
+	// Appel de la fontion du module pour débuter le skribbl
+	socket.on('skribbl_start', function()
+	{
+		skribbl.handleSkribblStart(io,socket);
+	});
+
+	//Envoi à tous les jours : la fenêtre se ferme
+	socket.on('skribbl_close_game', function()
+	{
+		io.sockets.emit("skribble_close_window");
+	});
+
+	//Affichage en temps réel des dessins chez tous les clients
+	socket.on('skribbl_draw', function(skribblMove,skribblLine,color)
+	{
+		socket.broadcast.emit('skribbl_draw_canvas', skribblMove, skribblLine,color);	
+	});
+
+	//Affichage chez tous les clients que les tracés s'effacent
+	socket.on('send_erase_canvas',function(){
+		io.sockets.emit("erase_drawings");
+	})
+
+	//Appel fonction pour stopper le jeu
+	socket.on('skribbl_send_stop_game',function(){
+		skribbl.handleSkribblStop(io);
+	})	
 });
 
 // Lance le serveur sur le port 8080 (http://localhost:8080)

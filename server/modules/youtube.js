@@ -26,7 +26,7 @@ function handleYoutube(io, message)
 		//On appelle l'api youtube avec notre clé	
 		var YouTube = require('youtube-node');
 		var youTube = new YouTube();
-		youTube.setKey('AIzaSyCZvK5kMIypEi0ofdyv-TWK81ATbU3K_bE');
+		youTube.setKey('AIzaSyAT5zizzUqIxL3o0hYtA7bFOwFIqtb91O4');
 
 		//On ajoute un parametre pour ne sélectionner que des vidéos
 		youTube.addParam('type', 'video');
@@ -34,8 +34,10 @@ function handleYoutube(io, message)
 		// On effectue la recherche avec notre sujet
 		youTube.search(''+itemSubject+'', 1, function(error, result) 
 		{
-			if (error) 
-				return;
+			if (error){
+				console.log(error);
+			}
+				
 			
 			// Si non, on récupère l'id de la vidéo
 			var videoId= result["items"][0]["id"]["videoId"];

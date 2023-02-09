@@ -8,9 +8,11 @@ socket.emit('user_enter', name);
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
 
-
 // Action quand on clique sur le bouton "Envoyer"
 $('#send-message').click(sendMessage);
+
+// Action quand on clique sur le bouton "Skribble"
+$('#start-skribbl').click(sendMessage);
 
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-input').keyup(function(evt)
@@ -57,3 +59,4 @@ function receiveMessage(data)
 	)
 	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 }
+
