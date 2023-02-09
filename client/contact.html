@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Contact</title>
+</head>
+<body>
+    <div class="btMenu">
+        <button class="button-menu" type="button" onclick="fonctionAccueil()"><img class="image" src="modules/avatar/Accueil.png" alt="icone accueil" height="22">Accueil</button>
+        <button class="button-menu" type="button" onclick="fonctionChat()"><img class="image" src="modules/avatar/Chat.png" alt="icone chat" height="25">Chat</button>
+    </div>
+    <div class="content">
+
+        <!-- Equipe -->
+        <div>
+            <h1>L'Equipe</h1>
+            <div class="equipe">
+                <div class="equipe-card">
+                    <img src="modules/avatar/14.svg" alt="avatar" class="contact_avatar">
+                    <h2>Clémentine Desrucques</h2>
+                    <p>clementine.desrucques@iut-dijon.u-bourgogne.fr</p>
+                </div>
+                <div class="equipe-card">
+                    <img src="modules/avatar/8.svg" alt="avatar" class="contact_avatar">
+                    <h2>Enzo Hardouin</h2>
+                    <p>enzo.hardouin@iut-dijon.u-bourgogne.fr</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modules -->
+        <div>
+            <h1>Nos modules</h1>
+            <div>
+                <div class="module-head">
+                    <img src="modules/avatar/spiderman.svg" alt="avatar" class="module_avatar">
+                    <h2>SpiderMan</h2>
+                </div>
+                <div class="module-content">
+                    <p>Ce module répond si on l'appel (spiderman). Il détecte les mots, calcul, vol, salut. "Quitte" pour quitter.</p>
+                </div>
+            </div>
+            <div>
+                <div class="module-head">
+                    <img src="modules/avatar/default.svg" alt="avatar" class="module_avatar">
+                    <h2>Avatars</h2>
+                </div>
+                <div class="module-content">
+                    <p>Ce module se déclanche lorsqu'on va sur la page "Chat". Il permet de choisir une image (ou de l'importer) et un pseudo pour se reconnaitre entre chatteur.</p>
+                </div>
+            </div>
+            <div>
+                <div class="module-head">
+                    <img src="modules/avatar/Quizz.svg" alt="avatar" class="module_avatar">
+                    <h2>Quizz</h2>
+                </div>
+                <div class="module-content">
+                    <p>Ce module te pose des questions et t'attribut des points si tu répond correctement (quizz). Au bout de 5 questions, tu pourras voir ton résultat final. "Quitte" pour quitter.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div>
+            <h1>Une question, une suggestion, un bug ?</h1>
+            <form>
+                <div class="input-flex">
+                    <div class="input">
+                        <label for="nom">Nom<span class="label-required">*</span></label>
+                        <input type="text" name="nom" id="nom" required>
+                    </div>
+                    <div class="input">
+                        <label for="prenom">Prénom<span class="label-required">*</span></label>
+                        <input type="text" name="prenom" id="prenom" required>
+                    </div>
+                </div>
+                <div class="input">
+                    <label for="email">Email<span class="label-required">*</span></label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="input">
+                    <label for="message">Message<span class="label-required">*</span></label>
+                    <textarea name="message" id="message" cols="30" rows="10" required></textarea>
+                </div>
+                <div>
+                    <input type="submit" class="button-primary" value="Envoyer" />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function fonctionAccueil(){
+        document.location.href="/";
+    }
+    function fonctionChat(){
+        document.location.href="/chat";
+    }
+</script>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: #f1f1f1;
+    }
+    .btMenu{
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-left: 20px;
+        background-color: #555;
+        left: -40px;
+        padding: 10px;
+        padding-left: 30px;
+        border-radius: 20px;
+    }
+
+    .button-menu{
+        background-color: black;
+        color: azure;
+        margin: 10px;
+        padding: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    /* Content */
+    .content {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin: 25px auto;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    h1:after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 2px;
+        background-color: #000;
+        margin: 0 auto;
+    }
+
+    /* Equipe */
+    .equipe {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 80px;
+    }
+
+    .equipe-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact_avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* Modules */
+    .module_avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .module-head {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Form */
+    form {
+        width: 100%;
+    }
+
+    .input {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .label-required {
+        color: red;
+    }
+
+    .input-flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .button-primary {
+        display:inline-block;
+        border:solid 2px #888;
+        width: 100%;
+        padding:0 20px;
+        height:31px;
+        border-radius: 8px;
+        transition:all .4s;
+    }
+
+    input[type="text"]{
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+    input[type="email"]{
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+    .image{
+        padding-left: 5px;
+        padding-right: 7px;
+        vertical-align: middle;
+    }
+</style>
