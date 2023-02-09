@@ -5,6 +5,7 @@ var ioLib = require('socket.io');	// WebSocket
 var ent = require('ent');		// Librairie pour encoder/décoder du HTML
 var path = require('path');		// Gestion des chemins d'accès aux fichiers	
 var fs = require('fs');			// Accès au système de fichier
+var nodemailer = require("nodemailer"); // Envoi d'emails
 require('dotenv').config();
 
 // Chargement des modules perso
@@ -30,27 +31,57 @@ var sondage = require('./modules/sondage.js');
 
 // Initialisation du serveur HTTP
 var app = express();
+app.use(express.json()); // Decode json-encoded body content
+app.use(express.urlencoded({ extended: true })); // Decode url-encoded body content
 var server = http.createServer(app);
 
 // Initialisation du websocket
 var io = ioLib.listen(server);
 
+
+/**
+ * ROUTES
+ */
+// Home
 app.get('/', function(req, res){
 	res.sendFile(path.resolve(__dirname + '/../client/home.html'));
 });
 
-// Traitement des requêtes HTTP (une seule route pour l'instant = racine)
+// Chat
 app.get('/chat', function(req, res)
 {
 	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
 });
 
+// GET - Contact
 app.get('/contact', function(req, res){
 	res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
 });
 
-app.post('/contact', function(req, res){
+// POST - Contact
+app.post('/contact', async function(req, res){
 	// Process
+
+	// create reusable transporter object using the default SMTP transport
+	let transporter = nodemailer.createTransport({
+		host: "web.lucienpuget.fr",
+		port: 465,
+		secure: true, // true for 465, false for other ports
+		auth: {
+			user: 'nodejs@lucienpuget.fr', // generated ethereal user
+			pass: '76K!Pqen', // generated ethereal password
+		},
+	});
+
+	// send mail with defined transport object
+	let info = await transporter.sendMail({
+		from: '"NodeJS" <nodejs@lucienpuget.fr>', // sender address
+		to: req.body.email??'', // list of receivers
+		subject:  req.body.name+' vous contacte !', // Subject line
+		text:  req.body.message, // plain text body
+	});
+
+	res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
 });
 
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
