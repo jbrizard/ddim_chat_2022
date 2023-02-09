@@ -186,12 +186,10 @@ io.sockets.on('connection', function(socket)
 	//Utilisateur en train d'écrire
 	socket.on('new_user_tiping', function(name)
 	{
-		// Stocke le nom de l'utilisateur dans l'objet socket
-		socket.name = name;
-
 		// Transmet le nom au module UserInteraction
 		userInteraction.userIsWriting(socket, name);
 	});
+	
 	//Nouvelle envoie de fichier
 	socket.on('file', function(file, name, type, user)
 	{

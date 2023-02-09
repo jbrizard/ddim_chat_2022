@@ -44,6 +44,7 @@ function checkFocus(){
  */
 function userWriting(data)
 {
+	log('user writing');
     // Reset le compte a rebours avant de cacher le message
     window.clearTimeout(timeoutHandle);
     // Affichage du message

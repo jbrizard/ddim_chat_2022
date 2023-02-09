@@ -76,9 +76,8 @@ $('#upload-avatar').change(previewFile);
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-input').keyup(function(evt)
 {
-	if (evt.keyCode === 13) // 13 = touche Entrée
 	//L'utilisateur est en train d'écrire
-	socket.emit('new_user_tiping', name);
+	socket.emit('new_user_tiping', currentUserName);
 
 	if (evt.keyCode == 13) // 13 = touche Entrée
 		sendMessage();

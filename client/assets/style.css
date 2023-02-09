@@ -167,14 +167,8 @@ h1 {
     padding: 5px;
 }
 .user-writing {
-		position: absolute;
-		top: 86vh;
-	display: flex;
-	flex-direction: row;
-}
-.user-writing {
 	position: absolute;
-	top: 86vh;
+	top: 0vh;
 	display: none;
 	width: 100%;
 }
