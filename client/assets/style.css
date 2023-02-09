@@ -8,7 +8,7 @@ html, body {
 }
 
 body {
-	background:#888;
+	background-image: linear-gradient(to bottom right, DarkGreen, DarkSeaGreen);
 	color:#555;
 	text-align:center;
 	/*font-family:Arial;
@@ -225,19 +225,20 @@ h1 {
 	flex-direction: row;
     justify-content: flex-end;
 	margin-left: 20px;
-	background-color: #555;
+	background-color: DarkSeaGreen;
 	left: -40px;
 	padding: 10px;
 	padding-left: 30px;
 	border-radius: 20px;
 }
 .menu_button{
-	background-color: black;
+	background-color: DarkGreen;
 	color: azure;
 	margin: 10px;
 	padding: 10px;
 	font-size: 20px;
 	cursor: pointer;
+	text-decoration: none;
 }
 .image{
 	padding-left: 5px;
