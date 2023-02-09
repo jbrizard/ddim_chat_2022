@@ -63,29 +63,27 @@
         <div>
             <h1>Une question, une suggestion, un bug ?</h1>
             <div>
-                <form method="post">
-                    <div class="input-flex">
-                        <div class="input">
-                            <label for="nom">Nom<span class="label-required">*</span></label>
-                            <input type="text" name="nom" id="nom" required>
-                        </div>
-                        <div class="input">
-                            <label for="prenom">Prénom<span class="label-required">*</span></label>
-                            <input type="text" name="prenom" id="prenom" required>
-                        </div>
+                <div class="input-flex">
+                    <div class="input">
+                        <label for="nom">Nom<span class="label-required">*</span></label>
+                        <input type="text" name="nom" id="nom" required>
                     </div>
                     <div class="input">
-                        <label for="email">Email<span class="label-required">*</span></label>
-                        <input type="email" name="email" id="email" required>
+                        <label for="prenom">Prénom<span class="label-required">*</span></label>
+                        <input type="text" name="prenom" id="prenom" required>
                     </div>
-                    <div class="input">
-                        <label for="message">Message<span class="label-required">*</span></label>
-                        <textarea name="message" id="message" cols="30" rows="10" required></textarea>
-                    </div>
-                    <div>
-                        <input type="submit" value="Envoyer" class="button-primary">
-                    </div>
-                </form>
+                </div>
+                <div class="input">
+                    <label for="email">Email<span class="label-required">*</span></label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="input">
+                    <label for="message">Message<span class="label-required">*</span></label>
+                    <textarea name="message" id="message" cols="30" rows="10" required></textarea>
+                </div>
+                <div>
+                    <button type="button" class="button-primary" onclick="sendEmail()">Envoyer</button>
+                </div>
             </div>
         </div>
     </div>
@@ -93,12 +91,48 @@
 </html>
 
 <script>
+    import nodemailer from "nodemailer";
+
     function fonctionAccueil(){
         document.location.href="http://localhost:8090/";
     }
     function fonctionContact(){
         document.location.href="http://localhost:8090/contact";
     }
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'enzohardouin39@gmail.com',
+            pass: '',
+        },
+    });
+
+    const mailOptions = {
+
+        from: document.getElementById('email').value,
+        to: 'enzohardouin39@gmail.com',
+        subject: 'Contact',
+        text: '' +
+            'Nom : ' + document.getElementById('nom').value + '\n' +
+            'Prénom : ' + document.getElementById('prenom').value + '\n' +
+            'Email : ' + document.getElementById('email').value + '\n' +
+            'Message : ' + document.getElementById('message').value + '\n',
+    };
+
+    function sendEmail() {
+
+        alert('Email envoyé !');
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+    }
+
 </script>
 
 <style>
