@@ -44,9 +44,11 @@ function handleShifumi(io, message, socket)
 		socket.emit('new_message',
 		{
 			name:'Shifumi',
-			message:'<span>Vous allez lancer une partie de shifumi, qui souhaitez vous affronter ?</span>'
+			message:'Vous allez lancer une partie de shifumi, qui souhaitez vous affronter ?'
+			+'<span class=\"shifumi-choose-player\">'
 			+'<select name="gamer-choice" id="gamer-choice"> <option value="" selected disabled hidden>Choisir un adversaire</option>'
 			+ options +'</select>'
+			+'</span>'
 		});
 	}
 }
@@ -72,10 +74,12 @@ function newGame(io, playerBId, socket)
 	// Affiche 3 inputs (Pierre, Feuille, Ciseaux)
 	var shifumiChoices = {
 		name: 'Shifumi', 
-		message: '<span>Faites un choix : Pierre, Feuille ou Ciseaux ? </br>'
-		+'<input type="image" id="pierre" class="shifumi-choices" alt="pierre" value="pierre"  src="/media/shifumi/rock_1faa8.png" width="20px">'
-		+'<input type="image" id="feuille" class="shifumi-choices" alt="feuille" value="feuille" src="/media/shifumi/fallen-leaf_1f342.png" width="20px">'
-		+'<input type="image" id="ciseaux" class="shifumi-choices" alt="ciseaux" value="ciseaux" src="/media/shifumi/scissors_2702-fe0f.png" width="20px">'
+		message: '<span class=\"shifumi-options\">Faites un choix : Pierre, Feuille ou Ciseaux ? </br>'
+		+'<span>'
+		+'<input type="image" id="pierre" class="shifumi-choices" alt="pierre" value="pierre"  src="/media/shifumi/rock_1faa8.png">'
+		+'<input type="image" id="feuille" class="shifumi-choices" alt="feuille" value="feuille" src="/media/shifumi/fallen-leaf_1f342.png">'
+		+'<input type="image" id="ciseaux" class="shifumi-choices" alt="ciseaux" value="ciseaux" src="/media/shifumi/scissors_2702-fe0f.png">'
+		+'</span>'
 		+'</span>'
 	}
 	playerA.emit('new_message', shifumiChoices);
@@ -114,9 +118,9 @@ function endGame(aChoice, bChoice)
 
 	// Ecrit les messages en fonction du résultat
 	if(winner != null){
-		var resultMessage = "<span class=\"shifumi_results\"> <strong>" + playerA.name + "</strong> a joué <strong>" + aChoice + "</strong> <br> <strong>" + playerB.name + "</strong> a joué <strong>" + bChoice + "</strong> <br> <strong>" + winner +"</strong> a gagné </span>";
+		var resultMessage = "<span class=\"shifumi-results\"><div>" + playerA.name + " a joué " + aChoice + " </div><div> " + playerB.name + " a joué " + bChoice + " </div><div> " + winner +" a gagné </div>";
 	}else{
-		var resultMessage = "<span class=\"shifumi_results\"> <strong>" + playerA.name + "</strong> a joué <strong>" + aChoice + "</strong> <br> <strong>" + playerB.name + "</strong> a joué <strong>" + bChoice + "</strong> <br> c'est une égalité </span>";
+		var resultMessage = "<span class=\"shifumi-results\"><div>" + playerA.name + " a joué " + aChoice + " </div><div> " + playerB.name + " a joué " + bChoice + " </div><div> c'est une égalité </div>";
 	}
 
 	// Envoi les messages dans le chat

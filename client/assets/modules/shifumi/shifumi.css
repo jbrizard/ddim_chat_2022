@@ -1,0 +1,50 @@
+/************ Module Shifumi *****************/
+
+/* Choix de l'adversaire */
+
+.shifumi-choose-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#gamer-choice {
+    margin: 2px;
+    width: 60%;
+    border: 1px solid black;
+    border-radius: 0.25em;
+    padding: 0.2em 0.3em;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: #fff;
+    background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+    text-align: center;
+}
+
+/* Affichage de pierre feuille ou ciseaux */
+.shifumi-options > span{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.shifumi-options input{
+    width: 30px;
+}
+
+/* Affichage du gagnant */
+.shifumi-results{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shifumi-results > div {
+    padding: 2px;
+}
+
+.shifumi-results > div:last-of-type {
+    font-weight: 600;
+}
+
