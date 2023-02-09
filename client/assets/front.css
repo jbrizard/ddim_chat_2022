@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Coustard&family=Roboto&display=swap');
+
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: rgb(15, 34, 94) url("images/cool-background.svg");
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+#navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #202020;
+    padding: 15px 25px;
+    color: white;
+}
+
+#navbar ul {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+#navbar a {
+    padding: 5px;
+}
+
+#navbar .left {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#home-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+}
+#home-content {
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 3.5px );
+    -webkit-backdrop-filter: blur( 3.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+    color: white;
+
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#home-content h1 {
+    font-size: 28px;
+    font-weight: bolder;
+}
+#home-content p {
+    font-size: 18px;
+}
+#home-content .btn {
+    padding: 10px;
+    background: #20c997;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 3px solid #20c997;
+}
+#home-content .btn:hover {
+    background: transparent;
+}
+
+#contact {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+}
+#contact input, #contact textarea {
+    font-size: 16px;
+    font-family: 'Roboto', Arial, sans-serif;
+    outline: none;
+    padding: 3px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+#chatbox {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 25px;
+    align-items: stretch;
+    height: calc(100vh - 65px);
+    grid-template-rows: calc(100vh - 65px - 50px);
+}
+#users {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+@media screen and (min-width: 700px) {
+    #users {
+        display: block;
+    }
+    #chatbox {
+        grid-template-columns: 250px 1fr;
+    }
+}
+#chat {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#upload {
+    display: none;
+}
+#messages {
+    width: 100%;
+    height: 100%;
+}
+#message-input {
+    height: auto;
+    width: auto;
+    flex: 1;
+}
+#tools {
+    align-items: stretch;
+}
+#chat .toolbox {
+    position: initial;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.upload-button {
+    position: relative;
+    top: 0;
+    margin: 0;
+    width: auto;
+    padding: 3px;
+}
+#skribbl {
+    display: none;
+}

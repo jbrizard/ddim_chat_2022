@@ -52,7 +52,9 @@ app.get('/', function(req, res){
 });
 
 // Chat
-app.get('/chat', function(req, res)
+app.get('/chat', function(req, res){
+	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
+});
 
 // Variable qui stock le dernier utilisateur ayant envoyé un message
 var lastMessageUser= null;

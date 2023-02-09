@@ -65,9 +65,7 @@ function receiveFile (link, user)
             + '<div class="image-message">'
             + '<a href="files/'
             + link
-            + '" download="'
-            + link
-            + '">'
+            + '" target="_blank">'
             + '<img src="files/'
             + link
             +'"></a>'

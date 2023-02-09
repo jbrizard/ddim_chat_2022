@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Le Chat! - Chat en ligne</title>
 
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>	<!-- fichier injecté par NodeJS -->
@@ -20,10 +21,18 @@
 	<link rel="stylesheet" href="/modules/sondage/sondage.css" />
 	<link rel="stylesheet" href="/modules/uploadFile/uploadFile.css" />
 	<link rel="stylesheet" href="/modules/skribbl/skribbl.css" />
+
+	<link rel="stylesheet" href="front.css">
 </head>
 
 <body>
-	<h1>Le Chat !</h1>
+	<nav id="navbar">
+		<a href="/" class="left">Le Chat !</a>
+		<ul>
+			<li><a href="/chat">Chat</a></li>
+			<li><a href="/contact">Contact</a></li>
+		</ul>
+	</nav>
 	<div id="chatbox">
 		<div id="users">
 			<h2>Utilisateurs</h2>
@@ -32,8 +41,7 @@
 		<div id="chat">
 			<div class="toolbox">
 				<div id="empty-chat-action" class="history">❌ Vider le chat</div>
-			</div>
-			<label for="upload" class="upload-button">
+				<label for="upload" class="upload-button">
 				<span class="svg-icon svg-icon-primary svg-icon-2x">
 					<svg  width="24px" height="24px" viewBox="0 0 24 24" >
 						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -44,7 +52,8 @@
 						</g>
 					</svg>
 				</span>
-			</label>
+				</label>
+			</div>
 			<input type="file"
 				   id="upload" name="upload"
 				   onchange="newUploadedFile(this)"
@@ -162,6 +171,9 @@
 			</li>
 			<li>
 				<strong>Module Sondage</strong> : pour créer un sondage taper : <b>/sondage</b> Question <b>?</b> Réponse1 <b>&</b> Réponse2</p>
+			</li>
+			<li>
+				<strong>Module ChatGPT</strong> : Demande à ChatGPT ! (/chatgpt)
 			</li>
 		</ul>
 	</div>

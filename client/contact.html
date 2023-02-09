@@ -1,49 +1,32 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire de contact</title>
-    <link rel="stylesheet" href="style-form.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-</head>
-<body>
-
-<div class="container">
-    <div class="row py-4">
-        <div class="col-sm-4">
-            <h3 class="text-light">Contactez l'équipe du chat ici!</h3>
-            <hr>
-            <address>
-                <p><strong>Email:</strong> chat@equipeddim.fr</p>
-            </address>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>Le Chat! - Formulaire de contact</title>
+        <link rel="stylesheet" href="front.css">
+    </head>
+    <body>
+        <nav id="navbar">
+            <a href="/" class="left">Le Chat !</a>
+            <ul>
+                <li><a href="/chat">Chat</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="home-body">
+            <section id="home-content">
+                <h1>Contactez l'équipe du chat ici!</h1>
+                <address>
+                    <p><strong>Email:</strong> <a href="mailto:chat@equipeddim.fr">chat@equipeddim.fr</a></p>
+                </address>
+                <form id="contact" method="post" class="form" role="form">
+                    <input class="form-control" id="name" name="name" placeholder="Nom" type="text" required autofocus />
+                    <input class="form-control" id="email" name="email" placeholder="Adresse email" type="email" required />
+                    <textarea class="form-control" id="message" name="message" placeholder="Votre message..." rows="5"></textarea>
+                    <button class="btn btn-success" type="submit">Envoyer le message</button>
+                </form>
+            </section>
         </div>
-
-        <div class="col-8 contact-form">
-            <form id="contact" method="post" class="form" role="form">
-                <div class="row">
-                    <div class="col-xs-6 col-md-6 form-group">
-                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required autofocus />
-                    </div>
-                    <div class="col-xs-6 col-md-6 form-group">
-                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
-                    </div>
-                </div>
-                <br />
-                <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
-                <br />
-                <div class="row">
-                    <div class="form-group">
-                        <a class="btn btn-primary" href="/">Retour à l'accueil</a>
-                        <button class="btn btn-success float-end" type="submit">Envoyer le message</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-</body>
+    </body>
 </html>
