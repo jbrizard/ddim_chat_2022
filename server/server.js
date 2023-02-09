@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var shifumi = require('./modules/shifumi.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -44,8 +45,22 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message});
 		
-		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		// Transmet le message aux modules (on passe aussi l'objet "io" pour que les modules puissent envoyer des messages)
 		daffy.handleDaffy(io, message);
+		shifumi.handleShifumi(io, message, socket);
+	});
+
+	// Récéption du joueur choisi lorsque une partie de shifumi est demandée
+	socket.on('choosen_player', function(idPlayer){
+		
+		// Transmet au module shifumi
+		shifumi.newGame(io, idPlayer, socket);
+	});
+	
+	// Récéption du choix du joueurs (Pierre, feuille ou ciseaux)
+	socket.on('shifumi_choice', function(choice){
+		// Transmet au module shifumi
+		shifumi.handleChoice(choice, socket);
 	});
 });
 
