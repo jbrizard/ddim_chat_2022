@@ -79,7 +79,6 @@ function userWriting(data)
  */
 function lastMessageViewed(data)
 {
-    console.log("aaaaa")
     $('#message-viewed').css("display", "flex").appendTo(".message:last");
     $('#who-viewed').text("vu par " + data.name);
 

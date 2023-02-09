@@ -72,7 +72,7 @@ io.sockets.on('connection', function(socket)
 		users.notifyUser(io, socket, users.connectionStatus.CONNECTED);
 
 		//Appelle l'historique des messages
-		messagesHistory.getAllMessages(io.sockets);
+		//messagesHistory.getAllMessages(io.sockets);
 
 		// Transmet le message au module UserInteraction (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		userInteraction.announceUser(socket, name);
@@ -172,7 +172,7 @@ io.sockets.on('connection', function(socket)
 	socket.on('user_has_focus', function()
 	{
 		// Vérifie si un autre utilisateur (différent du dernier utlisateur) est en focus sur le chat
-		if (lastMessageUser !== socket && lastMessageUser != null)
+		if (lastMessageUser !== socket && lastMessageUser != null && socket.name != 'undefined')
 		{
 			// Informe les autres utilisateurs (sauf celui qui a le focus ) que le dernier message a été vu
 			socket.broadcast.emit('last_message_viewed', {name:socket.name});
