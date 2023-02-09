@@ -223,3 +223,8 @@ button{
 	font-size: 20px;
 	cursor: pointer;
 }
+.image{
+	padding-left: 5px;
+	padding-right: 7px;
+	vertical-align: middle;
+}

@@ -5,8 +5,8 @@
 </head>
 <body>
     <div class="btMenu">
-        <button class="button-menu" type="button" onclick="fonctionAccueil()">Accueil</button>
-        <button class="button-menu" type="button" onclick="fonctionContact()">Contact</button>
+        <button class="button-menu" type="button" onclick="fonctionAccueil()"><img class="image" src="modules/avatar/Accueil.png" alt="icone accueil" height="22">Accueil</button>
+        <button class="button-menu" type="button" onclick="fonctionChat()"><img class="image" src="modules/avatar/Chat.png" alt="icone chat" height="25">Chat</button>
     </div>
     <div class="content">
 
@@ -17,12 +17,12 @@
                 <div class="equipe-card">
                     <img src="modules/avatar/14.svg" alt="avatar" class="contact_avatar">
                     <h2>Clémentine Desrucques</h2>
-                    <p>Petit desc</p>
+                    <p>clementine.desrucques@iut-dijon.u-bourgogne.fr</p>
                 </div>
                 <div class="equipe-card">
                     <img src="modules/avatar/8.svg" alt="avatar" class="contact_avatar">
                     <h2>Enzo Hardouin</h2>
-                    <p>Petit desc</p>
+                    <p>enzo.hardouin@iut-dijon.u-bourgogne.fr</p>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                     <h2>SpiderMan</h2>
                 </div>
                 <div class="module-content">
-                    <p>Description</p>
+                    <p>Ce module répond si on l'appel (/spiderman). Il détecte les mots, calcul, vol, salut. "Quitte" pour quitter.</p>
                 </div>
             </div>
             <div>
@@ -45,7 +45,7 @@
                     <h2>Avatars</h2>
                 </div>
                 <div class="module-content">
-                    <p>Description</p>
+                    <p>Ce module se déclanche lorsqu'on va sur la page "Chat". Il permet de choisir une image (ou de l'importer) et un pseudo pour se reconnaitre entre chatteur.</p>
                 </div>
             </div>
             <div>
@@ -54,7 +54,7 @@
                     <h2>Quizz</h2>
                 </div>
                 <div class="module-content">
-                    <p>Description</p>
+                    <p>Ce module te pose des questions et t'attribut des points si tu répond correctement (/quizz). Au bout de 5 questions, tu pourras voir ton résultat final. "Quitte" pour quitter.</p>
                 </div>
             </div>
         </div>
@@ -96,8 +96,8 @@
     function fonctionAccueil(){
         document.location.href="http://localhost:8090/";
     }
-    function fonctionContact(){
-        document.location.href="http://localhost:8090/contact";
+    function fonctionChat(){
+        document.location.href="http://localhost:8090/chat";
     }
 
     const transporter = nodemailer.createTransport({
@@ -272,5 +272,10 @@
         padding: 12px 20px;
         margin: 8px 0;
         box-sizing: border-box;
+    }
+    .image{
+        padding-left: 5px;
+        padding-right: 7px;
+        vertical-align: middle;
     }
 </style>
