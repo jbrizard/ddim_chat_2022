@@ -31,6 +31,8 @@ var chatGPT = require('./modules/chatgpt.js');
 var userInteraction = require('./modules/userInteraction.js');
 var uploadFile = require('./modules/uploadFile.js');
 var skribbl = require('./modules/skribbl.js');
+const smiley = require('./modules/smiley.js');
+const rainbow = require('./modules/rainbow.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -100,6 +102,9 @@ io.sockets.on('connection', function(socket)
 		if (message === null)
 			return;
 
+		// Remplace les smileys
+		message = smiley.handleSmiley(io, message);
+		
 		// Transmet le message à tous les utilisateurs (broadcast)
 		const newMessage = {
 			name:socket.name,
@@ -153,6 +158,8 @@ io.sockets.on('connection', function(socket)
 		
 		// Skribbl
 		skribbl.handleSkribblAnswer(io,message,{name:socket.name});
+		
+		rainbow.handleRainbow(io, message);
 
 		// Enregistre le dernier utilisateur ayant envoyé un message
 		lastMessageUser = socket;

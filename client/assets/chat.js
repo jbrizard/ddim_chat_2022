@@ -9,6 +9,7 @@ let avatarPerso = null;
 socket.on('new_message', receiveMessage);
 socket.on('notify_user', notifyUser);
 socket.on('get_messages_history', getMessagesHistory);
+socket.on('change_background', changeBackground);
 
 // Gestion des événements diffusés par le serveur
 socket.on('new_emote_wall', () =>
@@ -344,4 +345,15 @@ function emptyChatHistory()
 	// on vide le html correspondant à la liste des messages
 	$('#chat #messages').empty();
 	socket.emit('empty-chat-history', localStorage.user_name);
+}
+
+function changeBackground()
+{
+	$("body").addClass('rainbow');
+
+	setTimeout(function()
+	{
+		$("body").removeClass('rainbow');
+	}, 2000);
+
 }
