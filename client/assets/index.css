@@ -1,0 +1,40 @@
+body {
+    width: calc(100vw - (15px*2)) !important;
+    height: calc(100vh - (15px*2)) !important;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+}
+
+.logo {
+    width: 50px;
+
+    transform: translateY(50%);
+}
+
+.redirectContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    width: 150px;
+    height: 80px;
+
+    background-color: white;
+
+    border-radius: 5px;
+}

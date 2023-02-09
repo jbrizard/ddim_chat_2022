@@ -31,8 +31,13 @@ var chatGPT = require('./modules/chatgpt.js');
 var userInteraction = require('./modules/userInteraction.js');
 var uploadFile = require('./modules/uploadFile.js');
 
+var nodemailer = require('nodemailer');
+const { handleSendEmail } = require('./modules/mail.js');
+
 // Initialisation du serveur HTTP
 var app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 var server = http.createServer(app);
 
 // Initialisation du websocket
@@ -42,11 +47,54 @@ var io = ioLib.listen(server);
 // Variable qui stock le dernier utilisateur ayant envoyé un message
 var lastMessageUser= null;
 
-// Traitement des requêtes HTTP (une seule route pour l'instant = racine)
-app.get('/', function(req, res)
-{
-	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
-});
+// Traitement des requêtes HTTP
+app.route('/')
+	.get(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/index.html'));
+	})
+	.post(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/index.html'));
+	})
+	.put(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/index.html'));
+	});
+
+app.route('/chat')
+	.get(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
+	})
+	.post(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
+	})
+	.put(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
+	});
+
+app.route('/contact')
+	.get(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
+	})
+	.post(function(req, res)
+	{
+		const data = {
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			comment: req.body.comment,
+		}
+		handleSendEmail(data);
+		res.sendFile(path.resolve(__dirname + '/../client/index.html'));
+	})
+	.put(function(req, res)
+	{
+		res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
+	});
 
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
