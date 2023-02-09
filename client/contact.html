@@ -9,6 +9,8 @@
     
 		<link rel="stylesheet" href="contact.css" />
 		<link rel="stylesheet" href="style.css" />
+
+        <script src="contact.js" defer></script>
     </head>
     <body>
         <main class="wrapper">
@@ -20,14 +22,30 @@
                 <div class="content">
                     <div class="field firstName">
                         <label for="firstName">Prénom</label>
-                        <input id="firstName" type="text">
+                        <input 
+                            id="firstName" 
+                            type="text"
+                        >
                     </div>
                     <div class="field lastName">
                         <label for="lastName">Nom</label>
-                        <input id="lastName" type="text">
+                        <input 
+                            id="lastName" 
+                            type="text"
+                        >
+                    </div>
+                    <div class="field comment">
+                        <label for="comment">Commentaire</label>
+                        <textarea 
+                            id="comment" 
+                            type="textarea"
+                        ></textarea>
                     </div>
                 </div>
-                <input type="submit">
+                <input 
+                    type="submit"
+                    value="Envoyer le mail"    
+                >
             </form>            
         </main>
     </body>

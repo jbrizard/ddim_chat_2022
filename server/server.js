@@ -14,6 +14,8 @@ var gifs = require('./modules/gifs.js');
 var meteo = require('./modules/meteo.js');
 var coiffeur = require('./modules/coiffeur.js');
 
+var nodemailer = require('nodemailer');
+
 // Initialisation du serveur HTTP
 var app = express();
 var server = http.createServer(app);
@@ -21,7 +23,7 @@ var server = http.createServer(app);
 // Initialisation du websocket
 var io = ioLib.listen(server);
 
-// Traitement des requêtes HTTP (une seule route pour l'instant = racine)
+// Traitement des requêtes HTTP
 app.route('/')
 	.get(function(req, res)
 	{
