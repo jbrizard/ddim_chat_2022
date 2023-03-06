@@ -5,6 +5,8 @@ var ioLib = require('socket.io');	// WebSocket
 var ent = require('ent');		// Librairie pour encoder/décoder du HTML
 var path = require('path');		// Gestion des chemins d'accès aux fichiers	
 var fs = require('fs');			// Accès au système de fichier
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 
 // Chargement des modules perso
@@ -36,6 +38,8 @@ var skribbl = require('./modules/skribbl.js');
 var app = express();
 var server = http.createServer(app);
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Initialisation du websocket
 var io = ioLib.listen(server);
 
@@ -46,8 +50,52 @@ var lastMessageUser= null;
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)
 {
+	res.sendFile(path.resolve(__dirname + '/../client/home.html'));
+});
+
+// Traitement des requêtes HTTP (une seule route pour l'instant = racine)
+app.get('/chat', function(req, res)
+{
 	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
 });
+
+// Traitement des requêtes HTTP (une seule route pour l'instant = racine)
+app.get('/contact', function(req, res)
+{
+	res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
+});
+
+
+app.post('/send', (req, res) => {
+	const { email, message } = req.body;
+  
+	const transporter = nodemailer.createTransport({
+	  host: 'smtp.gmail.com',
+	  port: 587,
+	  secure: false,
+	  auth: {
+		user: 'ddim2023@gmail.com',
+		pass: '20DDIM23!'
+	  }
+	});
+  
+	const mailOptions = {
+	  from: email,
+	  to: 'ddim@yopmail.com',
+	  subject: 'Nouveau message depuis le formulaire',
+	  text: message
+	};
+  
+	transporter.sendMail(mailOptions, (error, info) => {
+	  if (error) {
+		console.log(error);
+		res.send('Une erreur s\'est produite. Veuillez réessayer plus tard.');
+	  } else {
+		console.log(`Message envoyé : ${info.response}`);
+		res.send('Message envoyé avec succès !');
+	  }
+	});
+  });
 
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
