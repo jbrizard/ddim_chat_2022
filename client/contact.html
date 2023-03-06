@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>	<!-- fichier injecté par NodeJS -->
+		
+		<link rel="stylesheet" href="style_contact.css" />
+	</head>
+	<body>
+		<div class="div-button">
+			<a href="/"> <button class="button-menu">Home</button></a>
+			<a href="/chat"> <button class="button-menu">Chat</button></a>
+		</div>
+		<form action="/send" method="post">
+			<label for="email">Email</label>
+			<input type="email" id="email" name="email"></input>
+			<label for="object">Objet</label>
+			<input type="text" id="object" name="object"></input>
+			<label for="message">Message</label>
+			<textarea id="message" name="message"></textarea>
+			<button class="send">
+				Envoyer
+			</button>
+		</form>
+		<div class="information">
+			<h2>Projet réalisé par Flavien GOUDET et Timothei CHARTIER</h2>
+			<p><b>Sondage</b> : Pour faire un sondage il suffit de faire une commande en passant une question, et deux réponse. Le sondage ce mettra sur le coté pour que tous les participants votent. Une fois que tout le monde votent, le sondage est terminé et le résultat s'affiche dans le chat.</p>
+			<p><b>ChatGPT</b> : Demander à ChatGPT une information grâce à la commande /chatgpt. Il répondra à vos questions avec son savoir.</p>
+		</div>
+	</body>
+</html>
