@@ -88,7 +88,7 @@ footer{
 	margin-top:50px;
 }
 
-.links{
+.links,#submit{
 	text-decoration:none;
 	color:white;
 	background-color: #3D3873;
@@ -104,7 +104,7 @@ footer{
 	border: solid 2px #3D3873;
 }
 
-.links:hover{
+.links:hover,#submit:hover{
 	color:#3D3873;
 	
 	background-color: #fff;
@@ -138,13 +138,11 @@ form{
 
 .textarea textarea{
 	border-radius:10px;
-	border-style:none;
 	margin-top:10px;
 }
 
 form input{
 	border-radius:10px;
-	border-style:none;
 	height:5vh;
 	margin-top:10px;
 }
@@ -347,5 +345,43 @@ form input{
 	}
 	100% {
 		box-shadow: 9984px 0 0 0 #000000, 9999px 0 0 0 #000000, 10014px 0 0 0 #000000;
+	}
+}
+
+@media (max-width: 768px) 
+{ 
+	.home{
+		flex-direction:column;
+
+	}
+	header{
+		width:100%;
+	}
+
+	#background{
+		width:10vw;
+	}
+
+	#illustration{
+		width:60vw;
+	}
+	#menu{
+		width:70%;
+	}
+	.links,#submit{
+		width:70% !important;
+	}
+
+	form{
+		margin-left:20px;
+		width:90%;
+	}
+
+	#nom_prenom,.object,.textarea,input,.firstname,.name{
+		width:100%;
+	}
+	#nom_prenom{
+		flex-direction: column;
+		align-items: start;
 	}
 }
