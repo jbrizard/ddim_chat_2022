@@ -23,6 +23,16 @@ app.get('/', function(req, res)
 {
 	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
 });
+
+app.get('/accueil', function(req, res)
+{
+	res.sendFile(path.resolve(__dirname + '/../client/home.html'));
+});
+
+app.get('/contact', function(req, res)
+{
+	res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
+});
   
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
