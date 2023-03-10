@@ -5,6 +5,7 @@
  */
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
+const avatar = require("./avatar");
 module.exports =  {
 	handleDaffy: handleDaffy // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
 }
@@ -24,7 +25,8 @@ function handleDaffy(io, message)
 		io.sockets.emit('new_message',
 		{
 			name:'Daffy!!',
-			message:'<span class="daffy">Coin Coin !</span>'
+			message:'<span class="daffy">Coin Coin !</span>',
+			avatar: "<img src='/modules/avatar/bot.png' alt='Bot avatar' width='30px'>"
 		});
 	}
 }

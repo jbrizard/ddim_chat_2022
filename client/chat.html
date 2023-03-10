@@ -1,43 +1,290 @@
 ﻿<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	
-		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="/socket.io/socket.io.js"></script>	<!-- fichier injecté par NodeJS -->
-		
-		<link rel="stylesheet" href="style.css" />
-		<link rel="stylesheet" href="/modules/daffy/daffy.css" />
-	</head>
-	
-	<body>
-		<h1>Le Chat !</h1>
-		
-		<div id="chat">
-			<div id="messages">
-				
-			</div>
-                        
-                        <div id="tools">
-                                <input type="text" id="message-input" />
-                                
-                                <input type="button" id="send-message" value="Envoyer" />
-                        </div>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>	<!-- fichier injecté par NodeJS -->
+
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="/modules/daffy/daffy.css" />
+	<link rel="stylesheet" href="/modules/gifs/gifs.css" />
+	<link rel="stylesheet" href="/modules/meteo/meteo.css" />
+	<link rel="stylesheet" href="/modules/users/users.css" />
+	<link rel="stylesheet" href="/modules/messages/message.css" />
+	<link rel="stylesheet" href="/modules/messagesHistory/messagesHistory.css" />
+	<link rel="stylesheet" href="/modules/arobase/arobase.css" />
+	<link rel="stylesheet" href="/modules/whisper/whisper.css" />
+	<link rel="stylesheet" href="/modules/basket/basket.css" />
+	<link rel="stylesheet" href="/modules/sondage/sondage.css" />
+	<link rel="stylesheet" href="/modules/uploadFile/uploadFile.css" />
+	<link rel="stylesheet" href="/modules/skribbl/skribbl.css" />
+</head>
+
+<body>
+	<h1>Le Chat !</h1>
+	<div id="chatbox">
+		<div id="users">
+			<h2>Utilisateurs</h2>
+			<div id="user-list"></div>
 		</div>
-		
-                <div id="help">
-                        <div id="help-toggle">?</div>
-                        <ul id="help-content">
-                                <li>
-                                        <strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
-                                </li>
-                        </ul>
-                </div>
-                
-		<script type="text/javascript" src="chat.js"></script>
-		<script type="text/javascript" src="modules/konami/konami.js"></script>
-		<script type="text/javascript" src="modules/tenor/tenor.js"></script>
-		<script type="text/javascript" src="modules/youtubemusic/music_player.js"></script>
-	</body>
+		<div id="chat">
+			<div class="toolbox">
+				<div id="empty-chat-action" class="history">❌ Vider le chat</div>
+			</div>
+			<label for="upload" class="upload-button">
+				<span class="svg-icon svg-icon-primary svg-icon-2x">
+					<svg  width="24px" height="24px" viewBox="0 0 24 24" >
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<rect x="0" y="0" width="24" height="24"/>
+							<path d="M2,13 C2,12.5 2.5,12 3,12 C3.5,12 4,12.5 4,13 C4,13.3333333 4,15 4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 C2,15 2,13.3333333 2,13 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+							<rect fill="#000000" opacity="0.3" x="11" y="2" width="2" height="14" rx="1"/>
+							<path d="M12.0362375,3.37797611 L7.70710678,7.70710678 C7.31658249,8.09763107 6.68341751,8.09763107 6.29289322,7.70710678 C5.90236893,7.31658249 5.90236893,6.68341751 6.29289322,6.29289322 L11.2928932,1.29289322 C11.6689749,0.916811528 12.2736364,0.900910387 12.6689647,1.25670585 L17.6689647,5.75670585 C18.0794748,6.12616487 18.1127532,6.75845471 17.7432941,7.16896473 C17.3738351,7.57947475 16.7415453,7.61275317 16.3310353,7.24329415 L12.0362375,3.37797611 Z" fill="#000000" fill-rule="nonzero"/>
+						</g>
+					</svg>
+				</span>
+			</label>
+			<input type="file"
+				   id="upload" name="upload"
+				   onchange="newUploadedFile(this)"
+			>
+			<div class="uploaded-file" id="upload-file">
+				<span id="file-name"></span>
+				<span class="delete-file" id="delete-file" onclick="deleteFile()">
+						<svg width="32px" height="32px" viewBox="0 0 24 24">
+							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<rect x="0" y="0" width="24" height="24"/>
+								<path d="M6,8 L18,8 L17.106535,19.6150447 C17.04642,20.3965405 16.3947578,21 15.6109533,21 L8.38904671,21 C7.60524225,21 6.95358004,20.3965405 6.89346498,19.6150447 L6,8 Z M8,10 L8.45438229,14.0894406 L15.5517885,14.0339036 L16,10 L8,10 Z" fill="#DC4E4E" fill-rule="nonzero"/>
+								<path d="M14,4.5 L14,3.5 C14,3.22385763 13.7761424,3 13.5,3 L10.5,3 C10.2238576,3 10,3.22385763 10,3.5 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#DC4E4E" opacity="0.3"/>
+							</g>
+						</svg>
+					</span>
+				<img id="upload-preview" src="#" alt="uploaded file"/>
+			</div>
+			<div id="messages">
+
+				<div id="message-viewed">
+					<img src="check.png" alt="check_icon">
+					<span id="who-viewed"></span>
+				</div>
+
+				<div id="user-writing" class="user-writing d-flex flex-row">
+					<div id="list-user-writing" class="d-flex flex-row"></div>
+
+					<span>is typing</span>
+					<div class="dot-typing"></div>
+				</div>
+
+			</div>
+
+			<div id="tools">
+				<div class="arobase-wrapper" style="display: none;">
+					<ul id="arobase-list">
+						<span>Personne ici !</span>
+					</ul>
+				</div>
+				<input type="text" id="message-input" />
+				<button id="send-gif" title="Envoyer un GIF" aria-describedby="tooltip" onkeyup="event.preventDefault()">
+					<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+						<path fill="currentColor" d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M10 10.5H7.5V13.5H8.5V12H10V13.7C10 14.4 9.5 15 8.7 15H7.3C6.5 15 6 14.3 6 13.7V10.4C6 9.7 6.5 9 7.3 9H8.6C9.5 9 10 9.7 10 10.3V10.5M13 15H11.5V9H13V15M17.5 10.5H16V11.5H17.5V13H16V15H14.5V9H17.5V10.5Z" />
+					</svg>
+					<div id="tooltip">
+						<div class="tooltip-flex">
+							<div class="tooltip-header">
+								<input type="search" placeholder="Rechercher..." id="search-gif">
+							</div>
+							<div class="tooltip-body" id="tooltip-body">
+								<div class="tooltip-content"></div>
+								<div class="tooltip-content"></div>
+							</div>
+						</div>
+					</div>
+				</button>
+				<input type="button" id="send-message" value="Envoyer" />
+			</div>
+		</div>
+	</div>
+
+
+	<div id="skribbl">
+		<div class="skribbl">
+			<h2>Skribbl</h2>
+			<input type="button" id="start-skribbl" value="Jouer" />
+			<input type="button" id="stop-skribbl" value="Stopper le jeu " />
+			<div class="skribbl_word_box">
+				<p>Le mot à faire deviner est :</p>
+				<p id="skribbl_word"></p>
+			</div>
+			<div id="skribbl_colors">
+				<input id="skribbl_choice_color" type="color" value="#000000">
+				<img id="skribbl_bin" src="modules/skribbl/bin.png">
+			</div>
+		</div>
+
+		<div class="canva">
+			<canvas id="canvas"></canvas>
+		</div>
+
+		<div class="end_game">
+			<img src="modules/skribbl/cup.png">
+			<h2>Bravo <span class="name"></span> !</h2>
+			<img class="suppr" src="modules/skribbl/close.png">
+		</div>
+
+		<div class="timeout">
+			<img src="modules/skribbl/timeout.png">
+			<h2>Temps écoulé !</h2>
+			<p>Vous avez perdu la partie...</p>
+			<img class="suppr" src="modules/skribbl/close.png">
+		</div>
+	</div>
+
+	<div id="help">
+		<div id="help-toggle">?</div>
+		<ul id="help-content">
+			<li>
+				<strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
+			</li>
+			<li>
+				<strong>Module Météo</strong> : /meteo Nom de la ville
+			</li>
+			<li>
+				<strong>Module Basket</strong> : faites un max de rebonds ! (/basket)
+			</li>
+			<li>
+				<strong>Module Spiderman</strong> : il tisse sa toile. ("Spiderman")
+				<br>"quitte" pour quitter le module
+			</li>
+			<li>
+				<strong>Module Quizz</strong> : vrai ou faux. ("Quizz")
+				<br>"quitte" pour quitter le module
+			</li>
+			<li>
+				<strong>Module Sondage</strong> : pour créer un sondage taper : <b>/sondage</b> Question <b>?</b> Réponse1 <b>&</b> Réponse2</p>
+			</li>
+			<li>
+				<strong>Module ChatGPT</strong> : Demande à ChatGPT ! (/chatgpt)
+			</li>
+		</ul>
+	</div>
+
+	<div id="basket">
+		<div id="others-mouse-pos"></div>
+
+		<div class="ball"></div>
+	</div>
+
+	<div id="basket-scores">
+		<div id="current-player"></div>
+		<div id="stats">
+			<strong>Meilleur joueur : <span class="best-player">???</span></strong>
+		</div>
+	</div>
+
+	<audio id="basket-bounce" src="modules/basket/bounce.mp3" autostart="0"></audio>
+
+	<div class="modal" id="modal">
+
+		<div class="modal-content">
+			<h2 class="modal-title">Bienvenue</h2>
+
+			<label>Choisissez votre image de profil :</label><br/>
+			<div class="iconeRadio">
+
+				<div class="icone-selected">
+					<input  type="radio" name="imgProfil" class="id-icone hidden" id="icon-1" value="1" checked />
+					<label for="icon-1"><img class="icone" src="modules/avatar/1.svg" alt="icone1" /></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden"  id="icon-2" value="2" />
+					<label for="icon-2"><img class="icone" src="modules/avatar/2.svg" alt="icone2" /></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="3"  id="icon-3"/>
+					<label for="icon-3"><img class="icone" src="modules/avatar/3.svg" alt="icone3" /></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="4"  id="icon-4"/>
+					<label for="icon-4"><img class="icone" src="modules/avatar/4.svg" alt="icone4" /></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="5"  id="icon-5"/>
+					<label for="icon-5"><img class="icone" src="modules/avatar/5.svg" alt="icone5" /></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="6"  id="icon-6"/>
+					<label for="icon-6"><img class="icone" src="modules/avatar/6.svg" alt="icone6"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="7"  id="icon-7"/>
+					<label for="icon-7"><img class="icone" src="modules/avatar/7.svg" alt="icone7"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="8"  id="icon-8"/>
+					<label for="icon-8"><img class="icone" src="modules/avatar/8.svg" alt="icone8"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="9"  id="icon-9"/>
+					<label for="icon-9"><img class="icone icone-selected" src="modules/avatar/9.svg" alt="icone9"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="10"  id="icon-10"/>
+					<label for="icon-10"><img class="icone" src="modules/avatar/10.svg" alt="icone10"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="11"  id="icon-11"/>
+					<label for="icon-11"><img class="icone" src="modules/avatar/11.svg" alt="icone11"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="12"  id="icon-12"/>
+					<label for="icon-12"><img class="icone" src="modules/avatar/12.svg" alt="icone12"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="13"  id="icon-13"/>
+					<label for="icon-13"><img class="icone" src="modules/avatar/13.svg" alt="icone13"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="14"  id="icon-14"/>
+					<label for="icon-14"><img class="icone" src="modules/avatar/14.svg" alt="icone14"/></label>
+				</div>
+				<div>
+					<input  type="radio" name="imgProfil" class="id-icone hidden" value="15"  id="icon-15"/>
+					<label for="icon-15"><img class="icone" src="modules/avatar/15.svg" alt="icone15"/></label>
+				</div>
+			</div>
+
+			<!-- upload img profil -->
+			<div>
+				<p>OU</p>
+				<input type="file" id="upload-avatar" class="id-icone" name="imgProfil" accept="image/png, image/jpeg"><br/>
+				<img src="" height="200" alt="Prévisualisation de l'image…" id="avatar-preview" class="icone">
+			</div>
+
+			<br/>&nbsp;
+			<br/>
+			<label for="pseudo">Votre pseudo :</label><br>
+			<input type="text" id="pseudo" autofocus autocomplete placeholder="Pseudo"/>
+			<br/>&nbsp;
+			<br/>
+			<input type="button" id="register" value="Valider" class="button-primary"/>
+		</div>
+	</div>
+
+	<div id="espace-sondage">
+	</div>
+
+	<script type="text/javascript" src="chat.js"></script>
+	<script type="text/javascript" src="/modules/messages/message.js"></script>
+	<script type="text/javascript" src="/modules/gifs/gifs.js"></script>
+	<script type="text/javascript" src="/modules/arobase/arobase.js"></script>
+	<script type="text/javascript" src="modules/basket/basket.js"></script>
+	<script type="text/javascript" src="modules/konami/konami.js"></script>
+	<script type="text/javascript" src="modules/tenor/tenor.js"></script>
+	<script type="text/javascript" src="modules/youtubemusic/music_player.js"></script>
+	<script type="text/javascript" src="modules/sondage/moduleSondage.js"></script>
+	<script type="text/javascript" src="modules/userInteraction/userInteraction.js"></script>
+	<script type="text/javascript" src="modules/uploadFile/uploadFile.js"></script>
+	<script type="text/javascript" src="modules/skribbl/skribbl.js"></script>
+</body>
 </html>
