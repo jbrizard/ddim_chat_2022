@@ -5,6 +5,7 @@ var ioLib = require('socket.io');	// WebSocket
 var ent = require('ent');		// Librairie pour encoder/décoder du HTML
 var path = require('path');		// Gestion des chemins d'accès aux fichiers	
 var fs = require('fs');			// Accès au système de fichier
+var firstLog = false;			// Lors du premier login, après le lancement du serveur
 require('dotenv').config();
 
 // Chargement des modules perso
@@ -44,9 +45,29 @@ var io = ioLib.listen(server);
 var lastMessageUser= null;
 
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
+app.get('/accueil', function(req, res)
+{
+	console.log(__dirname);
+	res.sendFile(path.resolve(__dirname + '/../client/home.html'));
+});
+
+app.get('/contact', function(req, res)
+{
+	console.log(__dirname);
+	res.sendFile(path.resolve(__dirname + '/../client/contact.html'));
+});
+
+// (route racine = chat)
 app.get('/', function(req, res)
 {
-	res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
+	if (firstLog == false) {
+		firstLog = true;
+		return res.redirect("/accueil");
+	}
+	else{
+		console.log(__dirname);
+		res.sendFile(path.resolve(__dirname + '/../client/chat.html'));
+	}
 });
 
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...

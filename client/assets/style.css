@@ -4,7 +4,6 @@ html, body {
 	height:100%;
 	margin:0;
 	padding:0;
-	overflow:hidden;
 }
 
 body {
@@ -21,6 +20,270 @@ h1 {
 	text-transform:uppercase;
 	text-shadow:0px 0px 20px rgba(0, 0, 0, 0.4);
 }
+
+#chatbox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 30px;
+
+	height: calc(100vh - 100px);
+}
+
+#help {
+        position:absolute;
+        right:10px;
+        top:10px;
+}
+#help-toggle {
+        width:30px;
+        height:30px;
+        line-height:30px;
+        vertical-align:middle;
+        background:#777;
+        color:#FFF;
+        font-size:24px;
+        font-weight:bold;
+        border-radius:50%;
+        cursor:pointer;
+}
+#help-content {
+        display:none;
+        position: absolute;
+        width: 400px;
+        background: #555;
+        color:#fff;
+        top: 25px;
+        right: 0;
+        padding: 20px;
+        list-style: none;
+        font-size: 14px;
+        text-align: left;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
+        border-radius: 3px;
+}
+
+/* modal */
+.modal{
+	position: fixed;
+	width: 100%;
+	z-index: 500;
+	height: 100vh;
+	background-color: rgba(255, 255, 255, 0.8);
+	left: 0;
+	top: 0;
+	align-items: center;
+	vertical-align: middle;
+}
+.modal-content{
+	background-color: #fff;
+	width: fit-content;
+	margin: 50px auto;
+	padding: 20px;
+	z-index: 600;
+	border: 1px solid #888;
+	border-radius: 15px;
+}
+.upload{
+	margin-top: 20px;
+}
+/* Avatar center */
+.message {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+.hidden{
+	display: none;
+}
+/* taille icone modal */
+.iconeRadio{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 10px;
+}
+
+.iconeRadio div{
+	margin: 4px;
+}
+
+.icone{
+	width: 40px;
+	height: 40px;
+}
+
+.icone-selected {
+	margin: 1px;
+}
+
+.icone-selected img{
+	border: 3px solid blue;
+	border-radius: 50px;
+}
+/* Button modal */
+.button-primary {
+	display:inline-block;
+	border:solid 2px #888;
+	width:calc(100% - 144px);
+	padding:0 20px;
+	height:31px;
+	border-radius: 8px;
+	transition:all .4s;
+}
+
+.gifTenor {
+	background-size: contain;
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+    margin: 0px 10px;
+    vertical-align: middle;
+	font-size:0;
+}
+
+
+
+
+
+
+
+
+
+/* ########################################################## */
+
+
+
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Coustard&family=Roboto&display=swap');
+
+html, body {
+	height:100%;
+	margin:0;
+	padding:0;
+	background-color:#24204B !important;
+}
+#background{
+	position:absolute;
+	top:-20%;
+	left:-20%;
+	width:50vw;
+}
+header{
+    width:100%;
+    height:13vh;
+    display: flex;
+    align-items:center;
+}
+
+#menu{
+    width:25%;
+    margin:auto;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+    align-items:center;
+}
+
+#menu a{
+    text-decoration:none;
+    color:#fff;
+}
+
+
+h1 {
+	color:#fff;
+	text-transform:uppercase;
+	text-shadow:0px 0px 20px rgba(0, 0, 0, 0.4);
+}
+
+.home{
+	text-align:left;
+	margin:auto;
+	width:70%;
+	height:50vh;
+	display:flex;
+	flex-direction: column;
+	justify-content:center;
+}
+
+#article{
+	text-align:left;
+	margin:auto;
+	margin-top:60px;
+	width:70%;
+}
+
+#article p{
+	text-align:justify;
+	font-size:18px;
+}
+
+footer{
+	width:100%;
+	height:15vh;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	margin-top:50px;
+}
+
+.links{
+	text-decoration:none;
+	color:white;
+	border: solid 1px white;
+	margin:20px;
+	height:5vh;
+	width:10vw;
+}
+
+/*-----------------------  Formulaire  -------------------*/
+form{
+	width:50%;
+	margin:auto;
+	display:flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+#nom_prenom{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+}
+.name,.firstname, .object, .textarea{
+	display:flex;
+	flex-direction:column;
+	width:20vw;
+	text-align:left;
+	margin:20px 50px 20px 0;
+}
+
+.textarea{
+	width:100%;
+}
+
+.textarea textarea{
+	border-radius:10px;
+	border-style:none;
+	margin-top:10px;
+}
+
+form input{
+	border-radius:10px;
+	border-style:none;
+	height:5vh;
+	margin-top:10px;
+}
+
+/*-----------------------------------------*/
+
 
 #chatbox {
 	display: flex;
@@ -167,6 +430,14 @@ h1 {
     padding: 5px;
 }
 .user-writing {
+		position: absolute;
+		top: 86vh;
+	display: flex;
+	flex-direction: row;
+}
+.user-writing {
+	position: absolute;
+	top: 86vh;
 	position: absolute;
 	top: 0vh;
 	display: none;
@@ -212,4 +483,5 @@ h1 {
 	100% {
 		box-shadow: 9984px 0 0 0 #000000, 9999px 0 0 0 #000000, 10014px 0 0 0 #000000;
 	}
+}
 }
